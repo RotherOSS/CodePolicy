@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace"/>
+
+    <xs:include schemaLocation="Database.xsd"/>
+
+    <xs:element name="otobo_package">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Name" />
+                <xs:element ref="Version"/>
+                <xs:element ref="Framework" maxOccurs="unbounded"/>
+                <xs:choice minOccurs="0" maxOccurs="unbounded">
+                    <xs:element ref="PackageRequired"/>
+                    <xs:element ref="ModuleRequired"/>
+                </xs:choice>
+                <xs:element ref="Vendor"/>
+                <xs:element ref="URL"/>
+                <xs:element ref="License"/>
+                <xs:element ref="Description" maxOccurs="unbounded" />
+
+                <xs:element ref="PackageIsVisible" minOccurs="0" />
+                <xs:element ref="PackageIsDownloadable" minOccurs="0" />
+                <xs:element ref="PackageIsBuildable" minOccurs="0" />
+                <xs:element ref="PackageIsRemovable" minOccurs="0" />
+                <xs:element ref="PackageAllowDirectUpdate" minOccurs="0" />
+
+                <xs:element ref="ChangeLog" minOccurs="0" maxOccurs="unbounded" />
+                <xs:element ref="OS" minOccurs="0" maxOccurs="unbounded" />
+                <xs:element ref="Filelist"/>
+                <xs:choice minOccurs="0" maxOccurs="unbounded">
+                    <xs:element ref="IntroInstall"/>
+                    <xs:element ref="IntroUninstall"/>
+                    <xs:element ref="IntroReinstall"/>
+                    <xs:element ref="IntroUpgrade"/>
+                    <xs:element ref="CodeInstall"/>
+                    <xs:element ref="CodeUpgrade"/>
+                    <xs:element ref="CodeUninstall"/>
+                    <xs:element ref="CodeReinstall"/>
+                    <xs:element ref="DatabaseInstall"/>
+                    <xs:element ref="DatabaseUpgrade"/>
+                    <xs:element ref="DatabaseReinstall"/>
+                    <xs:element ref="DatabaseUninstall"/>
+                    <xs:element ref="PackageMerge"/>
+                </xs:choice>
+            </xs:sequence>
+            <xs:attribute name="version" use="required" type="xs:token"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ChangeLog">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name="Date" use="required" type="xs:token"/>
+                    <xs:attribute name="Version" use="required" type="xs:token"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="Description">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name="Lang" use="optional" type="xs:token"/>
+                    <xs:attribute name="Format" use="optional" type="xs:token"/>
+                    <xs:attribute name="Translatable" use="optional" type="xs:token"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="PackageIsVisible">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="0"/>
+                <xs:enumeration value="1"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="PackageIsDownloadable">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="0"/>
+                <xs:enumeration value="1"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="PackageIsBuildable">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="0"/>
+                <xs:enumeration value="1"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="PackageIsRemovable">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="0"/>
+                <xs:enumeration value="1"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="PackageAllowDirectUpdate">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="0"/>
+                <xs:enumeration value="1"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="Filelist">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="File" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="File">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name="Location" use="required" type="xs:token"/>
+                    <xs:attribute name="Permission" use="required" type="xs:token"/>
+                    <xs:attribute name="Encode" use="optional" type="xs:token"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="PackageRequired">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name="Version" use="required" type="xs:token"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ModuleRequired">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name="Version" use="optional" type="xs:token"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="IntroInstall">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name="Type" use="required" type="xs:token"/>
+                    <xs:attribute name="Lang" use="optional" type="xs:token"/>
+                    <xs:attribute name="Title" use="optional" type="xs:token"/>
+                    <xs:attribute name="Translatable" use="optional" type="xs:token"/>
+                    <xs:attribute name="Format" use="optional" type="xs:token"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="IntroUninstall">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name="Type" use="required" type="xs:token"/>
+                    <xs:attribute name="Lang" use="optional" type="xs:token"/>
+                    <xs:attribute name="Title" use="optional" type="xs:token"/>
+                    <xs:attribute name="Translatable" use="optional" type="xs:token"/>
+                    <xs:attribute name="Format" use="optional" type="xs:token"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="IntroReinstall">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name="Type" use="required" type="xs:token"/>
+                    <xs:attribute name="Lang" use="optional" type="xs:token"/>
+                    <xs:attribute name="Title" use="optional" type="xs:token"/>
+                    <xs:attribute name="Translatable" use="optional" type="xs:token"/>
+                    <xs:attribute name="Format" use="optional" type="xs:token"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="IntroUpgrade">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name="Type" use="required" type="xs:token"/>
+                    <xs:attribute name="Lang" use="optional" type="xs:token"/>
+                    <xs:attribute name="Title" use="optional" type="xs:token"/>
+                    <xs:attribute name="Translatable" use="optional" type="xs:token"/>
+                    <xs:attribute name="Version" use="optional" type="xs:token"/>
+                    <xs:attribute name="Format" use="optional" type="xs:token"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="CodeInstall">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name="Type" use="optional" type="xs:token"/>
+                    <xs:attribute name="IfPackage" use="optional" type="xs:token"/>
+                    <xs:attribute name="IfNotPackage" use="optional" type="xs:token"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CodeUninstall">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name="Type" use="optional" type="xs:token"/>
+                    <xs:attribute name="IfPackage" use="optional" type="xs:token"/>
+                    <xs:attribute name="IfNotPackage" use="optional" type="xs:token"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CodeReinstall">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name="Type" use="optional" type="xs:token"/>
+                    <xs:attribute name="IfPackage" use="optional" type="xs:token"/>
+                    <xs:attribute name="IfNotPackage" use="optional" type="xs:token"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CodeUpgrade">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name="Type" use="optional" type="xs:token"/>
+                    <xs:attribute name="Version" use="optional" type="xs:token"/>
+                    <xs:attribute name="IfPackage" use="optional" type="xs:token"/>
+                    <xs:attribute name="IfNotPackage" use="optional" type="xs:token"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="PackageMerge">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:choice minOccurs="0" maxOccurs="unbounded">
+                    <xs:element ref="CodeUpgrade"/>
+                    <xs:element ref="DatabaseUpgrade"/>
+                </xs:choice>
+            </xs:sequence>
+            <xs:attribute name="Name" use="required" type="xs:token"/>
+            <xs:attribute name="TargetVersion" use="required" type="xs:token"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="Name" type="xs:token"/>
+    <xs:element name="Vendor" type="xs:token"/>
+    <xs:element name="URL" type="xs:token"/>
+    <xs:element name="Framework">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:token">
+                    <xs:attribute name="Minimum" use="optional" type="xs:token"/>
+                    <xs:attribute name="Maximum" use="optional" type="xs:token"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Version" type="xs:token"/>
+    <xs:element name="License" type="xs:token"/>
+    <xs:element name="OS" type="xs:token"/>
+</xs:schema>

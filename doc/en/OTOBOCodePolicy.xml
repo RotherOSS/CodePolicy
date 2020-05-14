@@ -1,0 +1,180 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+    "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+
+<book lang='en'>
+
+<bookinfo>
+<title>$Name</title>
+<edition>$Description Version $Version</edition>
+
+<copyright>
+<year>$YearStamp</year>
+<holder>$Vendor, $URL</holder>
+</copyright>
+
+<date>$DateStamp</date>
+
+<legalnotice>
+    <para>$License</para>
+    <para>This work is copyrighted by $Vendor, Zimmersmühlenweg 11, 61440 Oberursel, Germany.</para>
+    <para>Build Date: $DateStamp</para>
+</legalnotice>
+
+</bookinfo>
+
+<preface id="preface" >
+    <title>Preface</title>
+    <para>
+        OTOBOCodePolicy is a general code quality checker that can also make changes to the code.
+        You can use it to check your code against the OTOBO code style guide.
+    </para>
+</preface>
+
+<chapter>
+    <title>Feature List</title>
+    <section>
+        <title>How it can be used</title>
+        <para>
+            <itemizedlist>
+                <listitem><para>manually (see below)</para></listitem>
+                <listitem><para>as a pre commit hook that validates your local changes</para></listitem>
+                <listitem><para>as a pre receive filter that checks what you push to git.otobo.org</para></listitem>
+                <listitem><para>as a unit test that you can run locally and also runs on the UT servers (for the framework)</para></listitem>
+            </itemizedlist>
+        </para>
+    </section>
+    <section>
+        <title>What's cool about it</title>
+        <para>
+            <itemizedlist>
+                <listitem><para>modular, easy to extend and configure</para></listitem>
+                <listitem><para>single point of contact for all code quality issues</para></listitem>
+                <listitem><para>already runs on the UT servers to maintain code quality in the framework continuously</para></listitem>
+                <listitem><para>automatically detects the framework version, code checks can run conditionally - this means we can make it stricter for future versions of OTOBO - also should not complain about code in packages for older OTOBO versions too much</para></listitem>
+                <listitem><para>You can disable single filters directly in your code instead of in a huge configuration file with tons of exceptions.</para></listitem>
+            </itemizedlist>
+        </para>
+    </section>
+    <section>
+        <title>How to run it to validate your code</title>
+        <para>
+            <itemizedlist>
+                <listitem><para>manually: call /path/to/OTOBOCodePolicy/bin/otobo.CodePolicy.pl from the toplevel of your repository. Checks changed files (no arguments), all files (--all), a directory (--directory) or a file (--file).</para></listitem>
+                <listitem><para>pre commit hook: call /path/to/OTOBOCodePolicy/scripts/install-git-hooks.pl in every local repository that you want to have the pre commit hook. It will automatically be run by "git commit" and reject your commit if a problem was found. Skip with "git commit --no-verify".</para></listitem>
+                <listitem><para>UnitTest: install package into OTOBO, then run <filename>bin/otobo.Console.pl Dev::UnitTest::Run</filename>.</para></listitem>
+            </itemizedlist>
+        </para>
+    </section>
+    <section>
+        <title>How to configure it</title>
+        <para>
+            <itemizedlist>
+                <listitem><para>Configuration is done in TidyAll/tidyallrc. This file contains only directory-level configuration, no exceptions for single customized files or modules.</para></listitem>
+                <listitem><para>If you need to make an exception in a file for a certain filter, you can use this syntax: nofilter(Name::Of::Filter).
+
+                <screen><![CDATA[
+                Example Perl:
+                ## nofilter(TidyAll::Plugin::OTOBO::Perl::ISA)
+
+                Example SOPM:
+                <!-- nofilter(TidyAll::Plugin::OTOBO::SOPM::FileRights) -->
+                ]]></screen>
+                </para></listitem>
+                <listitem><para>
+                    Some of the checks are implemented as Perl::Critic policies. To disable these individually, you can place "## no critic" marks as it is usual for Perl::Critic.
+                </para></listitem>
+            </itemizedlist>
+        </para>
+    </section>
+</chapter>
+
+<chapter>
+    <title>System Requirements</title>
+    <section>
+        <title>Framework</title>
+        <para>The following OTOBO framework is required:</para>
+        <para>
+        $Framework
+        </para>
+    </section>
+    <section>
+        <title>Packages</title>
+        <para>The following packages are required:</para>
+        <para>
+        $PackageRequired
+        </para>
+    </section>
+    <section>
+        <title>Operating System</title>
+        <para>This package requires one of the following operating systems:</para>
+        <para>
+        $OS
+        </para>
+    </section>
+    <section>
+        <title>Third Party Software</title>
+        <para>This third party software is required to use this package:</para>
+        <para>
+            <itemizedlist>
+                <listitem><para>xmllint (often in the libxml2-utils package)</para></listitem>
+                <listitem><para>nodejs</para></listitem>
+                <listitem><para>The nodejs package eslint and some helper packages (install with <literal>npm install -g eslint@5 eslint-plugin-import eslint-config-airbnb-base eslint-plugin-vue babel-eslint eslint-plugin-jest</literal></para></listitem>
+                <listitem><para>gettext</para></listitem>
+                <listitem><para>hunspell</para></listitem>
+            </itemizedlist>
+        </para>
+    </section>
+</chapter>
+
+<chapter>
+    <title>Installation</title>
+    <para>The following instructions explain how to install the package.</para>
+    <section>
+        <title>Admin Interface</title>
+        <para>
+            Please use the following URL to install the package utilizing the admin
+            interface (please note that you need to be in the admin group).
+        </para>
+        <para>
+            <ulink url="http://localhost/otobo/index.pl?Action=AdminPackageManager">
+                http://localhost/otobo/index.pl?Action=AdminPackageManager
+            </ulink>
+        </para>
+    </section>
+    <section>
+        <title>Command Line</title>
+        <para>
+            Whenever you cannot use the Admin Interface for whatever reason,
+            you may use the following command line tool instead.
+            <screen><![CDATA[
+shell> bin/otobo.Console.pl Admin::Package::Install /path/to/$Name-$Version.opm
+            ]]></screen>
+        </para>
+    </section>
+</chapter>
+
+<chapter>
+    <!-- You can build this chapter by running module-tools/Config2Docbook.pl -->
+    <title>Configuration</title>
+    <para>
+        This package does not need to be configured.
+    </para>
+</chapter>
+<chapter>
+    <title>Filelist</title>
+    <!-- Standard text. Don't change this -->
+    <para>This list shows all included files and the referring permissions.</para>
+    <para>
+       $Filelist
+    </para>
+</chapter>
+
+<chapter>
+    <title>ChangeLog</title>
+    <para>
+    $ChangeLog
+    </para>
+</chapter>
+
+</book>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace"/>
+
+    <xs:element name="otobo_config">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Setting" type="SettingType" maxOccurs="unbounded" />
+            </xs:sequence>
+            <xs:attribute name="version" use="required" type="xs:string"/>
+            <xs:attribute name="init" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="Framework"/>
+                        <xs:enumeration value="Application"/>
+                        <xs:enumeration value="Config"/>
+                        <xs:enumeration value="Changes"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:simpleType name="BooleanAttribute">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="SettingType">
+        <xs:sequence>
+            <xs:element name="Description">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="Translatable" use="optional" type="BooleanAttribute"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Navigation" type="xs:string" />
+            <xs:element name="Value"      type="ValueType"/>
+        </xs:sequence>
+        <xs:attribute name="Name" use="required">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:maxLength value="250" />
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+
+        <xs:attribute name="Valid"                    use="required" type="BooleanAttribute"/>
+        <xs:attribute name="Required"                 use="required" type="BooleanAttribute" />
+        <xs:attribute name="ReadOnly"                 use="optional" type="BooleanAttribute" />
+        <xs:attribute name="Invisible"                use="optional" type="BooleanAttribute" />
+        <xs:attribute name="UserModificationPossible" use="optional" type="BooleanAttribute" />
+        <xs:attribute name="UserModificationActive"   use="optional" type="BooleanAttribute" />
+
+        <xs:attribute name="ConfigLevel" use="optional" type="xs:int"/>
+
+        <xs:attribute name="UserPreferencesGroup" use="optional" type="xs:string"/>
+    </xs:complexType>
+
+    <xs:complexType name="ValueType">
+        <xs:choice>
+            <xs:element name="Item"  type="ItemType"/>
+            <xs:element name="Hash"  type="HashType"/>
+            <xs:element name="Array" type="ArrayType"/>
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:complexType mixed="true" name="ItemType">
+        <xs:choice>
+            <xs:element name="Array" type="ArrayType"/>
+            <xs:element name="Hash"  type="HashType"/>
+            <xs:sequence>
+                <xs:element name="Item" minOccurs="0" maxOccurs="unbounded" type="ItemType"/>
+            </xs:sequence>
+        </xs:choice>
+        <xs:attribute name="Translatable" type="BooleanAttribute" use="optional" />
+        <!-- allow for arbitrary unspecified value-type specific attributes -->
+        <xs:anyAttribute processContents="skip"/>
+    </xs:complexType>
+
+    <xs:complexType name="HashType">
+        <xs:sequence>
+            <xs:element name="DefaultItem" type="ItemType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Item" type="ItemType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="MinItems" type="xs:int" use="optional" />
+        <xs:attribute name="MaxItems" type="xs:int" use="optional" />
+    </xs:complexType>
+
+    <xs:complexType name="ArrayType">
+        <xs:sequence>
+            <xs:element name="DefaultItem" type="DefaultItemType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Item" type="ItemType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="MinItems" type="xs:int" use="optional" />
+        <xs:attribute name="MaxItems" type="xs:int" use="optional" />
+    </xs:complexType>
+
+    <xs:complexType mixed="true" name="DefaultItemType">
+        <xs:choice>
+            <xs:element name="Array" type="DefaultArrayType"/>
+            <xs:element name="Hash"  type="DefaultHashType"/>
+            <xs:sequence>
+                <xs:element name="Item" minOccurs="0" maxOccurs="unbounded" type="ItemType"/>
+            </xs:sequence>
+        </xs:choice>
+        <xs:attribute name="Translatable" type="BooleanAttribute" use="optional" />
+        <!-- allow for arbitrary unspecified value-type specific attributes -->
+        <xs:anyAttribute processContents="skip"/>
+    </xs:complexType>
+
+    <!-- Hashes in DefaultItems can only contain other DefaultItems, not real Items. -->
+    <xs:complexType name="DefaultHashType">
+        <xs:sequence>
+            <xs:element name="DefaultItem" type="DefaultItemType" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+        <xs:attribute name="MinItems" type="xs:int" use="optional" />
+        <xs:attribute name="MaxItems" type="xs:int" use="optional" />
+    </xs:complexType>
+
+    <!-- Arrays in DefaultItems can only contain other DefaultItems, not real Items. -->
+    <xs:complexType name="DefaultArrayType">
+        <xs:sequence>
+            <xs:element name="DefaultItem" type="DefaultItemType" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+        <xs:attribute name="MinItems" type="xs:int" use="optional" />
+        <xs:attribute name="MaxItems" type="xs:int" use="optional" />
+    </xs:complexType>
+</xs:schema>

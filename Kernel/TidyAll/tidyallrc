@@ -1,0 +1,543 @@
+;
+; Global ignores
+;
+
+; Ignore all CPAN content.
+ignore = Kernel/cpan-lib/**/* Custom/Kernel/cpan-lib/**/*
+; Ignore all dynamic/temporary data.
+ignore = var/{article,log,run,sessions,spool,tmp,virtualfs}/**/*
+; Ignore thirdparty content.
+ignore = **/thirdparty/**/*
+; Ignore Loader cache files.
+ignore = **/{js-cache,css-cache}/**/*
+; Ignore test data files.
+;ignore = scripts/test/sample/**/*
+; Ignore vagrant instance contents of the CI provisioner.
+ignore = var/Vagrant/Instances/**/*
+; node.js packages
+ignore = node_modules/**/*
+ignore = Frontend/Vendor/**/*
+; Webpack generated output files
+ignore = var/public/dist/**/*
+
+;
+; Common
+;
+
+[+TidyAll::Plugin::OTOBO::Common::CRLFLineEndings]
+select = **/*.{pl,pm,psgi,t,tt,spec,js,css,scss,vue,dist,tmpl,sh,skel,xml,sopm,html,service,conf}
+
+[+TidyAll::Plugin::OTOBO::Common::NoFilter]
+select = **/*.{pl,pm,psgi,t,tt,spec,js,css,scss,vue,dist,tmpl,sh,skel,xml,sopm,html}
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+
+[+TidyAll::Plugin::OTOBO::Common::Origin]
+select = **/*.{pl,psgi,pm,t,js,css,tt,xml,sopm}
+ignore = Kernel/Config/Files/ZZZ*.pm
+; Ignore docbook documentations
+ignore = */content/**/*.xml
+
+[+TidyAll::Plugin::OTOBO::Common::CustomizationMarkersTT]
+select = Custom/Kernel/Output/HTML/**/*.tt
+select = Kernel/Output/HTML/**/*.tt
+
+[+TidyAll::Plugin::OTOBO::Common::CustomizationMarkers]
+select = **/*.{pl,psgi,pm,t,js,css,tt}
+ignore = Kernel/Config.pm
+ignore = Kernel/Config/GenericAgent.pm
+ignore = Kernel/Config/Files/ZZZ*.pm
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+
+[+TidyAll::Plugin::OTOBO::XML::Docbook::ReplaceSupportEmail]
+select = doc/**/*.xml
+
+[+TidyAll::Plugin::OTOBO::XML::Docbook::RemoveContactChapter]
+select = doc/**/*.xml
+
+[+TidyAll::Plugin::OTOBO::Common::ProhibitEmailAddresses]
+select = **/*.{pl,pm,psgi,t,tt,js,xml,sopm}
+
+;[+TidyAll::Plugin::OTOBO::Common::TranslatableStringsSpellCheck]
+;select = **/*.{pl,pm,tt,js,xml}
+
+[+TidyAll::Plugin::OTOBO::Common::RemoveCVSIDs]
+select = **/*.{pl,pm,psgi,t,xml,tt,dist,spec,js}
+select = var/cron/*
+
+[+TidyAll::Plugin::OTOBO::Common::ValidateFilename]
+select = *
+
+;
+; Cron
+;
+
+[+TidyAll::Plugin::OTOBO::Cron::CronScripts]
+select = var/cron/*.dist
+
+;
+; JavaScript
+;
+
+[+TidyAll::Plugin::OTOBO::JavaScript::DebugCode]
+select = **/*.js
+ignore = scripts/webpack/**/*
+
+[+TidyAll::Plugin::OTOBO::JavaScript::UnloadEvent]
+select = **/*.js **/*.tt
+
+[+TidyAll::Plugin::OTOBO::JavaScript::FileName]
+select = **/*.js
+ignore = **/test/*
+
+[+TidyAll::Plugin::OTOBO::JavaScript::FileNameUnitTest]
+select = var/httpd/htdocs/js/test/*.js
+
+[+TidyAll::Plugin::OTOBO::JavaScript::ESLint]
+select = **/*.{js,vue}
+ignore = scripts/test/sample/Loader/**/*
+; Ignore this slow plugin for more agile OTOBOCodePolicy filter development with a custom mode "fast".
+except_modes = fast
+
+[+TidyAll::Plugin::OTOBO::JavaScript::Vue::EventListeners]
+select = Frontend/**/*.{js,vue}
+ignore = Frontend/Tests/**/*
+
+;
+; Legal
+;
+
+[+TidyAll::Plugin::OTOBO::Legal::AddressUpdate]
+select = doc/**/*.xml
+
+[+TidyAll::Plugin::OTOBO::Legal::LicenseValidator]
+select = **/*.{pl,pm,psgi,t,tt,spec,js,css,scss,vue,dist,sh,skel,xml,sopm}
+ignore = COPYING RELEASE CREDITS
+ignore = Kernel/Config.pm Kernel/Config/**/ZZZ*.pm Kernel/Config/Files/User/*.pm
+ignore = Kernel/WebApp.conf.dist
+ignore = scripts/auto_build/spec/templates/**/*
+ignore = scripts/test/sample/Loader/*.min.{css,js}
+ignore = scripts/test/sample/SysConfig/Migration/**/ZZZ*.pm
+ignore = scripts/DBUpdate{To6,}/TaskConfig/*.yml.dist
+ignore = var/httpd/htdocs/common/**/*.css
+; OTOBOContinuousIntegrationProvisioner - deployment template includes
+ignore = **/*.tt.sh
+
+[+TidyAll::Plugin::OTOBO::Legal::ReplaceCopyright]
+select = **/*.{pl,pm,psgi,t,tt,spec,js,css,scss,vue,dist,tmpl,sh,skel,xml,sopm,html,service,conf,example,template}
+select = .*.dist .bash_completion
+select = var/cron/*
+select = var/git/hooks/*-receive
+select = documentation.yml
+ignore = Kernel/Config.pm Kernel/Config/**/ZZZ*.pm
+ignore = module-format.xml,codesyntax.xml,language-translations.xml,writing-otobo-application.xml,test-mechanism.xml
+; Don't run this in the CI to avoid updates on year changes. It is enough to update the code when it is changed.
+only_modes = cli editor commit
+
+[+TidyAll::Plugin::OTOBO::Legal::SOPMLicense]
+select = *.{opm,sopm}
+
+;
+; POT/PO
+;
+
+[+TidyAll::Plugin::OTOBO::PO::DocbookLint]
+select = i18n/**/*.{pot,po}
+select = locale/**/*.{pot,po}
+
+[+TidyAll::Plugin::OTOBO::PO::HTMLTags]
+select = i18n/**/*.{pot,po}
+
+[+TidyAll::Plugin::OTOBO::PO::msgfmt]
+select = i18n/**/*.{pot,po}
+select = locale/**/*.{pot,po}
+
+;
+; Perl
+;
+
+[+TidyAll::Plugin::OTOBO::Perl::BinScripts]
+select = bin/*.pl
+
+[+TidyAll::Plugin::OTOBO::Perl::CacheNew]
+select = **/*.{pl,psgi,pm}
+select = Kernel/Config.pm.dist
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+
+[+TidyAll::Plugin::OTOBO::Perl::DBObject]
+select = Kernel/Modules/**/*.pm Custom/Kernel/Modules/**/*.pm
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+
+[+TidyAll::Plugin::OTOBO::Perl::DieExit]
+select = Kernel/Modules/**/*.pm Custom/Kernel/Modules/**/*.pm
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+
+[+TidyAll::Plugin::OTOBO::Perl::Dumper]
+select = **/*.{pl,pm,psgi}
+select = Kernel/Config.pm.dist
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+
+[+TidyAll::Plugin::OTOBO::Perl::ForeachToFor]
+select = **/*.{pl,pm,psgi,t}
+select = Kernel/Config.pm.dist
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+
+[+TidyAll::Plugin::OTOBO::Perl::ForMy]
+select = **/*.{pl,psgi,pm,t}
+select = Kernel/Config.pm.dist
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+
+[+TidyAll::Plugin::OTOBO::Perl::ISA]
+select = **/*.{pl,pm,psgi,t}
+select = Kernel/Config.pm.dist
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+
+[+TidyAll::Plugin::OTOBO::Perl::LayoutObject]
+select = **/*.{pl,pm,psgi,t}
+select = Kernel/Config.pm.dist
+ignore = scripts/test/**/*
+ignore = Kernel/{Modules,Output}/**/* Custom/Kernel/{Modules,Output}/**/*
+ignore = Kernel/System/Web/* Custom/Kernel/System/Web/*
+ignore = Kernel/System/DynamicField/**/* Custom/Kernel/System/DynamicField/**/*
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+
+[+TidyAll::Plugin::OTOBO::Perl::ModuleFormat]
+select = **/*.{pm,t}
+select = Kernel/Config.pm.dist
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+
+[+TidyAll::Plugin::OTOBO::Perl::NoExitInConsoleCommands]
+select = Kernel/System/Console/Command/**/*.pm Custom/Kernel/System/Console/Command/**/*.pm
+
+[+TidyAll::Plugin::OTOBO::Perl::ObjectDependencies]
+select = **/*.{pm}
+select = Kernel/Config.pm.dist
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+
+[+TidyAll::Plugin::OTOBO::Perl::ObjectManagerCreation]
+select = **/*.{pm}
+select = Kernel/Config.pm.dist
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+
+[+TidyAll::Plugin::OTOBO::Perl::ObjectNameSpace]
+select = **/*.{pl,pm,t}
+select = Kernel/Config.pm.dist
+ignore = Kernel/Modules/**/* Custom/Kernel/Modules/**/*
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+
+[+TidyAll::Plugin::OTOBO::Perl::ParamObject]
+select = **/*.{pl,psgi}
+select = Kernel/System/**/*.pm Custom/Kernel/System/**/*.pm
+ignore = Kernel/System/Web/* Custom/Kernel/System/Web/*
+ignore = Kernel/System/DynamicField/**/* Custom/Kernel/System/DynamicField/**/*
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+
+[+TidyAll::Plugin::OTOBO::Perl::PerlCritic]
+select = **/*.{pl,pm,psgi,t}
+ignore = Kernel/Config.pm
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+ignore = scripts/test/sample/**/*
+; Ignore this slow plugin for more agile OTOBOCodePolicy filter development with a custom mode "fast".
+except_modes = fast
+
+[+TidyAll::Plugin::OTOBO::Perl::PerlTidy]
+select = **/*.{pl,pm,psgi,t}
+ignore = Kernel/Config.pm Kernel/Config/Defaults.pm Kernel/Config/**/ZZZ*.pm Kernel/Config/Files/User/*.pm
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+argv = -l=120 -i=4 -ci=4 -vt=0 -vtc=0 -cti=0 -pt=1 -bt=1 -sbt=1 -bbt=1 -nsfs -nolq -bbao -nola -ndnl -cab=0
+; Ignore this slow plugin for more agile OTOBOCodePolicy filter development with a custom mode "fast".
+except_modes = fast
+
+[+TidyAll::Plugin::OTOBO::Perl::Pod::FunctionPod]
+select = **/*.{pm}
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+
+[+TidyAll::Plugin::OTOBO::Perl::Pod::NamePod]
+select = **/*.{pm}
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+
+[+TidyAll::Plugin::OTOBO::Perl::Pod::SpellCheck]
+select = **/*.{pm,pod}
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+; Ignore this slow plugin for more agile OTOBOCodePolicy filter development with a custom mode "fast".
+except_modes = fast
+
+[+TidyAll::Plugin::OTOBO::Perl::Pod::Validator]
+select = **/*.{pm,pod,pod.dist}
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+
+[+TidyAll::Plugin::OTOBO::Perl::Print]
+select = Kernel/Modules/**/*.pm Custom/Kernel/Modules/**/*.pm
+
+; $Kernel::OM must not be used in the base WebApp infrastructure, only
+;   in controllers, controller utility packages and the plugin
+;   providing Kernel::OM to the controllers.
+[+TidyAll::Plugin::OTOBO::Perl::ProhibitObjectManager]
+select = Kernel/WebApp.pm
+select = Kernel/WebApp/*.pm
+ignore = Kernel/WebApp/Plugin/**/*.pm
+ignore = Kernel/WebApp/Plugin/*ProvideObjectManager.pm
+
+[+TidyAll::Plugin::OTOBO::Perl::ProhibitMojoJSON]
+select = **/*.{pm}
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+
+[+TidyAll::Plugin::OTOBO::Perl::Require]
+select = **/*.{pl,psgi,pm,t}
+select = Kernel/Config.pm.dist
+ignore = scripts/test/Selenium/**/*.t
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+
+[+TidyAll::Plugin::OTOBO::Perl::ScriptFormat]
+select = **/*.{pl,psgi}
+
+[+TidyAll::Plugin::OTOBO::Perl::SortKeys]
+select = **/*.{pl,pm,psgi,t}
+select = Kernel/Config.pm.dist
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+
+[+TidyAll::Plugin::OTOBO::Perl::SubDeclaration]
+select = **/*.{pl,pm,psgi,t}
+select = Kernel/Config.pm.dist
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+
+[+TidyAll::Plugin::OTOBO::Perl::SyntaxCheck]
+select = **/*.{pl,pm,psgi,t}
+select = Kernel/Config.pm.dist
+; Ignore this slow plugin for more agile OTOBOCodePolicy filter development with a custom mode "fast".
+except_modes = fast
+
+[+TidyAll::Plugin::OTOBO::Perl::Tests::Helper]
+select = **/*.{t}
+
+[+TidyAll::Plugin::OTOBO::Perl::Time]
+select = **/*.{pl,pm,psgi,t}
+select = Kernel/Config.pm.dist
+ignore = scripts/test/**/*
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+
+[+TidyAll::Plugin::OTOBO::Perl::Translatable]
+select = **/*.{pl,pm,psgi,t}
+ignore = Kernel/Config.pm Kernel/Config/**/ZZZ*.pm
+ignore = Kernel/Language.pm
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+ignore = scripts/test/**/*
+
+[+TidyAll::Plugin::OTOBO::Perl::TranslationEncoding]
+select = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+
+[+TidyAll::Plugin::OTOBO::Perl::UnitTestConfigChanges]
+select = scripts/test/**/*.{t}
+
+[+TidyAll::Plugin::OTOBO::Perl::UseParent]
+select = **/*.pm **/*.pm.skel
+select = Kernel/Config.pm.dist
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+
+[+TidyAll::Plugin::OTOBO::Perl::UseWarnings]
+select = **/*.{pl,pm,psgi,t}
+select = Kernel/Config.pm.dist
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+
+[+TidyAll::Plugin::OTOBO::Perl::WebApp::HeadGetWithoutBody]
+select = Kernel/WebApp/Controller/**/*.pm
+
+;
+; SOPM
+;
+
+[+TidyAll::Plugin::OTOBO::SOPM::CodeTags]
+select = *.{opm,sopm}
+
+[+TidyAll::Plugin::OTOBO::SOPM::FileList]
+select = *.{opm,sopm}
+
+[+TidyAll::Plugin::OTOBO::SOPM::FileRights]
+select = *.{opm,sopm}
+
+[+TidyAll::Plugin::OTOBO::SOPM::Name]
+select = *.{sopm}
+
+[+TidyAll::Plugin::OTOBO::SOPM::OndemandTestingPresent]
+select = *.{opm,sopm}
+
+[+TidyAll::Plugin::OTOBO::SOPM::PackageRequired]
+select = *.{opm,sopm}
+
+[+TidyAll::Plugin::OTOBO::SOPM::RequiredElements]
+select = *.{sopm}
+
+[+TidyAll::Plugin::OTOBO::SOPM::XSDValidator]
+select = *.{sopm}
+
+;
+; TT
+;
+
+[+TidyAll::Plugin::OTOBO::TT::ScriptUsage]
+select = **/*.tt
+
+[+TidyAll::Plugin::OTOBO::TT::TranslationFilter]
+select = **/*.tt
+
+;
+; SQL
+;
+
+[+TidyAll::Plugin::OTOBO::SQL::ReservedWords]
+select = **/*.{xml,opm,sopm}
+
+;
+; Whitespace
+;
+
+[+TidyAll::Plugin::OTOBO::Whitespace::FourSpaces]
+select = **/*.{opm,sopm}
+
+[+TidyAll::Plugin::OTOBO::Whitespace::Tabs]
+select = **/*.{pl,pm,psgi,t,tt,js,xml,opm,sopm}
+ignore = Kernel/Config.pm Kernel/Config/**/ZZZ*.pm
+
+[+TidyAll::Plugin::OTOBO::Whitespace::TrailingWhitespace]
+select = **/*.{pl,pm,psgi,t,tt,js,xml,opm,sopm,md}
+ignore = Kernel/Config.pm Kernel/Config/**/ZZZ*.pm
+
+;
+; XML
+;
+
+[+TidyAll::Plugin::OTOBO::XML::ConfigSyntax]
+select = **/*.xml
+ignore = development/samples/config/*.xml
+; ignore .xml files in documentation
+ignore = doc/**/*.xml
+ignore = en/content/**/*.xml
+ignore = de/content/**/*.xml
+ignore = hu/content/**/*.xml
+
+[+TidyAll::Plugin::OTOBO::XML::ConfigDescription]
+select = Kernel/Config/**/*.xml
+
+[+TidyAll::Plugin::OTOBO::XML::Configuration::Navigation]
+select = Kernel/Config/**/*.xml
+
+[+TidyAll::Plugin::OTOBO::XML::Configuration::UnitTestBlacklist]
+select = Kernel/Config/**/*.xml
+
+[+TidyAll::Plugin::OTOBO::XML::Configuration::XSDValidator]
+select = Kernel/Config/**/*.xml
+
+[+TidyAll::Plugin::OTOBO::XML::Configuration::YAMLIndentation]
+select = Kernel/Config/**/*.xml
+
+[+TidyAll::Plugin::OTOBO::XML::Configuration::YAMLValidator]
+select = Kernel/Config/**/*.xml
+
+[+TidyAll::Plugin::OTOBO::XML::Database::KeyLength]
+select = scripts/database/otobo-schema.xml
+select = *.{sopm}
+
+[+TidyAll::Plugin::OTOBO::XML::Database::XSDValidator]
+select = scripts/database/*.xml
+select = scripts/database/update/*.xml
+
+[+TidyAll::Plugin::OTOBO::XML::Docbook::BinScripts]
+select = doc/**/*.xml
+;select = en/content/**/*.xml
+
+[+TidyAll::Plugin::OTOBO::XML::Docbook::ImageOutput]
+select = doc/**/*.xml
+select = en/content/**/*.xml
+
+[+TidyAll::Plugin::OTOBO::XML::Docbook::XSDValidator]
+select = doc/**/*.xml
+;select = en/content/**/*.xml
+
+[+TidyAll::Plugin::OTOBO::XML::WSDL::XSDValidator]
+select = **/*.wsdl
+
+[+TidyAll::Plugin::OTOBO::XML::WADL::XSDValidator]
+select = **/*.wadl
+
+[+TidyAll::Plugin::OTOBO::XML::Lint]
+select = **/*.{xml,xsd}
+
+[+TidyAll::Plugin::OTOBO::XML::LintWithOurParsers]
+select = ;**/*.xml
+
+;
+; Migrations OTOBO 5
+;
+
+[+TidyAll::Plugin::OTOBO::Migrations::OTOBO5::HeaderlineFilename]
+select = **/*.{pl,pm,psgi,t,tt,js,spec}
+select = .*.dist .bash_completion
+ignore = Kernel/Config/Files/ZZZ*.pm
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+
+[+TidyAll::Plugin::OTOBO::Migrations::OTOBO5::OutputFilterPre]
+select = Kernel/Config/**/*.xml
+
+[+TidyAll::Plugin::OTOBO::Migrations::OTOBO5::Popup]
+select = **/*.tt
+
+[+TidyAll::Plugin::OTOBO::Migrations::OTOBO5::StatisticsPreview]
+select = Kernel/System/Stats/Dynamic/*.pm
+
+;
+; Migrations OTOBO 10
+;
+
+[+TidyAll::Plugin::OTOBO::Migrations::OTOBO6::DateTime]
+select = **/*.{pl,pm,psgi,t}
+ignore = Kernel/Config/Files/ZZZ*.pm
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+
+[+TidyAll::Plugin::OTOBO::Migrations::OTOBO6::PerlConfigFileFormat]
+select = Kernel/Config/Files/*.pm
+
+[+TidyAll::Plugin::OTOBO::Migrations::OTOBO6::PermissionDataNotInSession]
+select = **/*.{pl,pm,psgi,t}
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+
+[+TidyAll::Plugin::OTOBO::Migrations::OTOBO6::SysConfig]
+select = **/*.{pl,pm,psgi,t}
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+
+[+TidyAll::Plugin::OTOBO::Migrations::OTOBO6::TimeObject]
+select = **/*.{pl,pm,psgi,t}
+ignore = Kernel/System/Time.pm
+ignore = scripts/test/Time.t
+ignore = scripts/test/Time/**/*.t
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+
+[+TidyAll::Plugin::OTOBO::Migrations::OTOBO6::TimeZoneOffset]
+select = **/*.{pl,pm,psgi,t}
+ignore = Kernel/Config/Files/ZZZ*.pm
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+
+[+TidyAll::Plugin::OTOBO::Migrations::OTOBO6::XMLFrontendNavigation]
+select = Kernel/Config/**/*.xml
+
+;
+; Migrations OTOBO 7
+;
+
+[+TidyAll::Plugin::OTOBO::Migrations::OTOBO7::DeprecatedSettings]
+select = Kernel/Config/**/*.xml
+
+[+TidyAll::Plugin::OTOBO::Migrations::OTOBO7::TranslatableStringsPlaceholders]
+select = **/*.{pl,pm,tt,js,xml,html.tmpl}
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+
+[+TidyAll::Plugin::OTOBO::Migrations::OTOBO7::WebAppNoLegacyCode]
+select = Kernel/WebApp.pm
+select = Kernel/WebApp/**/*.{pl,pm}
+
+;
+; Migrations OTOBO 8
+;
+
+[+TidyAll::Plugin::OTOBO::Migrations::OTOBO8::UselessComments]
+select = **/*.{pl,pm,psgi,t}
+ignore = Kernel/Config/Files/ZZZ*.pm
+ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
