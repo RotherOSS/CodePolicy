@@ -17,7 +17,7 @@
     <PackageIsDownloadable>0</PackageIsDownloadable>
     <PackageIsBuildable>0</PackageIsBuildable>
     <Filelist>
-        <File Permission="760" Location="bin/otobo.CodePolicy.pl" />
+        <File Permission="770" Location="bin/otobo.CodePolicy.pl" />
         <File Permission="660" Location="Kernel/cpan-lib/Locale/PO.pm" />
         <File Permission="660" Location="Kernel/cpan-lib/Perl/Tidy.pod" />
         <File Permission="660" Location="Kernel/cpan-lib/Perl/Tidy.pm" />

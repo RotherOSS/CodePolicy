@@ -50,30 +50,42 @@ sub validate_file {
     # Check a javascript license header.
     if ( lc $Filetype eq 'js' ) {
 
+        my $Description = _DescJS();
         my $GPLJavaScript = _GPLJavaScript();
 
         if ( $Code !~ m{\Q$GPLJavaScript\E} ) {
             return $Self->DieWithError("Found no valid javascript license header!");
         }
+        if ( $Code !~ m{\Q$Description\E} ) {
+            return $Self->DieWithError("Found no valid description in javascript license header!");
+        }
     }
 
     # Check a perl script license header.
-    elsif ( lc $Filetype eq 'pl' || lc $Filetype eq 'psgi' || lc $Filetype eq 'sh' ) {
+    elsif ( lc $Filetype eq 'pl' || lc $Filetype eq 'psgi' || lc $Filetype eq 'sh' || lc $Filetype eq 't' ) {
 
+        my $Description = _DescPerl();
         my $GPLPerlScript = _GPLPerlScript();
 
         if ( $Code !~ m{\Q$GPLPerlScript\E} ) {
             return $Self->DieWithError("Found no valid perl script license header!");
+        }
+        if ( $Code !~ m{\Q$Description\E} ) {
+            return $Self->DieWithError("Found no valid description in perl license header!");
         }
     }
 
     # Check css license header.
     elsif ( lc $Filetype eq 'css' || lc $Filetype eq 'scss' ) {
 
+        my $Description = _DescCss();
         my $GPLCss = _GPLCss();
 
         if ( $Code !~ m{\Q$GPLCss\E} ) {
             return $Self->DieWithError("Found no valid css license header!");
+        }
+        if ( $Code !~ m{\Q$Description\E} ) {
+            return $Self->DieWithError("Found no valid description in css license header!");
         }
     }
 
@@ -141,7 +153,6 @@ sub _GPLPerlScript {
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 END_GPLPERLSCRIPT
-
 }
 
 sub _GPLJavaScript {
@@ -216,8 +227,32 @@ This software is part of the OTOBO project (L<https://otobo.org/>).
 
 This software comes with ABSOLUTELY NO WARRANTY. For details, see
 the enclosed file COPYING for license information (GPL). If you
-did not receive this file, see L<https://www.gnu.org/licenses/>.
+did not receive this file, see L<https://www.gnu.org/licenses/gpl-3.0.txt>.
 END_GPLPERLDOC
+}
+
+
+sub _DescPerl {
+    return <<'END_DESCPERLSCRIPT';
+# --
+# OTOBO is a web-based ticketing system for service organisations.
+# --
+END_DESCPERLSCRIPT
+}
+
+sub _DescJS {
+    return <<'END_DESCJS';
+// --
+// OTOBO is a web-based ticketing system for service organisations.
+// --
+END_DESCJS
+}
+
+sub _DescCss {
+    return <<'END_DESCCSS';
+/* OTOBO is a web-based ticketing system for service organisations.
+
+END_DESCCSS
 }
 
 1;
