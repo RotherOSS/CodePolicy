@@ -29,11 +29,9 @@ sub transform_source {
     return $Code if $Self->IsPluginDisabled( Code => $Code );
     return $Code if $Self->IsFrameworkVersionLessThan( 3, 2 );
 
-    # For framework 3.2 or later, rewrite /usr/bin/perl -w to
-    # /usr/bin/perl
-    # we use 'use warnings;' which works lexical and not global
+    # For otobo we use /usr/bin/env perl
 
-    $Code =~ s{\A\#!/usr/bin/perl[ ]-w}{\#!/usr/bin/perl}xms;
+    $Code =~ s{\A\#!/usr/bin/perl.+}{\#!/usr/bin/env perl}xms;
 
     return $Code;
 }
@@ -44,9 +42,9 @@ sub validate_source {
     return $Code if $Self->IsPluginDisabled( Code => $Code );
 
     # Check for presence of shebang line
-    if ( $Code !~ m{\A\#!/usr/bin/perl\s*(?:-w)?}xms ) {
+    if ( $Code !~ m{\A\#!/usr/bin/env\sperl}xms ) {
         return $Self->DieWithError(<<"EOF");
-Need #!/usr/bin/perl at the start of script files.
+Need '#!/usr/bin/env perl' at the start of script files.
 EOF
     }
 
