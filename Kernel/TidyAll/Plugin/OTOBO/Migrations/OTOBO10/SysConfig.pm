@@ -14,7 +14,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package TidyAll::Plugin::OTOBO::Migrations::OTOBO6::TimeZoneOffset;
+package TidyAll::Plugin::OTOBO::Migrations::OTOBO10::SysConfig;
 
 use strict;
 use warnings;
@@ -25,27 +25,42 @@ sub validate_source {
     my ( $Self, $Code ) = @_;
 
     return if $Self->IsPluginDisabled( Code => $Code );
-    return if $Self->IsFrameworkVersionLessThan( 6, 0 );
-    return if !$Self->IsFrameworkVersionLessThan( 7, 0 );
+    return if $Self->IsFrameworkVersionLessThan( 10, 0 );
+    return if !$Self->IsFrameworkVersionLessThan( 11, 0 );
 
     my ( $Counter, $ErrorMessage );
 
+    LINE:
     for my $Line ( split /\n/, $Code ) {
         $Counter++;
 
-        # Look for code that might contain old time zone offset calculations
+        next LINE if $Line =~ m/^\s*\#/smx;
+
+        # Look for code that uses not not existing functions.
         if (
-            $Line =~ m{(timezone|time zone)}smi
-            && $Line =~ m{3600}smi
+            $Line =~ m{
+            ->(CreateConfig|ConfigItemUpdate|ConfigItemGet|ConfigItemReset
+            |ConfigItemValidityUpdate|ConfigGroupList|ConfigSubGroupList
+            |ConfigSubGroupConfigItemList|ConfigItemSearch|ConfigItemTranslatableStrings
+            |ConfigItemValidate|ConfigItemCheckAll)\(}smx
             )
         {
+            # Skip ITSM functions, which have same name.
+            next LINE if $Line =~ m{ConfigItemObject};
+            next LINE if $Line =~ m{ITSM};
+
             $ErrorMessage .= "Line $Counter: $Line\n";
         }
     }
 
     if ($ErrorMessage) {
         return $Self->DieWithError(<<"EOF");
-Code might contain deprecated time zone offset calculations. Only use methods provided by Kernel::System::DateTime to change time zones and calculate date/time.
+Use of unexisting methods in Kernel::System::SysConfig is not allowed (CreateConfig, ConfigItemUpdate,
+ConfigItemGet, ConfigItemReset, ConfigItemValidityUpdate,ConfigGroupList, ConfigSubGroupList,
+ConfigSubGroupConfigItemList, ConfigItemSearch, ConfigItemTranslatableStrings, ConfigItemValidate
+and ConfigItemCheckAll).
+
+    Please see http://doc.otobo.com/doc/manual/developer/6.0/en/html/package-porting.html#package-porting-5-to-6 for porting guidelines.
 $ErrorMessage
 EOF
     }

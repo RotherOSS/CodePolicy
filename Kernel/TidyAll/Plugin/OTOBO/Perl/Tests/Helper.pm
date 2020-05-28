@@ -64,20 +64,6 @@ Don't use the Helper flag 'RestoreDatabase' in  Selenium tests, as the web serve
 EOF
     }
 
-    return if $Self->IsFrameworkVersionLessThan( 8, 0 );
-
-    if ( $MatchPositions{PGPInstantiation} && !$MatchPositions{HelperObjectFlagPGPEnvironment} ) {
-        return $Self->DieWithError(<<"EOF");
-PGP tests should always use the 'ProvideTestPGPEnvironment' flag of the unit test Helper.
-EOF
-    }
-
-    if ( $MatchPositions{SMIMEInstantiation} && !$MatchPositions{HelperObjectFlagSMIMEEnvironment} ) {
-        return $Self->DieWithError(<<"EOF");
-SMIME tests should always use the 'ProvideTestSMIMEEnvironment' flag of the unit test Helper.
-EOF
-    }
-
     return;
 }
 

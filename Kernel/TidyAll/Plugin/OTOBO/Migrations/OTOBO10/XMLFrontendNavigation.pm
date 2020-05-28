@@ -14,7 +14,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package TidyAll::Plugin::OTOBO::Migrations::OTOBO6::XMLFrontendNavigation;
+package TidyAll::Plugin::OTOBO::Migrations::OTOBO10::XMLFrontendNavigation;
 
 use strict;
 use warnings;
@@ -25,8 +25,8 @@ sub validate_source {
     my ( $Self, $Code ) = @_;
 
     return if $Self->IsPluginDisabled( Code => $Code );
-    return if $Self->IsFrameworkVersionLessThan( 6, 0 );
-    return if !$Self->IsFrameworkVersionLessThan( 7, 0 );
+    return if $Self->IsFrameworkVersionLessThan( 10, 0 );
+    return if !$Self->IsFrameworkVersionLessThan( 11, 0 );
 
     my ( $Counter, $ErrorMessage );
 

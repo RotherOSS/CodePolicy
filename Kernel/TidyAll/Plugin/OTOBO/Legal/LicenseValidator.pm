@@ -50,7 +50,7 @@ sub validate_file {
     # Check a javascript license header.
     if ( lc $Filetype eq 'js' ) {
 
-        my $Description = _DescJS();
+        my $Description   = _DescJS();
         my $GPLJavaScript = _GPLJavaScript();
 
         if ( $Code !~ m{\Q$GPLJavaScript\E} ) {
@@ -64,7 +64,7 @@ sub validate_file {
     # Check a perl script license header.
     elsif ( lc $Filetype eq 'pl' || lc $Filetype eq 'psgi' || lc $Filetype eq 'sh' || lc $Filetype eq 't' ) {
 
-        my $Description = _DescPerl();
+        my $Description   = _DescPerl();
         my $GPLPerlScript = _GPLPerlScript();
 
         if ( $Code !~ m{\Q$GPLPerlScript\E} ) {
@@ -79,7 +79,7 @@ sub validate_file {
     elsif ( lc $Filetype eq 'css' || lc $Filetype eq 'scss' ) {
 
         my $Description = _DescCss();
-        my $GPLCss = _GPLCss();
+        my $GPLCss      = _GPLCss();
 
         if ( $Code !~ m{\Q$GPLCss\E} ) {
             return $Self->DieWithError("Found no valid css license header!");
@@ -230,7 +230,6 @@ the enclosed file COPYING for license information (GPL). If you
 did not receive this file, see L<https://www.gnu.org/licenses/gpl-3.0.txt>.
 END_GPLPERLDOC
 }
-
 
 sub _DescPerl {
     return <<'END_DESCPERLSCRIPT';

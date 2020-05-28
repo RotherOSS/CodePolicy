@@ -14,19 +14,22 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package TidyAll::Plugin::OTOBO::Migrations::OTOBO6::SysConfig;
+package TidyAll::Plugin::OTOBO::Migrations::OTOBO10::PermissionDataNotInSession;
 
 use strict;
 use warnings;
 
 use parent qw(TidyAll::Plugin::OTOBO::Base);
 
+## nofilter(TidyAll::Plugin::OTOBO::Migrations::OTOBO10::PermissionDataNotInSession)
+## nofilter(TidyAll::Plugin::OTOBO::Perl::ObjectDependencies)
+
 sub validate_source {
     my ( $Self, $Code ) = @_;
 
     return if $Self->IsPluginDisabled( Code => $Code );
-    return if $Self->IsFrameworkVersionLessThan( 6, 0 );
-    return if !$Self->IsFrameworkVersionLessThan( 7, 0 );
+    return if $Self->IsFrameworkVersionLessThan( 10, 0 );
+    return if !$Self->IsFrameworkVersionLessThan( 11, 0 );
 
     my ( $Counter, $ErrorMessage );
 
@@ -36,31 +39,23 @@ sub validate_source {
 
         next LINE if $Line =~ m/^\s*\#/smx;
 
-        # Look for code that uses not not existing functions.
-        if (
-            $Line =~ m{
-            ->(CreateConfig|ConfigItemUpdate|ConfigItemGet|ConfigItemReset
-            |ConfigItemValidityUpdate|ConfigGroupList|ConfigSubGroupList
-            |ConfigSubGroupConfigItemList|ConfigItemSearch|ConfigItemTranslatableStrings
-            |ConfigItemValidate|ConfigItemCheckAll)\(}smx
-            )
-        {
-            # Skip ITSM functions, which have same name.
-            next LINE if $Line =~ m{ConfigItemObject};
-            next LINE if $Line =~ m{ITSM};
-
+        if ( $Line =~ m{UserIsGroup}sm ) {
             $ErrorMessage .= "Line $Counter: $Line\n";
         }
     }
 
     if ($ErrorMessage) {
         return $Self->DieWithError(<<"EOF");
-Use of unexisting methods in Kernel::System::SysConfig is not allowed (CreateConfig, ConfigItemUpdate,
-ConfigItemGet, ConfigItemReset, ConfigItemValidityUpdate,ConfigGroupList, ConfigSubGroupList,
-ConfigSubGroupConfigItemList, ConfigItemSearch, ConfigItemTranslatableStrings, ConfigItemValidate
-and ConfigItemCheckAll).
+Since OTOBO 10, group permission information is no longer stored in the session nor the LayoutObject and cannot be fetched with 'UserIsGroup[]'. Instead, it can be fetched with PermissionCheck() on Kernel::System::Group or Kernel::System::CustomerGroup.
 
-    Please see http://doc.otobo.com/doc/manual/developer/6.0/en/html/package-porting.html#package-porting-5-to-6 for porting guidelines.
+Example:
+
+    my \$HasPermission = \$Kernel::OM->Get('Kernel::System::Group')->PermissionCheck(
+        UserID    => \$UserID,
+        GroupName => \$GroupName,
+        Type      => 'move_into',
+    );
+
 $ErrorMessage
 EOF
     }

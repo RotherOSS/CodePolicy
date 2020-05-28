@@ -20,7 +20,7 @@ use warnings;
 
 use File::Basename;
 use FindBin qw($RealBin);
-use lib dirname($RealBin) . '/Kernel/';          # find TidyAll
+use lib dirname($RealBin) . '/Kernel/';           # find TidyAll
 
 use utf8;
 

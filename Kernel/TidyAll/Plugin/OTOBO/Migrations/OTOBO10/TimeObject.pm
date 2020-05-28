@@ -14,39 +14,43 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package TidyAll::Plugin::OTOBO::Migrations::OTOBO5::OutputFilterPre;
+package TidyAll::Plugin::OTOBO::Migrations::OTOBO10::TimeObject;
 
 use strict;
 use warnings;
 
-use File::Basename;
 use parent qw(TidyAll::Plugin::OTOBO::Base);
+## nofilter(TidyAll::Plugin::OTOBO::Migrations::OTOBO10::TimeObject)
 
 sub validate_source {
     my ( $Self, $Code ) = @_;
 
     return if $Self->IsPluginDisabled( Code => $Code );
-    return if $Self->IsFrameworkVersionLessThan( 5, 0 );
-    return if !$Self->IsFrameworkVersionLessThan( 6, 0 );
+    return if $Self->IsFrameworkVersionLessThan( 10, 0 );
+    return if !$Self->IsFrameworkVersionLessThan( 11, 0 );
 
-    my @InvalidSettings;
+    my ( $Counter, $ErrorMessage );
 
-    $Code =~ s{
-        (<ConfigItem\s*Name="Frontend::Output::FilterElementPre.*?>)
-    }{
-        push @InvalidSettings, $1;
-    }smxge;
+    LINE:
+    for my $Line ( split /\n/, $Code ) {
+        $Counter++;
 
-    my $ErrorMessage;
+        next LINE if $Line =~ m/^\s*\#/smx;
 
-    if (@InvalidSettings) {
-        $ErrorMessage .= "Pre output filters are not supported in OTOBO 5+.\n";
-        $ErrorMessage .= "Wrong settings found: " . join( ', ', @InvalidSettings ) . "\n";
+        if ( $Line =~ m{Kernel::System::Time[^a-zA-Z]}sm ) {
+            $ErrorMessage .= "Line $Counter: $Line\n";
+        }
     }
 
     if ($ErrorMessage) {
-        return $Self->DieWithError("$ErrorMessage");
+        return $Self->DieWithError(<<"EOF");
+Use of deprecated Kernel::System::Time is not allowed anymore except for legacy API interfaces. Please use Kernel::System::DateTime instead.
+    Please see http://doc.otobo.com/doc/manual/developer/6.0/en/html/package-porting.html#package-porting-5-to-6 for porting guidelines.
+$ErrorMessage
+EOF
     }
+
+    return;
 }
 
 1;

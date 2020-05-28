@@ -68,21 +68,13 @@
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Legal/LicenseValidator.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Legal/ReplaceCopyright.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Legal/SOPMLicense.pm" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Migrations/OTOBO5/HeaderlineFilename.pm" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Migrations/OTOBO5/OutputFilterPre.pm" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Migrations/OTOBO5/Popup.pm" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Migrations/OTOBO5/StatisticsPreview.pm" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Migrations/OTOBO6/DateTime.pm" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Migrations/OTOBO6/PerlConfigFileFormat.pm" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Migrations/OTOBO6/PermissionDataNotInSession.pm" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Migrations/OTOBO6/SysConfig.pm" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Migrations/OTOBO6/TimeObject.pm" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Migrations/OTOBO6/TimeZoneOffset.pm" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Migrations/OTOBO6/XMLFrontendNavigation.pm" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Migrations/OTOBO7/DeprecatedSettings.pm" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Migrations/OTOBO7/TranslatableStringsPlaceholders.pm" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Migrations/OTOBO7/WebAppNoLegacyCode.pm" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Migrations/OTOBO8/UselessComments.pm" />
+        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Migrations/OTOBO10/DateTime.pm" />
+        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Migrations/OTOBO10/PerlConfigFileFormat.pm" />
+        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Migrations/OTOBO10/PermissionDataNotInSession.pm" />
+        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Migrations/OTOBO10/SysConfig.pm" />
+        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Migrations/OTOBO10/TimeObject.pm" />
+        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Migrations/OTOBO10/TimeZoneOffset.pm" />
+        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Migrations/OTOBO10/XMLFrontendNavigation.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/BinScripts.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Critic/Policy/OTOBO/ProhibitLowPrecendeceOps.pm" />
@@ -118,8 +110,6 @@
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Pod/SpellCheck.Whitelist.txt" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Pod/Validator.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Print.pm" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/ProhibitObjectManager.pm" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/ProhibitMojoJSON.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Require.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/ScriptFormat.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/SortKeys.pm" />
@@ -132,7 +122,6 @@
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/UnitTestConfigChanges.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/UseParent.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/UseWarnings.pm" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/WebApp/HeadGetWithoutBody.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/PO/DocbookLint.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/PO/HTMLTags.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/PO/msgfmt.pm" />
@@ -140,7 +129,6 @@
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/SOPM/FileList.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/SOPM/FileRights.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/SOPM/Name.pm" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/SOPM/OndemandTestingPresent.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/SOPM/PackageRequired.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/SOPM/RequiredElements.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/SOPM/XSDValidator.pm" />
@@ -149,10 +137,7 @@
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/StaticFiles/Hunspell/Dictionaries/en_US.dic" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/StaticFiles/Hunspell/Dictionaries/Readme.md" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/StaticFiles/XSD/Configuration.xsd" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/StaticFiles/XSD/Configuration_before_5.xsd" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/StaticFiles/XSD/Configuration_before_6.xsd" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/StaticFiles/XSD/Database.xsd" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/StaticFiles/XSD/Database_before_9.xsd" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/StaticFiles/XSD/Docbook/4_2/calstblx.xsd" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/StaticFiles/XSD/Docbook/4_2/dbhierx.xsd" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/StaticFiles/XSD/Docbook/4_2/dbnotnx.xsd" />
@@ -184,7 +169,6 @@
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/StaticFiles/XSD/WSDL/Literal.xsd" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/StaticFiles/XSD/WSDL/WSDL.xsd" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/StaticFiles/XSD/SOPM.xsd" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/StaticFiles/XSD/SOPM_before_9.xsd" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/TT/ScriptUsage.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/TT/TranslationFilter.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Whitespace/FourSpaces.pm" />
@@ -195,8 +179,6 @@
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/XML/Configuration/Navigation.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/XML/Configuration/UnitTestBlacklist.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/XML/Configuration/XSDValidator.pm" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/XML/Configuration/YAMLIndentation.pm" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/XML/Configuration/YAMLValidator.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/XML/Database/XSDValidator.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/XML/Database/KeyLength.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/XML/Docbook/BinScripts.pm" />
@@ -218,7 +200,6 @@
         <File Permission="660" Location="scripts/test/OTOBOCodePolicy.t" />
         <File Permission="660" Location="scripts/test/OTOBOCodePolicyPlugins/JavaScript/DebugCode.t" />
         <File Permission="660" Location="scripts/test/OTOBOCodePolicyPlugins/JavaScript/ESLint.t" />
-        <File Permission="660" Location="scripts/test/OTOBOCodePolicyPlugins/JavaScript/Vue/EventListeners.t" />
         <File Permission="660" Location="scripts/test/OTOBOCodePolicyPlugins/Migrations/OTOBO7/DeprecatedSettings.t" />
         <File Permission="660" Location="scripts/test/OTOBOCodePolicyPlugins/Migrations/OTOBO8/UselessComments.t" />
         <File Permission="660" Location="scripts/test/OTOBOCodePolicyPlugins/Perl/CacheNew.t" />

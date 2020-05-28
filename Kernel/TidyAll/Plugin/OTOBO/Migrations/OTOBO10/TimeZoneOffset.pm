@@ -14,7 +14,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package TidyAll::Plugin::OTOBO::Migrations::OTOBO5::Popup;
+package TidyAll::Plugin::OTOBO::Migrations::OTOBO10::TimeZoneOffset;
 
 use strict;
 use warnings;
@@ -25,25 +25,27 @@ sub validate_source {
     my ( $Self, $Code ) = @_;
 
     return if $Self->IsPluginDisabled( Code => $Code );
-    return if $Self->IsFrameworkVersionLessThan( 5, 0 );
-    return if !$Self->IsFrameworkVersionLessThan( 6, 0 );
+    return if $Self->IsFrameworkVersionLessThan( 10, 0 );
+    return if !$Self->IsFrameworkVersionLessThan( 11, 0 );
 
     my ( $Counter, $ErrorMessage );
 
     for my $Line ( split /\n/, $Code ) {
         $Counter++;
 
-        # look for forbidden text in popup header
-        # text should be "cancel & close" or "undo & close"
-        # but not "xyz & close window" anymore
-        if ( $Line =~ m{\[% Translate\("(Undo & close window|Cancel & close window|Close window)}smi ) {
+        # Look for code that might contain old time zone offset calculations
+        if (
+            $Line =~ m{(timezone|time zone)}smi
+            && $Line =~ m{3600}smi
+            )
+        {
             $ErrorMessage .= "Line $Counter: $Line\n";
         }
     }
 
     if ($ErrorMessage) {
         return $Self->DieWithError(<<"EOF");
-Popup close notice should not contain the word "window".
+Code might contain deprecated time zone offset calculations. Only use methods provided by Kernel::System::DateTime to change time zones and calculate date/time.
 $ErrorMessage
 EOF
     }

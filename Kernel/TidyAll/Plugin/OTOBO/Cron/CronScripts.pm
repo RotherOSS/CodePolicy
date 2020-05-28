@@ -33,7 +33,7 @@ sub validate_file {
     return if $Self->IsFrameworkVersionLessThan( 5, 0 );
 
     my %AllowedFiles = (
-        'aaa_base.dist'       => 1,
+        'aaa_base.dist'        => 1,
         'otobo_daemon.dist'    => 1,
         'otobo_webserver.dist' => 1,
     );

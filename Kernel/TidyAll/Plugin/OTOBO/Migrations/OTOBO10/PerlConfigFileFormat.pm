@@ -14,33 +14,28 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 
-package TidyAll::Plugin::OTOBO::Migrations::OTOBO8::UselessComments;
+package TidyAll::Plugin::OTOBO::Migrations::OTOBO10::PerlConfigFileFormat;
 
 use strict;
 use warnings;
 
-use parent 'TidyAll::Plugin::OTOBO::Base';
+use parent qw(TidyAll::Plugin::OTOBO::Base);
 
-sub transform_source {
+sub validate_source {
     my ( $Self, $Code ) = @_;
 
-    return $Code if $Self->IsPluginDisabled( Code => $Code );
-    return $Code if $Self->IsFrameworkVersionLessThan( 8, 0 );
-    return $Code if !$Self->IsFrameworkVersionLessThan( 9, 0 );
+    return if $Self->IsPluginDisabled( Code => $Code );
+    return if $Self->IsFrameworkVersionLessThan( 10, 0 );
+    return if !$Self->IsFrameworkVersionLessThan( 11, 0 );
 
-    my @CleanupRegexes = (
-        qr{^[ ]* [#] [ ]+ (?: [gG]et | [cC]heck ) [ ] needed [ ] (?:objects|variables|stuff|params|data) [.]? \n}smx,
-        qr{^[ ]* [#] [ ]+ [gG]et [ ] [a-zA-Z0-9_]{2,} [ ] object [.]? \n}smx,
-        qr{^[ ]* [#] [ ]+ [gG]et [ ] script [ ] alias [.]? \n}smx,
-        qr{^[ ]* [#] [ ]+ [gG]et [ ] valid [ ] list [.]? \n}smx,
-        qr{^[ ]* [#] [ ]+ [aA]llocate [ ] new [ ] hash [ ] for [ ] object [.]? \n}smx,
-    );
+    if ( $Code !~ m{^package \s}smx || $Code !~ m{^sub \s+ Load}smx ) {
 
-    for my $Regex (@CleanupRegexes) {
-        $Code =~ s{$Regex}{}smxg;
+        return $Self->DieWithError(<<"EOF");
+Perl configuration files for OTOBO 10+ must use the the new format like Kernel/Config/Files/ZZZAAuto.pm (they need to be created as a package with a Load() method).
+EOF
     }
 
-    return $Code;
+    return;
 }
 
 1;

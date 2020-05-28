@@ -45,11 +45,11 @@ sub transform_source {
     my $Output = '';
 
     my @Lines = split( /\n/, $Code );
-    my $i = 0;
+    my $i     = 0;
 
-    # header start    
+    # header start
     LINE:
-    for my $Line ( @Lines ) {
+    for my $Line (@Lines) {
         last LINE if $Line =~ /Copyright/;
 
         $Output .= $Line . "\n";
@@ -59,40 +59,40 @@ sub transform_source {
     my $CopySet = 0;
 
     # copyright block
-    while ( $Lines[ $i ] && $Lines[ $i ] =~ /Copyright/ ) {
-        my $Line = $Lines[ $i ];
+    while ( $Lines[$i] && $Lines[$i] =~ /Copyright/ ) {
+        my $Line = $Lines[$i];
 
         # POD copyright statements.
         if ( $Line =~ /^# Copyright .*Rother OSS/ ) {
-            $Line = "# Copyright (C) $YearString $Copy";
+            $Line    = "# Copyright (C) $YearString $Copy";
             $CopySet = 1;
         }
 
         # Check string in documentation.yml files
         elsif ( $Line =~ /^Copyright: .*Rother OSS/ ) {
-            $Line = "Copyright: $YearString $Copy";
+            $Line    = "Copyright: $YearString $Copy";
             $CopySet = 1;
         }
 
         # Any other generic copyright statements, e.g :
         #   print "Copyright (c) 2003-2008 Rother OSS GmbH, http://www.otobo.com/\n";
         elsif ( $Line =~ /^([^\n]*)Copyright.*Rother OSS/i ) {
-            $Line = "$1Copyright (C) $YearString $Copy";
+            $Line    = "$1Copyright (C) $YearString $Copy";
             $CopySet = 1;
         }
 
         $Output .= $Line . "\n";
         $i++;
     }
-    
+
     # if we are not yet listed add Rother OSS GmbH
-    if ( !$CopySet && $Lines[ $i-1 ] =~ /^(.*)Copyright/ ) {
+    if ( !$CopySet && $Lines[ $i - 1 ] =~ /^(.*)Copyright/ ) {
         $Output .= "$1Copyright (C) $YearString $Copy\n";
     }
 
     # add the rest of the file
     for ( $i .. $#Lines ) {
-        $Output .= $Lines[ $_ ] . "\n";
+        $Output .= $Lines[$_] . "\n";
     }
 
     return $Output;

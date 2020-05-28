@@ -67,24 +67,6 @@ sub validate_source {
                     'Invalid top Frontend subgroup found (only Admin|Agent|Base|Customer|Public|External are allowed).',
             },
             {
-                Name                 => 'Valid Frontend subgroups (OTOBO 7+)',
-                MatchSettingName     => qr{.*},
-                MatchNavigationValue => qr{^Frontend},                       # no entries allowed in "Frontend" directly
-                RequireNavigationMatch          => qr{^Frontend::(Admin|Agent|Base|External)(::|$)},
-                SkipForFrameworkVersionLessThan => [ 7, 0 ],
-                ErrorMessage =>
-                    'Invalid top Frontend subgroup found (only Admin|Agent|Base|External are allowed).',
-            },
-            {
-                Name                            => 'Valid WebApp subgroups (OTOBO 7+)',
-                MatchSettingName                => qr{.*},
-                MatchNavigationValue            => qr{^WebApp::},                        # Allow toplevel entries
-                RequireNavigationMatch          => qr{^WebApp::(API|APIClient)(::|$)},
-                SkipForFrameworkVersionLessThan => [ 7, 0 ],
-                ErrorMessage =>
-                    'Invalid top WebApp subgroup found (only API|APIClient is allowed).',
-            },
-            {
                 Name                   => 'Main Loader config',
                 MatchSettingName       => qr{^Loader::(Agent|Customer|Enabled)},
                 MatchNavigationValue   => qr{.*},
@@ -194,15 +176,6 @@ sub validate_source {
                 RequireNavigationMatch => qr{^Frontend::(Admin|Agent|Customer|Public)::View::.+$},
                 ErrorMessage =>
                     "Screen specific settings should be added in Frontend::(Admin|Agent|Customer|Public)::View.",
-            },
-            {
-                Name                            => 'Valid frontend views (OTOBO 7+)',
-                MatchSettingName                => qr{.*},
-                MatchNavigationValue            => qr{^Frontend::(Admin|Agent|Customer|Public)::(.+::)*View.+$},
-                RequireNavigationMatch          => qr{^Frontend::(Admin|Agent)::View::.+$},
-                SkipForFrameworkVersionLessThan => [ 7, 0 ],
-                ErrorMessage =>
-                    "Screen specific settings should be added in Frontend::(Admin|Agent)::View.",
             },
         );
 

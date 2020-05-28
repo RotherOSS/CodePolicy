@@ -205,33 +205,6 @@ sub validate_source {
         $ErrorMessage .= $NameLength;
     }
 
-    # Checks for OTOBO 7+.
-    if ( !$Self->IsFrameworkVersionLessThan( 7, 0 ) ) {
-
-        # PackageIsDownloadable + PackageIsBuildable flags has to be set for some packages:
-        #   - all packages which starts with OTOBO
-        #   - all OTOBO Freebie Features
-        #   - all ITSM packages
-        #   - OTOBOSTORM package
-        if (
-            $Self->IsRestrictedPackage(
-                Package => $PackageName,
-            )
-            )
-        {
-
-            if ( !$DownloadFlag ) {
-
-                $ErrorMessage .= "You have forgot to use the element <PackageIsDownloadable>!\n";
-            }
-
-            if ( !$BuildFlag ) {
-
-                $ErrorMessage .= "You have forgot to use the element <PackageIsBuildable>!\n";
-            }
-        }
-    }
-
     if ($ErrorMessage) {
         return $Self->DieWithError($ErrorMessage);
     }
@@ -245,16 +218,16 @@ sub IsRestrictedPackage {
     my %RestrictedPackages = (
 
         # OTOBO Freebie Features (otobo.org)
-        FAQ                     => 1,
-        iPhoneHandle            => 1,
-        MasterSlave             => 1,
+        FAQ                      => 1,
+        iPhoneHandle             => 1,
+        MasterSlave              => 1,
         OTOBOAppointmentCalendar => 1,
         OTOBOCodePolicy          => 1,
         OTOBOMasterSlave         => 1,
-        Support                 => 1,
-        Survey                  => 1,
-        SystemMonitoring        => 1,
-        TimeAccounting          => 1,
+        Support                  => 1,
+        Survey                   => 1,
+        SystemMonitoring         => 1,
+        TimeAccounting           => 1,
 
         # ITSM packages (itsm.otobo.org)
         GeneralCatalog                => 1,

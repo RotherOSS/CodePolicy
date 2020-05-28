@@ -26,23 +26,16 @@ sub validate_source {
 
     return if $Self->IsPluginDisabled( Code => $Code );
 
-    my $ExecutablePermissionCheck = qr{Permission="760"};
+    my $ExecutablePermissionCheck = qr{Permission="770"};
     my $StaticPermissionCheck     = qr{Permission="660"};
     my $Explanation = 'A <File>-Tag has wrong permissions. Script files normally need 760 rights, the others 660.';
 
-    # A little more lenient before OTOBO 8 (with group executable permissions)
-    if ( $Self->IsFrameworkVersionLessThan( 8, 0 ) ) {
-        $ExecutablePermissionCheck = qr{Permission="770"};
-        $StaticPermissionCheck     = qr{Permission="660"};
-        $Explanation = 'A <File>-Tag has wrong permissions. Script files normally need 770 rights, the others 660.';
-    }
-
-    # A lot more lenient before OTOBO 10 (world permissions)
-    if ( $Self->IsFrameworkVersionLessThan( 6, 0 ) ) {
-        $ExecutablePermissionCheck = qr{Permission="755"};
-        $StaticPermissionCheck     = qr{Permission="644"};
-        $Explanation = 'A <File>-Tag has wrong permissions. Script files normally need 755 rights, the others 644.';
-    }
+    ## A lot more lenient before OTOBO 10 (world permissions)
+    #if ( $Self->IsFrameworkVersionLessThan( 6, 0 ) ) {
+    #    $ExecutablePermissionCheck = qr{Permission="755"};
+    #    $StaticPermissionCheck     = qr{Permission="644"};
+    #    $Explanation = 'A <File>-Tag has wrong permissions. Script files normally need 755 rights, the others 644.';
+    #}
 
     my ( $ErrorMessage, $Counter );
 
