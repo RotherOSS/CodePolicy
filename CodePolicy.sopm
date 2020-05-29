@@ -60,7 +60,6 @@
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/JavaScript/ESLint/legacy.eslintrc.js" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/JavaScript/ESLint/webpack.eslintrc.js" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/JavaScript/ESLint/Rules/no-window.js" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/JavaScript/Vue/EventListeners.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/JavaScript/FileName.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/JavaScript/FileNameUnitTest.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/JavaScript/UnloadEvent.pm" />
