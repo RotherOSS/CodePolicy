@@ -239,7 +239,7 @@ sub CreateTidyAll {
                             $TidyAll::OTOBO::FrameworkVersionMinor = $VersionMinor;
                         }
                     }
-                    elsif ( $Line =~ m{<Vendor>} && $Line !~ m{OTOBO} ) {
+                    elsif ( $Line =~ m{<Vendor>} && $Line !~ m{Rother OSS} ) {
                         $TidyAll::OTOBO::ThirdpartyModule = 1;
                     }
                 }
