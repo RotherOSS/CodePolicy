@@ -38,6 +38,7 @@
         <File Permission="660" Location="Kernel/cpan-lib/Perl/Tidy/IOScalarArray.pm" />
         <File Permission="660" Location="Kernel/cpan-lib/Perl/Tidy/VerticalAligner/Alignment.pm" />
         <File Permission="660" Location="Kernel/cpan-lib/Perl/Tidy/VerticalAligner/Line.pm" />
+        <File Permission="660" Location="Kernel/cpan-lib/Pod/Strip.pm" />
         <File Permission="660" Location="Kernel/TidyAll/OTOBO.pm" />
         <File Permission="660" Location="Kernel/TidyAll/OTOBO/Git/PreCommit.pm" />
         <File Permission="660" Location="Kernel/TidyAll/OTOBO/Git/PreReceive.pm" />
