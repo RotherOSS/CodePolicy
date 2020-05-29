@@ -126,6 +126,7 @@ select = var/git/hooks/*-receive
 select = documentation.yml
 ignore = Kernel/Config.pm Kernel/Config/**/ZZZ*.pm
 ignore = module-format.xml,codesyntax.xml,language-translations.xml,writing-otobo-application.xml,test-mechanism.xml
+ignore = scripts/auto_build/spec/templates/includes/suse-systemd-base.tt scripts/auto_build/spec/templates/includes/redhat-systemd-base.tt
 ; Don't run this in the CI to avoid updates on year changes. It is enough to update the code when it is changed.
 only_modes = cli editor commit
 
