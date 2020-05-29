@@ -30,10 +30,7 @@ sub validate_file {
     return if $Self->IsFrameworkVersionLessThan( 3, 3 );
 
     my $XSDFile = dirname(__FILE__) . '/../StaticFiles/XSD/SOPM.xsd';
-    if ( $Self->IsFrameworkVersionLessThan( 9, 0 ) ) {
-        $XSDFile = dirname(__FILE__) . '/../StaticFiles/XSD/SOPM_before_9.xsd';
 
-    }
     my $CMD = "xmllint --noout --nonet --schema $XSDFile";
 
     my $Command = sprintf( "%s %s %s 2>&1", $CMD, $Self->argv(), $Filename );

@@ -28,7 +28,7 @@ sub validate_file {
     return if $Self->IsFrameworkVersionLessThan( 3, 3 );
 
     my $XSDFile = dirname(__FILE__) . '/../../StaticFiles/XSD/Database.xsd';
-    my $CMD = "xmllint --noout --nonet --schema $XSDFile";
+    my $CMD     = "xmllint --noout --nonet --schema $XSDFile";
 
     my $Command = sprintf( "%s %s %s 2>&1", $CMD, $Self->argv(), $Filename );
     my $Output  = `$Command`;

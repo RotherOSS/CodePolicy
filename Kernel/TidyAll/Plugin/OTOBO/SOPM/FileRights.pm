@@ -28,7 +28,7 @@ sub validate_source {
 
     my $ExecutablePermissionCheck = qr{Permission="770"};
     my $StaticPermissionCheck     = qr{Permission="660"};
-    my $Explanation = 'A <File>-Tag has wrong permissions. Script files normally need 760 rights, the others 660.';
+    my $Explanation = 'A <File>-Tag has wrong permissions. Script files normally need 770 rights, the others 660.';
 
     ## A lot more lenient before OTOBO 10 (world permissions)
     #if ( $Self->IsFrameworkVersionLessThan( 6, 0 ) ) {

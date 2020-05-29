@@ -31,7 +31,7 @@ sub transform_source {
 
     # For otobo we use /usr/bin/env perl
 
-    $Code =~ s{\A\#!/usr/bin/perl.+}{\#!/usr/bin/env perl}xms;
+    $Code =~ s{\A\#!/usr/bin/perl[^\n]*}{\#!/usr/bin/env perl}xms;
 
     return $Code;
 }

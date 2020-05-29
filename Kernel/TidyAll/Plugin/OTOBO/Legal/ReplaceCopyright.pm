@@ -85,8 +85,9 @@ sub transform_source {
         $i++;
     }
 
-    # if we are not yet listed add Rother OSS GmbH
-    if ( !$CopySet && $Lines[ $i - 1 ] =~ /^(.*)Copyright/ ) {
+    # if we are not yet listed add Rother OSS GmbH if the file seems to have an usual copyright header
+    # in rare cases this can break files and then needs further adaption
+    if ( !$CopySet && $Lines[ $i - 1 ] =~ /^([#\/\s]*)Copyright/ ) {
         $Output .= "$1Copyright (C) $YearString $Copy\n";
     }
 

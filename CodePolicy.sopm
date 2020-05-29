@@ -190,11 +190,11 @@
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/XML/Lint.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/XML/LintWithOurParsers.pm" />
         <File Permission="660" Location="Kernel/TidyAll/tidyallrc" />
-        <File Permission="760" Location="Kernel/TidyAll/git-hooks/pre-commit.pl" />
-        <File Permission="760" Location="Kernel/TidyAll/git-hooks/pre-receive.pl" />
-        <File Permission="760" Location="Kernel/TidyAll/git-hooks/prepare-commit-msg.pl" />
-        <File Permission="760" Location="scripts/install-git-hooks.pl" />
-        <File Permission="760" Location="scripts/uninstall-git-hooks.pl" />
+        <File Permission="770" Location="Kernel/TidyAll/git-hooks/pre-commit.pl" />
+        <File Permission="770" Location="Kernel/TidyAll/git-hooks/pre-receive.pl" />
+        <File Permission="770" Location="Kernel/TidyAll/git-hooks/prepare-commit-msg.pl" />
+        <File Permission="770" Location="scripts/install-git-hooks.pl" />
+        <File Permission="770" Location="scripts/uninstall-git-hooks.pl" />
         <File Permission="660" Location="scripts/test/OTOBOCodePolicyPlugins.pm" />
         <File Permission="660" Location="scripts/test/OTOBOCodePolicy.t" />
         <File Permission="660" Location="scripts/test/OTOBOCodePolicyPlugins/JavaScript/DebugCode.t" />
