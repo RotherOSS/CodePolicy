@@ -40,7 +40,7 @@ sub validate_source {
             $NavBar = 0;
         }
 
-        if ( !$NavBar && $Line =~ /<Description.+?>(.).*?(.)<\/Description>/ ) {
+        if ( !$NavBar && $Line =~ /<Description.+?>(.).*?(.)\)?<\/Description>/ ) {
             if ( $2 ne '.' && $2 ne '?' && $2 ne '!' ) {
                 $ErrorMessage .= "Line $Counter: $Line\n";
             }

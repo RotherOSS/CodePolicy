@@ -1,7 +1,7 @@
 agpl
 gpl
 otobo
-otobo ag
+otrs
 sla
 
 ascii
@@ -48,3 +48,4 @@ minified
 decrypt
 decrypted
 unmanaged
+preselect
