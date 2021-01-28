@@ -31,22 +31,22 @@ select = **/*.{pl,pm,psgi,t,tt,spec,js,css,scss,vue,dist,tmpl,sh,skel,xml,sopm,h
 select = **/*.{pl,pm,psgi,t,tt,spec,js,css,scss,vue,dist,tmpl,sh,skel,xml,sopm,html}
 ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
 
-[+TidyAll::Plugin::OTOBO::Common::Origin]
-select = **/*.{pl,psgi,pm,t,js,css,tt,xml,sopm}
-ignore = Kernel/Config/Files/ZZZ*.pm
-; Ignore docbook documentations
-ignore = */content/**/*.xml
+;[+TidyAll::Plugin::OTOBO::Common::Origin]
+;select = **/*.{pl,psgi,pm,t,js,css,tt,xml,sopm}
+;ignore = Kernel/Config/Files/ZZZ*.pm
+;; Ignore docbook documentations
+;ignore = */content/**/*.xml
 
-[+TidyAll::Plugin::OTOBO::Common::CustomizationMarkersTT]
-select = Custom/Kernel/Output/HTML/**/*.tt
-select = Kernel/Output/HTML/**/*.tt
+;[+TidyAll::Plugin::OTOBO::Common::CustomizationMarkersTT]
+;select = Custom/Kernel/Output/HTML/**/*.tt
+;select = Kernel/Output/HTML/**/*.tt
 
-[+TidyAll::Plugin::OTOBO::Common::CustomizationMarkers]
-select = **/*.{pl,psgi,pm,t,js,css,tt}
-ignore = Kernel/Config.pm
-ignore = Kernel/Config/GenericAgent.pm
-ignore = Kernel/Config/Files/ZZZ*.pm
-ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+;[+TidyAll::Plugin::OTOBO::Common::CustomizationMarkers]
+;select = **/*.{pl,psgi,pm,t,js,css,tt}
+;ignore = Kernel/Config.pm
+;ignore = Kernel/Config/GenericAgent.pm
+;ignore = Kernel/Config/Files/ZZZ*.pm
+;ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
 
 [+TidyAll::Plugin::OTOBO::XML::Docbook::ReplaceSupportEmail]
 select = doc/**/*.xml
