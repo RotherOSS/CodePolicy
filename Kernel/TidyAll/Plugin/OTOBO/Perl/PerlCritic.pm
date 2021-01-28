@@ -65,7 +65,7 @@ sub validate_file {
         $Critic->add_policy( -policy => 'OTOBO::ProhibitOpen' );
         $Critic->add_policy( -policy => 'OTOBO::ProhibitRandInTests' );
         $Critic->add_policy( -policy => 'OTOBO::ProhibitSmartMatchOperator' );
-        $Critic->add_policy( -policy => 'OTOBO::ProhibitUnless' );
+#        $Critic->add_policy( -policy => 'OTOBO::ProhibitUnless' );
         $Critic->add_policy( -policy => 'OTOBO::RequireCamelCase' );
         $Critic->add_policy( -policy => 'OTOBO::RequireLabels' );
         $Critic->add_policy( -policy => 'OTOBO::RequireParensWithMethods' );
