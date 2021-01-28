@@ -440,33 +440,33 @@ select = ;**/*.xml
 ; Migrations OTOBO 10
 ;
 
-[+TidyAll::Plugin::OTOBO::Migrations::OTOBO10::DateTime]
-select = **/*.{pl,pm,psgi,t}
-ignore = Kernel/Config/Files/ZZZ*.pm
-ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
-
-[+TidyAll::Plugin::OTOBO::Migrations::OTOBO10::PerlConfigFileFormat]
-select = Kernel/Config/Files/*.pm
-
-[+TidyAll::Plugin::OTOBO::Migrations::OTOBO10::PermissionDataNotInSession]
-select = **/*.{pl,pm,psgi,t}
-ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
-
-[+TidyAll::Plugin::OTOBO::Migrations::OTOBO10::SysConfig]
-select = **/*.{pl,pm,psgi,t}
-ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
-
-[+TidyAll::Plugin::OTOBO::Migrations::OTOBO10::TimeObject]
-select = **/*.{pl,pm,psgi,t}
-ignore = Kernel/System/Time.pm
-ignore = scripts/test/Time.t
-ignore = scripts/test/Time/**/*.t
-ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
-
-[+TidyAll::Plugin::OTOBO::Migrations::OTOBO10::TimeZoneOffset]
-select = **/*.{pl,pm,psgi,t}
-ignore = Kernel/Config/Files/ZZZ*.pm
-ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
-
-[+TidyAll::Plugin::OTOBO::Migrations::OTOBO10::XMLFrontendNavigation]
-select = Kernel/Config/**/*.xml
+;[+TidyAll::Plugin::OTOBO::Migrations::OTOBO10::DateTime]
+;select = **/*.{pl,pm,psgi,t}
+;ignore = Kernel/Config/Files/ZZZ*.pm
+;ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+;
+;[+TidyAll::Plugin::OTOBO::Migrations::OTOBO10::PerlConfigFileFormat]
+;select = Kernel/Config/Files/*.pm
+;
+;[+TidyAll::Plugin::OTOBO::Migrations::OTOBO10::PermissionDataNotInSession]
+;select = **/*.{pl,pm,psgi,t}
+;ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+;
+;[+TidyAll::Plugin::OTOBO::Migrations::OTOBO10::SysConfig]
+;select = **/*.{pl,pm,psgi,t}
+;ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+;
+;[+TidyAll::Plugin::OTOBO::Migrations::OTOBO10::TimeObject]
+;select = **/*.{pl,pm,psgi,t}
+;ignore = Kernel/System/Time.pm
+;ignore = scripts/test/Time.t
+;ignore = scripts/test/Time/**/*.t
+;ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+;
+;[+TidyAll::Plugin::OTOBO::Migrations::OTOBO10::TimeZoneOffset]
+;select = **/*.{pl,pm,psgi,t}
+;ignore = Kernel/Config/Files/ZZZ*.pm
+;ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+;
+;[+TidyAll::Plugin::OTOBO::Migrations::OTOBO10::XMLFrontendNavigation]
+;select = Kernel/Config/**/*.xml
