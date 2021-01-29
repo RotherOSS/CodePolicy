@@ -45,6 +45,9 @@ sub violates {
     # $Variable->method();
     return if ref $Method eq 'PPI::Structure::Subscript';
 
+    # postfix dereferecing: $Ref->@*;
+    return if ref $Method eq 'PPI::Token::Cast';
+
     my $List = $Method->snext_sibling();
     return if ref $List eq 'PPI::Structure::List';
 
