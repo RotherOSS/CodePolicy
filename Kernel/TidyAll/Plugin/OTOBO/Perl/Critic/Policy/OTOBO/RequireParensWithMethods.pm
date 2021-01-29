@@ -47,6 +47,7 @@ sub violates {
 
     # postfix dereferecing: $Ref->@*;
     return if ref $Method eq 'PPI::Token::Cast';
+    return if ref $Method eq 'PPI::Token::Magic';
 
     my $List = $Method->snext_sibling();
     return if ref $List eq 'PPI::Structure::List';
