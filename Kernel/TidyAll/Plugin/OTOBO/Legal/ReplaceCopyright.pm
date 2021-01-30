@@ -76,8 +76,10 @@ sub transform_source {
 
         # Any other generic copyright statements, e.g :
         #   print "Copyright (c) 2003-2008 Rother OSS GmbH, http://www.otobo.com/\n";
-        elsif ( $Line =~ /^([^\n]*)Copyright.*Rother OSS/i ) {
-            $Line    = "$1Copyright (C) $YearString $Copy";
+        # $2 should only occur in: Kernel/Output/HTML/Templates/Standard/Copyright.tt
+        elsif ( $Line =~ /^([^\n]*)Copyright.*Rother OSS.+?(\s+-->)?$/i ) {
+            my $End  = $2 // '';
+            $Line    = "$1Copyright (C) $YearString $Copy$End";
             $CopySet = 1;
         }
 
