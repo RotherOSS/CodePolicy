@@ -16,8 +16,10 @@
 # --
 use strict;
 use warnings;
+use v5.24;
+use utf8;
 
-use File::Basename;
+use File::Basename qw(dirname);
 use FindBin qw($RealBin);
 use lib dirname($RealBin);
 use lib dirname($RealBin) . '/Kernel';    # Find TidyAll

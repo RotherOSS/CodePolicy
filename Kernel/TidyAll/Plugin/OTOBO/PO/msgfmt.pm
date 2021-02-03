@@ -33,7 +33,6 @@ sub validate_file {
     my ( $Self, $Filename ) = @_;
 
     return if $Self->IsPluginDisabled( Filename => $Filename );
-    return if $Self->IsFrameworkVersionLessThan( 4, 0 );
 
     my $Command = sprintf( "%s %s %s 2>&1", $Self->cmd(), $Self->argv(), $Filename );
     my $Output  = `$Command`;

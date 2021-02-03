@@ -36,7 +36,6 @@ sub applies_to           { return 'PPI::Token::Word' }
 sub prepare_to_scan_document {
     my ( $Self, $Document ) = @_;
 
-    return if $Self->IsFrameworkVersionLessThan( 4, 0 );
 
     return 1;
 }

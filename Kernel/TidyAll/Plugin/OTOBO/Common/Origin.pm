@@ -172,7 +172,6 @@ sub validate_source {
     my ( $Self, $Code ) = @_;
 
     return $Code if $Self->IsPluginDisabled( Code => $Code );
-    return $Code if $Self->IsFrameworkVersionLessThan( 2, 4 );
 
     # Check the origin if customization markers are found
     if ( $Code =~ m{ ^ [ ]* (?: \# | \/\/ ) [ ]+ --- [ ]* $ }xms ) {
@@ -214,8 +213,6 @@ sub validate_file {
             return $Self->DieWithError("File is in Custom directory but no origin present.\n");
         }
     }
-
-    return if $Self->IsFrameworkVersionLessThan( 6, 0 );
 
     if ( $Filename =~ m{ .* \.css }xmsi ) {
 

@@ -22,13 +22,8 @@ package Perl::Critic::PolicyOTOBO;
 
 use strict;
 use warnings;
-
-no strict 'vars';    ## no critic
-
-use vars qw(
-    $TidyAll::OTOBO::FrameworkVersionMajor
-    $TidyAll::OTOBO::FrameworkVersionMinor
-);
+use v5.24;
+use utf8;
 
 # Base class for OTOBO perl critic policies
 

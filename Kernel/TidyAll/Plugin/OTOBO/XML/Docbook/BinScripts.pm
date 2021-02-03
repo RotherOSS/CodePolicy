@@ -33,7 +33,6 @@ sub validate_source {
     my ( $Self, $Code ) = @_;
 
     return $Code if $Self->IsPluginDisabled( Code => $Code );
-    return $Code if $Self->IsFrameworkVersionLessThan( 5, 0 );
 
     my %AllowedFiles = (
         'otobo.CheckModules.pl'   => 1,

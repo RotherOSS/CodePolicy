@@ -38,7 +38,6 @@ sub validate_source {
     my ( $Self, $Code ) = @_;
 
     return if $Self->IsPluginDisabled( Code => $Code );
-    return if $Self->IsFrameworkVersionLessThan( 2, 4 );
 
     my $ErrorMessage;
     my $Counter;
@@ -63,18 +62,8 @@ sub validate_source {
         # Validate otobo_config tag
         if ( $Line =~ /^<otobo_config/ ) {
 
-            if ( $Self->IsFrameworkVersionLessThan( 6, 0 ) ) {
-                if (
-                    $Line !~ /init="(Framework|Application|Config|Changes)"/
-                    || $Line !~ /version="1.0"/
-                    )
-                {
-                    $ErrorMessage
-                        .= "The <otobo_config>-tag has missing or incorrect attributes. ExampleLine: <otobo_config version=\"1.0\" init=\"Application\">\n";
-                    $ErrorMessage .= "Line $Counter: $Line\n";
-                }
-            }
-            else {
+            # OTOBO 10 started with version="2.0"
+            {
                 my $Version = '2.0';
 
                 if (

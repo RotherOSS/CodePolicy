@@ -39,7 +39,6 @@ sub applies_to           { return 'PPI::Token::Word' }
 sub prepare_to_scan_document {
     my ( $Self, $Document ) = @_;
 
-    return if $Self->IsFrameworkVersionLessThan( 6, 0 );
 
     return $Document->logical_filename() =~ m{ \.t \z }xms;
 }

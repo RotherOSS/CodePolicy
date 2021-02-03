@@ -31,7 +31,6 @@ sub validate_file {
     my ( $Self, $Filename ) = @_;
 
     return if $Self->IsPluginDisabled( Filename => $Filename );
-    return if $Self->IsFrameworkVersionLessThan( 6, 0 );
 
     my $IsDocbookTranslation = $Filename =~ m{/doc-}smx;
     return if $IsDocbookTranslation;

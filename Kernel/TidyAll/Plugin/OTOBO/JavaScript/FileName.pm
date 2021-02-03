@@ -27,7 +27,6 @@ sub validate_file {
     my ( $Self, $Filename ) = @_;
 
     return if $Self->IsPluginDisabled( Filename => $Filename );
-    return if $Self->IsFrameworkVersionLessThan( 6, 0 );
 
     my $Code       = $Self->_GetFileContents($Filename);
     my $NameOfFile = substr( basename($Filename), 0, -3 );    # cut off .js

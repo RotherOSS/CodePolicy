@@ -47,7 +47,6 @@ sub validate_file {
     my ( $Self, $Filename ) = @_;
 
     return if $Self->IsPluginDisabled( Filename => $Filename );
-    return if $Self->IsFrameworkVersionLessThan( 3, 1 );
 
     # read the file as an array
     open FH, "$Filename" or die $!;    ## no critic

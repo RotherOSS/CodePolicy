@@ -25,7 +25,6 @@ sub transform_source {
     my ( $Self, $Code ) = @_;
 
     return $Code if $Self->IsPluginDisabled( Code => $Code );
-    return $Code if $Self->IsFrameworkVersionLessThan( 6, 0 );
 
     $Code =~ s{ ^ \s* \K use \s+ base \b }{use parent}smxg;
 

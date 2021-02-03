@@ -32,7 +32,6 @@ sub validate_file {
     my ( $Self, $File ) = @_;
 
     return if $Self->IsPluginDisabled( Filename => $File );
-    return if $Self->IsFrameworkVersionLessThan( 6, 0 );
 
     if ( !$HunspellPath ) {
         $HunspellPath = `which hunspell`;

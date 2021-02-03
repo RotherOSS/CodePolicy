@@ -27,7 +27,6 @@ sub validate_source {
     my ( $Self, $Code ) = @_;
 
     return $Code if $Self->IsPluginDisabled( Code => $Code );
-    return $Code if $Self->IsFrameworkVersionLessThan( 4, 0 );
 
     if ( $Code !~ m{^[ \t]*use\s+utf8;}mx ) {
         return $Self->DieWithError(<<"EOF");

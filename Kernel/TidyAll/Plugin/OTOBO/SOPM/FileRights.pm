@@ -26,6 +26,7 @@ sub validate_source {
 
     return if $Self->IsPluginDisabled( Code => $Code );
 
+    # strict permission checks starting with OTOBO 10
     my $ExecutablePermissionCheck = qr{Permission="770"};
     my $StaticPermissionCheck     = qr{Permission="660"};
     my $Explanation = 'A <File>-Tag has wrong permissions. Script files normally need 770 rights, the others 660.';

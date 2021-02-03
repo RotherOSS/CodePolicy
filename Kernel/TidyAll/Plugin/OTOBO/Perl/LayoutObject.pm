@@ -28,16 +28,11 @@ sub validate_source {
     my ( $Self, $Code ) = @_;
 
     return $Code if $Self->IsPluginDisabled( Code => $Code );
-    return       if $Self->IsFrameworkVersionLessThan( 3, 3 );
-    return       if !$Self->IsFrameworkVersionLessThan( 6, 0 );
 
     $Code = $Self->StripPod( Code => $Code );
     $Code = $Self->StripComments( Code => $Code );
 
     my $Forbidden = qr{\$LayoutObject|Kernel::Output::HTML::Layout}xms;
-    if ( $Self->IsFrameworkVersionLessThan( 6, 0 ) ) {
-        $Forbidden = qr{\$LayoutObject}xms;
-    }
 
     if ( $Code =~ $Forbidden ) {
         return $Self->DieWithError(<<"EOF");

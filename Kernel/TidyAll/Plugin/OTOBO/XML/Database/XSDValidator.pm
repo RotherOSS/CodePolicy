@@ -25,7 +25,6 @@ use parent qw(TidyAll::Plugin::OTOBO::Base);
 sub validate_file {
     my ( $Self, $Filename ) = @_;
     return if $Self->IsPluginDisabled( Filename => $Filename );
-    return if $Self->IsFrameworkVersionLessThan( 3, 3 );
 
     my $XSDFile = dirname(__FILE__) . '/../../StaticFiles/XSD/Database.xsd';
     my $CMD     = "xmllint --noout --nonet --schema $XSDFile";

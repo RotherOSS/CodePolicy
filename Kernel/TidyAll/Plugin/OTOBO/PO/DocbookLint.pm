@@ -32,7 +32,6 @@ sub validate_file {
     my ( $Self, $Filename ) = @_;
 
     return if $Self->IsPluginDisabled( Filename => $Filename );
-    return if $Self->IsFrameworkVersionLessThan( 4, 0 );
 
     my $IsDocbookTranslation = $Filename =~ m{/doc-}smx;
     my $Strings              = Locale::PO->load_file_asarray($Filename);

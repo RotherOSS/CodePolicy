@@ -31,7 +31,6 @@ sub validate_source {
     #return;
 
     return $Code if $Self->IsPluginDisabled( Code => $Code );
-    return $Code if $Self->IsFrameworkVersionLessThan( 6, 0 );
 
     my $FunctionNameInPod = '';
     my $FunctionLineInPod = '';

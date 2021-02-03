@@ -34,7 +34,6 @@ sub transform_source {
     my ( $Self, $Code ) = @_;
 
     return $Code if $Self->IsPluginDisabled( Code => $Code );
-    return $Code if $Self->IsFrameworkVersionLessThan( 2, 4 );
 
     # Find customization markers with // in .tt files and replace them with #.
     #

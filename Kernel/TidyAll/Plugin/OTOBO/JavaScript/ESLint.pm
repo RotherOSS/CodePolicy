@@ -29,7 +29,6 @@ sub transform_file {
     my ( $Self, $Filename ) = @_;
 
     return if $Self->IsPluginDisabled( Filename => $Filename );
-    return if $Self->IsFrameworkVersionLessThan( 5, 0 );
 
     if ( !$ESLintPath ) {
 

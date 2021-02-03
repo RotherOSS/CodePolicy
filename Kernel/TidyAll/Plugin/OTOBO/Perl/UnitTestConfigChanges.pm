@@ -31,16 +31,6 @@ sub validate_source {
     my ( $Self, $Code ) = @_;
 
     return if $Self->IsPluginDisabled( Code => $Code );
-    return if $Self->IsFrameworkVersionLessThan( 5, 0 );
-
-    # use only for Selenium tests prior to OTOBO 10
-    if (
-        $Code !~ m{/Selenium/}smx
-        && $Self->IsFrameworkVersionLessThan( 6, 0 )
-        )
-    {
-        return;
-    }
 
     my ( $ErrorMessage, $Counter );
 

@@ -36,7 +36,6 @@ sub transform_source {
     my ( $Self, $Code ) = @_;
 
     return $Code if $Self->IsPluginDisabled( Code => $Code );
-    return $Code if $Self->IsFrameworkVersionLessThan( 2, 4 );
 
     # Find wrong customization markers without space or with 4 hyphens and correct them
     #
@@ -136,7 +135,6 @@ sub validate_source {
     my ( $Self, $Code ) = @_;
 
     return $Code if $Self->IsPluginDisabled( Code => $Code );
-    return $Code if $Self->IsFrameworkVersionLessThan( 2, 4 );
 
     my ( $Counter, $Flag, $ErrorMessage );
 

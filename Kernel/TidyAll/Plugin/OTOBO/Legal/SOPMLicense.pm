@@ -37,7 +37,6 @@ sub validate_source {
     my ( $Self, $Code ) = @_;
 
     return if $Self->IsPluginDisabled( Code => $Code );
-    return if $Self->IsFrameworkVersionLessThan( 2, 4 );
 
     if ( $Code !~ m{<License> .+? </License>}smx ) {
         return $Self->DieWithError("Could not find a valid OPM license header.");

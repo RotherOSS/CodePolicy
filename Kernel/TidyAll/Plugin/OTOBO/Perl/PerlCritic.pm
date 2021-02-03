@@ -53,16 +53,13 @@ sub validate_file {
     state $CachedPerlCritic = {};
 
     return if $Self->IsPluginDisabled( Filename => $Filename );
-    return if $Self->IsFrameworkVersionLessThan( 3, 2 );
 
     my $FrameworkVersion = "$TidyAll::OTOBO::FrameworkVersionMajor.$TidyAll::OTOBO::FrameworkVersionMinor";
 
     if ( !$CachedPerlCritic->{$FrameworkVersion} ) {
 
-        my $Severity = 4;    # STERN
-        if ( $Self->IsFrameworkVersionLessThan( 6, 0 ) ) {
-            $Severity = 5;    #  GENTLE, less strict for older versions
-        }
+        my $Severity = 4;    # STERN, check only for violation of severity 4 and 5
+
         my $Critic = Perl::Critic->new(
             -severity => $Severity,
             -exclude  => [

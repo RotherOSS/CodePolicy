@@ -26,23 +26,10 @@ sub validate_file {
     my ( $Self, $Filename ) = @_;
 
     return if $Self->IsPluginDisabled( Filename => $Filename );
-    return if $Self->IsFrameworkVersionLessThan( 3, 3 );
 
     # Default: OTOBO 10+ configuration files in Kernel/Config/Files/XML.
     my $XSDFile   = dirname(__FILE__) . '/../../StaticFiles/XSD/Configuration.xsd';
     my $WantedDir = 'Kernel/Config/Files/XML';
-
-    # Handling for older versions: config files in Kernel/Config/Files.
-    if ( $Self->IsFrameworkVersionLessThan( 5, 0 ) ) {
-
-        # In OTOBO 4 and below there were special CSS_IE7 and CSS_IE8 Tags for the loader.
-        $XSDFile   = dirname(__FILE__) . '/../../StaticFiles/XSD/Configuration_before_5.xsd';
-        $WantedDir = 'Kernel/Config/Files';
-    }
-    elsif ( $Self->IsFrameworkVersionLessThan( 6, 0 ) ) {
-        $XSDFile   = dirname(__FILE__) . '/../../StaticFiles/XSD/Configuration_before_6.xsd';
-        $WantedDir = 'Kernel/Config/Files';
-    }
 
     if ( $Filename !~ m{$WantedDir/[^/]+[.]xml$}smx ) {
         return $Self->DieWithError(

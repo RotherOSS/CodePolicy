@@ -30,13 +30,12 @@ sub validate_source {
     my ( $Self, $Code ) = @_;
 
     return if $Self->IsPluginDisabled( Code => $Code );
-    return if $Self->IsFrameworkVersionLessThan( 3, 2 );
 
     my ( $ErrorMessageMissingFiles, $ErrorMessageUnpackagedFiles, $ErrorMessageForbiddenToplevel );
 
-    # From OTOBO 3.3 on, packages cannot create new toplevel directories/files
-    #   because of stricter permissions.
-    my $AllowOtherToplevelEntries = $Self->IsFrameworkVersionLessThan( 3, 3 ) ? 1 : 0;
+    # Starting with OTOBO 10.0 on, packages cannot create new toplevel directories/files
+    #  because of stricter permissions.
+    my $AllowOtherToplevelEntries = 0;
 
     my @SOPMFileList;
 
