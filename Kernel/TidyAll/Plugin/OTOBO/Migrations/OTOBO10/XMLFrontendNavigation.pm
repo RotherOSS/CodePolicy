@@ -26,6 +26,9 @@ sub validate_source {
 
     return if $Self->IsPluginDisabled( Code => $Code );
 
+    # active only for OTOBO 10
+    return unless $Self->IsFrameworkVersionLessThan( 11, 0 );
+
     my ( $Counter, $ErrorMessage );
 
     my ( $CurrentSettingName, $InValue, $ValueContent );

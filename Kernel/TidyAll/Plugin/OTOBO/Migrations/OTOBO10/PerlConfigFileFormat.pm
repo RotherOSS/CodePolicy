@@ -26,6 +26,9 @@ sub validate_source {
 
     return if $Self->IsPluginDisabled( Code => $Code );
 
+    # active only for OTOBO 10
+    return unless $Self->IsFrameworkVersionLessThan( 11, 0 );
+
     if ( $Code !~ m{^package \s}smx || $Code !~ m{^sub \s+ Load}smx ) {
 
         return $Self->DieWithError(<<"EOF");
