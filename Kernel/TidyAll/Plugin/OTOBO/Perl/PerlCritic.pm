@@ -18,30 +18,39 @@ package TidyAll::Plugin::OTOBO::Perl::PerlCritic;
 
 use strict;
 use warnings;
-
-use File::Basename;
-use lib dirname(__FILE__) . '/../';    # Find our Perl::Critic policies
+use v5.24;
+use namespace::autoclean;
+use utf8;
 
 use parent qw(TidyAll::Plugin::OTOBO::Perl);
+
+use File::Basename qw(dirname);
+use lib dirname(__FILE__) . '/../';    # Find our Perl::Critic policies
+
+# core modules
+
+# CPAN modules
 use Perl::Critic;
 
+# OTOBO modules
 use Perl::Critic::Policy::OTOBO::ProhibitGoto;
 use Perl::Critic::Policy::OTOBO::ProhibitLowPrecendeceOps;
 use Perl::Critic::Policy::OTOBO::ProhibitSmartMatchOperator;
 use Perl::Critic::Policy::OTOBO::ProhibitRandInTests;
 use Perl::Critic::Policy::OTOBO::ProhibitOpen;
-#use Perl::Critic::Policy::OTOBO::ProhibitUnless;
+use Perl::Critic::Policy::OTOBO::ProhibitUnless;
 use Perl::Critic::Policy::OTOBO::RequireCamelCase;
 use Perl::Critic::Policy::OTOBO::RequireLabels;
 use Perl::Critic::Policy::OTOBO::RequireParensWithMethods;
 use Perl::Critic::Policy::OTOBO::RequireTrueReturnValueForModules;
 
-# Cache Perl::Critic object instance to save time. But cache it
-#   for every framework version, because the configuration may differ.
-our $CachedPerlCritic = {};
-
+# This sub will be called by Code::TidyAll
 sub validate_file {
     my ( $Self, $Filename ) = @_;
+
+    # Cache Perl::Critic object instance to save time. But cache it
+    #   for every framework version, because the configuration may differ.
+    state $CachedPerlCritic = {};
 
     return if $Self->IsPluginDisabled( Filename => $Filename );
     return if $Self->IsFrameworkVersionLessThan( 3, 2 );
