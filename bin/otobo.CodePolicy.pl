@@ -3,7 +3,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2020 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -135,6 +135,10 @@ else {
 
 # Safeguard: ignore non-regular files and symlinks (causes TidyAll errors).
 @Files = grep { -f && !-l } @Files;
+
+# sort the files alphabetically, but be aware the parallel processing
+# will mess up the ordering again.
+@Files = sort @Files;
 
 my @GlobalResults = $TidyAll->ProcessPathsParallel(
     Processes => $Processes,
