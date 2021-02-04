@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2020 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -34,11 +34,11 @@ sub default_severity     { return $Perl::Critic::Utils::SEVERITY_HIGHEST; }
 sub default_themes       { return qw( otobo ) }
 sub applies_to           { return 'PPI::Document' }
 
-# Only apply to Perl modules and test files, not to scripts.
+# Only apply to Perl modules, not to scripts, not to test scripts.
 sub prepare_to_scan_document {
     my ( $Self, $Document ) = @_;
 
-    return $Document->logical_filename() =~ m{ (\.pm|\.t) \z }xms;
+    return $Document->is_module();
 }
 
 sub violates {
