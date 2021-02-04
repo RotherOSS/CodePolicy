@@ -82,7 +82,6 @@
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Critic/Policy/OTOBO/ProhibitOpen.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Critic/Policy/OTOBO/ProhibitRandInTests.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Critic/Policy/OTOBO/ProhibitSmartMatchOperator.pm" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Critic/Policy/OTOBO/ProhibitUnless.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Critic/Policy/OTOBO/RequireCamelCase.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Critic/Policy/OTOBO/RequireLabels.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Critic/Policy/OTOBO/RequireParensWithMethods.pm" />
