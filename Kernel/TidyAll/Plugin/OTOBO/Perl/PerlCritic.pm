@@ -62,8 +62,8 @@ sub validate_file {
         my $Critic = Perl::Critic->new(
             -severity => $Severity,
             -exclude  => [
-                'Modules::RequireExplicitPackage',    # this breaks in our scripts/test folder
             ],
+            '-program-extensions' => [qw(.pl .t)],
         );
 
         # explicitly add the OTOBO policies, run them regardless of severity
