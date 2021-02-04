@@ -71,6 +71,9 @@ sub validate_file {
         $Critic->add_policy( -policy => 'OTOBO::RequireParensWithMethods' );
         $Critic->add_policy( -policy => 'OTOBO::RequireTrueReturnValueForModules' );
 
+        # explicitly add standard policy mit severity $SEVERITY_LOW, that is 2
+        $Critic->add_policy( -policy => 'ControlStructures::ProhibitUnlessBlocks' );
+
         $CachedPerlCritic->{$FrameworkVersion} = $Critic;
     }
 
