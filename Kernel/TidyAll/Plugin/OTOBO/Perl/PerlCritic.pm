@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2020 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -38,7 +38,6 @@ use Perl::Critic::Policy::OTOBO::ProhibitLowPrecendeceOps;
 use Perl::Critic::Policy::OTOBO::ProhibitSmartMatchOperator;
 use Perl::Critic::Policy::OTOBO::ProhibitRandInTests;
 use Perl::Critic::Policy::OTOBO::ProhibitOpen;
-use Perl::Critic::Policy::OTOBO::ProhibitUnless;
 use Perl::Critic::Policy::OTOBO::RequireCamelCase;
 use Perl::Critic::Policy::OTOBO::RequireLabels;
 use Perl::Critic::Policy::OTOBO::RequireParensWithMethods;
@@ -49,7 +48,7 @@ sub validate_file {
     my ( $Self, $Filename ) = @_;
 
     # Cache Perl::Critic object instance to save time. But cache it
-    #   for every framework version, because the configuration may differ.
+    # for every framework version, because the configuration may differ.
     state $CachedPerlCritic = {};
 
     return if $Self->IsPluginDisabled( Filename => $Filename );
@@ -58,7 +57,7 @@ sub validate_file {
 
     if ( !$CachedPerlCritic->{$FrameworkVersion} ) {
 
-        my $Severity = 4;    # STERN, check only for violation of severity 4 and 5
+        my $Severity = 4;    # STERN, only $SEVERITY_HIGHEST = 5 and $SEVERITY_HIGH = 4 are covered
 
         my $Critic = Perl::Critic->new(
             -severity => $Severity,
@@ -66,16 +65,20 @@ sub validate_file {
                 'Modules::RequireExplicitPackage',    # this breaks in our scripts/test folder
             ],
         );
+
+        # explicitly add the OTOBO policies, run them regardless of severity
         $Critic->add_policy( -policy => 'OTOBO::ProhibitGoto' );
         $Critic->add_policy( -policy => 'OTOBO::ProhibitLowPrecendeceOps' );
         $Critic->add_policy( -policy => 'OTOBO::ProhibitOpen' );
         $Critic->add_policy( -policy => 'OTOBO::ProhibitRandInTests' );
         $Critic->add_policy( -policy => 'OTOBO::ProhibitSmartMatchOperator' );
-#        $Critic->add_policy( -policy => 'OTOBO::ProhibitUnless' );
         $Critic->add_policy( -policy => 'OTOBO::RequireCamelCase' );
         $Critic->add_policy( -policy => 'OTOBO::RequireLabels' );
         $Critic->add_policy( -policy => 'OTOBO::RequireParensWithMethods' );
         $Critic->add_policy( -policy => 'OTOBO::RequireTrueReturnValueForModules' );
+
+        # explicitly add standard policy mit severity $SEVERITY_LOW, that is 2
+        $Critic->add_policy( -policy => 'ControlStructures::ProhibitUnlessBlocks' );
 
         $CachedPerlCritic->{$FrameworkVersion} = $Critic;
     }
