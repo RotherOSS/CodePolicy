@@ -35,7 +35,6 @@ use Perl::Critic::Policy::OTOBO::ProhibitOpen;
 use Perl::Critic::Policy::OTOBO::RequireCamelCase;
 use Perl::Critic::Policy::OTOBO::RequireLabels;
 use Perl::Critic::Policy::OTOBO::RequireParensWithMethods;
-use Perl::Critic::Policy::OTOBO::RequireTrueReturnValueForModules;
 
 sub validate_file {
     my ( $Self, $Filename ) = @_;
@@ -69,7 +68,6 @@ sub validate_file {
         $Critic->add_policy( -policy => 'OTOBO::RequireCamelCase' );
         $Critic->add_policy( -policy => 'OTOBO::RequireLabels' );
         $Critic->add_policy( -policy => 'OTOBO::RequireParensWithMethods' );
-        $Critic->add_policy( -policy => 'OTOBO::RequireTrueReturnValueForModules' );
 
         # explicitly add standard policy mit severity $SEVERITY_LOW, that is 2
         $Critic->add_policy( -policy => 'ControlStructures::ProhibitUnlessBlocks' );
