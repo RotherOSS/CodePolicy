@@ -26,7 +26,12 @@ use lib dirname(__FILE__) . '/../';    # Find our Perl::Critic policies
 
 use parent qw(TidyAll::Plugin::OTOBO::Perl);
 
+# core modules
+
+# CPAN modules
 use Perl::Critic;
+
+# OTOBO modules
 use Perl::Critic::Policy::OTOBO::ProhibitGoto;
 use Perl::Critic::Policy::OTOBO::ProhibitLowPrecendeceOps;
 use Perl::Critic::Policy::OTOBO::ProhibitSmartMatchOperator;
@@ -78,6 +83,12 @@ sub validate_file {
     # Force stringification of $Filename as it is a Path::Tiny object in Code::TidyAll 0.50+.
     my @Violations = $CachedPerlCritic->{$FrameworkVersion}->critique("$Filename");
 
+    # Format the violations, indicating the policy name, brief description and explanation.
+    # See https://metacpan.org/pod/Perl::Critic::Violation#OVERLOADS
+    # for the  escape characters.
+    Perl::Critic::Violation::set_format(
+        '%p violated at line %l column %c (Severity: %s)\\n  %m\\n%e\\n'
+    );
     if (@Violations) {
         return $Self->DieWithError("@Violations");
     }
