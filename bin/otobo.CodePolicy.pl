@@ -25,15 +25,19 @@ use lib dirname($RealBin);
 use lib dirname($RealBin) . '/Kernel';    # Find TidyAll
 use lib dirname($RealBin) . '/Kernel/cpan-lib';
 
+# core modules
 use Cwd;
 use File::Basename;
 use File::Spec;
 use Getopt::Long;
 use File::Find;
 use File::Path qw();
+
+# CPAN modules
 use Code::TidyAll;
 use IPC::System::Simple qw(capturex);
 
+# OTOBO modules
 use TidyAll::OTOBO;
 
 # Ensure UTF8 output works.
@@ -41,6 +45,7 @@ binmode( \*STDOUT, ':encoding(UTF-8)' );
 binmode( \*STDERR, ':encoding(UTF-8)' );
 
 my ( $Verbose, $Directory, $File, $Mode, $Cached, $All, $Help, $Processes );
+my $Plugins = [];
 GetOptions(
     'verbose'     => \$Verbose,
     'all'         => \$All,
@@ -50,10 +55,11 @@ GetOptions(
     'mode=s'      => \$Mode,
     'help'        => \$Help,
     'processes=s' => \$Processes,
+    'plugins=s@'  => \$Plugins,
 );
 
 if ($Help) {
-    print <<"EOF";
+    print <<"END_MSG";
 Usage: OTOBOCodePolicy/bin/otobo.CodePolicy.pl [options]
 
     Performs OTOBO code policy checks. Run this script from the toplevel directory
@@ -69,8 +75,10 @@ Options:
     -m, --mode          Use custom Code::TidyAll mode (default: cli)
     -v, --verbose       Activate diagnostics
     -p, --processes     The number of processes to use (default: env var OTOBOCODEPOLICY_PROCESSES if set, otherwise "6")
+    --plugins           Restrict to specific plugin that should be used. Pass the option multiple time for multiple plugins.
     -h, --help          Show this usage message
-EOF
+END_MSG
+
     exit 0;
 }
 
@@ -80,11 +88,12 @@ my $RootDir = getcwd();
 
 my $TidyAll = TidyAll::OTOBO->new_from_conf_file(
     $ConfigurationFile,
-    check_only => 0,
-    mode       => $Mode // 'cli',
-    root_dir   => $RootDir,
-    data_dir   => File::Spec->tmpdir(),
-    verbose    => $Verbose ? 1 : 0,
+    check_only       => 0,
+    mode             => $Mode // 'cli',
+    root_dir         => $RootDir,
+    data_dir         => File::Spec->tmpdir(),
+    verbose          => $Verbose ? 1 : 0,
+    selected_plugins => $Plugins,
 );
 
 $TidyAll->DetermineFrameworkVersionFromDirectory();
