@@ -44,7 +44,8 @@ use TidyAll::OTOBO;
 binmode( \*STDOUT, ':encoding(UTF-8)' );
 binmode( \*STDERR, ':encoding(UTF-8)' );
 
-my ( $Verbose, $Directory, $File, $Mode, $Cached, $All, $Help, $Processes, $Plugins );
+my ( $Verbose, $Directory, $File, $Mode, $Cached, $All, $Help, $Processes );
+my $Plugins = [];
 GetOptions(
     'verbose'     => \$Verbose,
     'all'         => \$All,
