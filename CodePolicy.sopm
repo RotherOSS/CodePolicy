@@ -110,7 +110,6 @@
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Print.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Require.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/ScriptFormat.pm" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/SortKeys.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/SubDeclaration.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/SyntaxCheck.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Tests/Helper.pm" />
@@ -205,7 +204,6 @@
         <File Permission="660" Location="scripts/test/OTOBOCodePolicyPlugins/Perl/ObjectDependencies.t" />
         <File Permission="660" Location="scripts/test/OTOBOCodePolicyPlugins/Perl/Pod/FunctionPod.t" />
         <File Permission="660" Location="scripts/test/OTOBOCodePolicyPlugins/Perl/Pod/NamePod.t" />
-        <File Permission="660" Location="scripts/test/OTOBOCodePolicyPlugins/Perl/SortKeysReference.t" />
         <File Permission="660" Location="scripts/test/OTOBOCodePolicyPlugins/Perl/Tests/Helper.t" />
         <File Permission="660" Location="scripts/test/OTOBOCodePolicyPlugins/PerlCritic/ProhibitOpen.t" />
         <File Permission="660" Location="scripts/test/OTOBOCodePolicyPlugins/PerlCritic/ProhibitStringySplit.t" />

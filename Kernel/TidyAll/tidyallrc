@@ -274,11 +274,6 @@ ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
 [+TidyAll::Plugin::OTOBO::Perl::ScriptFormat]
 select = **/*.{pl,psgi}
 
-[+TidyAll::Plugin::OTOBO::Perl::SortKeys]
-select = **/*.{pl,pm,psgi,t}
-select = Kernel/Config.pm.dist
-ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
-
 [+TidyAll::Plugin::OTOBO::Perl::SubDeclaration]
 select = **/*.{pl,pm,psgi,t}
 select = Kernel/Config.pm.dist
