@@ -77,7 +77,7 @@
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Migrations/OTOBO10/XMLFrontendNavigation.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/BinScripts.pm" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Critic/Policy/OTOBO/ProhibitLowPrecendeceOps.pm" />
+        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Critic/Policy/OTOBO/ProhibitLowPrecedenceOps.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Critic/Policy/OTOBO/ProhibitGoto.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Critic/Policy/OTOBO/ProhibitOpen.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Critic/Policy/OTOBO/ProhibitRandInTests.pm" />
