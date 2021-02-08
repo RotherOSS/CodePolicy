@@ -36,7 +36,7 @@ my $Description = q{Using low precedence operators is not allowed};
 my $Explanation =
     q{Replace low precedence operators with the high precedence substitutes};
 
-my %LowPrecendeceOperators = (
+my %LowPrecedenceOps = (
     not => '!',
     and => '&&',
     or  => '||',
@@ -48,10 +48,11 @@ sub default_themes       { return qw( otobo ) }
 sub applies_to           { return 'PPI::Token::Operator' }
 
 sub violates {
-    my ( $Self, $Element ) = @_;
+    my ( $Self, $Op ) = @_;
 
-    return if !grep { $Element eq $_ } keys %LowPrecendeceOperators;
-    return $Self->violation( $Description, $Explanation, $Element );
+    # Is the encountered op a low precedence op ?
+    return unless exists $LowPrecedenceOps{$Op};
+    return $Self->violation( $Description, $Explanation, $Op );
 }
 
 1;
