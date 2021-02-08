@@ -18,13 +18,21 @@ package Perl::Critic::Policy::OTOBO::ProhibitLowPrecedenceOps;
 
 use strict;
 use warnings;
+use v5.24;
+use utf8;
 
-use Perl::Critic::Utils qw{};
 use parent 'Perl::Critic::Policy';
+
+# core modules
+
+# CPAN modules
+use Perl::Critic::Utils qw{};
+
+# OTOBO modules
 
 our $VERSION = '0.01';
 
-my $Description = q{Use of low precedence operators is not allowed};
+my $Description = q{Using low precedence operators is not allowed};
 my $Explanation =
     q{Replace low precedence operators with the high precedence substitutes};
 
