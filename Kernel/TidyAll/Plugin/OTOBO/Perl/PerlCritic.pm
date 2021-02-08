@@ -33,7 +33,7 @@ use Perl::Critic;
 
 # OTOBO modules
 use Perl::Critic::Policy::OTOBO::ProhibitGoto;
-use Perl::Critic::Policy::OTOBO::ProhibitLowPrecendeceOps;
+use Perl::Critic::Policy::OTOBO::ProhibitLowPrecedenceOps;
 use Perl::Critic::Policy::OTOBO::ProhibitSmartMatchOperator;
 use Perl::Critic::Policy::OTOBO::ProhibitRandInTests;
 use Perl::Critic::Policy::OTOBO::ProhibitOpen;
@@ -66,7 +66,7 @@ sub validate_file {
 
         # explicitly add the OTOBO policies, run them regardless of severity
         $Critic->add_policy( -policy => 'OTOBO::ProhibitGoto' );
-        $Critic->add_policy( -policy => 'OTOBO::ProhibitLowPrecendeceOps' );
+        $Critic->add_policy( -policy => 'OTOBO::ProhibitLowPrecedenceOps' );
         $Critic->add_policy( -policy => 'OTOBO::ProhibitOpen' );
         $Critic->add_policy( -policy => 'OTOBO::ProhibitRandInTests' );
         $Critic->add_policy( -policy => 'OTOBO::ProhibitSmartMatchOperator' );
