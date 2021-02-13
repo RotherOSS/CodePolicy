@@ -77,6 +77,12 @@ Options:
     -p, --processes     The number of processes to use (default: env var OTOBOCODEPOLICY_PROCESSES if set, otherwise "6")
     --plugins           Restrict to specific plugin that should be used. Pass the option multiple time for multiple plugins.
     -h, --help          Show this usage message
+
+Example usage:
+
+    # run Perl::Critic on a source tree
+    ../CodePolicy/bin/otobo.CodePolicy.pl --plugins +TidyAll::Plugin::OTOBO::Perl::PerlCritic -a --processes 1 1>critic.out
+
 END_MSG
 
     exit 0;
