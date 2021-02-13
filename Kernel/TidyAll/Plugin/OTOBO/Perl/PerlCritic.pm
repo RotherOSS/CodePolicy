@@ -21,9 +21,6 @@ use warnings;
 use v5.24;
 use utf8;
 
-use File::Basename qw(dirname);
-use lib dirname(__FILE__) . '/../';    # Find our Perl::Critic policies
-
 use parent qw(TidyAll::Plugin::OTOBO::Perl);
 
 # core modules
@@ -32,14 +29,6 @@ use parent qw(TidyAll::Plugin::OTOBO::Perl);
 use Perl::Critic;
 
 # OTOBO modules
-use Perl::Critic::Policy::OTOBO::ProhibitGoto;
-use Perl::Critic::Policy::OTOBO::ProhibitLowPrecedenceOps;
-use Perl::Critic::Policy::OTOBO::ProhibitSmartMatchOperator;
-use Perl::Critic::Policy::OTOBO::ProhibitRandInTests;
-use Perl::Critic::Policy::OTOBO::ProhibitOpen;
-use Perl::Critic::Policy::OTOBO::RequireCamelCase;
-use Perl::Critic::Policy::OTOBO::RequireLabels;
-use Perl::Critic::Policy::OTOBO::RequireParensWithMethods;
 
 sub validate_file {
     my ( $Self, $Filename ) = @_;
@@ -66,15 +55,8 @@ sub validate_file {
             '-program-extensions' => [qw(.pl .t)],
         );
 
-        # explicitly add the OTOBO policies, run them regardless of severity
-        $Critic->add_policy( -policy => 'OTOBO::ProhibitGoto' );
-        $Critic->add_policy( -policy => 'OTOBO::ProhibitLowPrecedenceOps' );
-        $Critic->add_policy( -policy => 'OTOBO::ProhibitOpen' );
-        $Critic->add_policy( -policy => 'OTOBO::ProhibitRandInTests' );
-        $Critic->add_policy( -policy => 'OTOBO::ProhibitSmartMatchOperator' );
-        $Critic->add_policy( -policy => 'OTOBO::RequireCamelCase' );
-        $Critic->add_policy( -policy => 'OTOBO::RequireLabels' );
-        $Critic->add_policy( -policy => 'OTOBO::RequireParensWithMethods' );
+        # The OTOBO specific policies don't have to be added explicity,
+        # as they have the default severity $SEVERITY_HIGHEST = 5
 
         # explicitly add standard policy with defaul severity $SEVERITY_LOW, that is 2
         $Critic->add_policy( -policy => 'ControlStructures::ProhibitUnlessBlocks' );

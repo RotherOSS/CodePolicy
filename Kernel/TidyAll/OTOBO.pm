@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2020 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -18,8 +18,15 @@ package TidyAll::OTOBO;
 
 use strict;
 use warnings;
+use v5.24;
+use utf8;
 
-use Code::TidyAll 0.56;
+use File::Basename qw(dirname);
+use lib dirname(__FILE__) . '/Plugin/OTOBO';    # Find our Perl::Critic policies
+
+use parent qw(Code::TidyAll);
+
+# core modules
 use File::Basename;
 use File::Temp ();
 use IO::File;
@@ -27,9 +34,8 @@ use POSIX ":sys_wait_h";
 use Term::ANSIColor();
 use Time::HiRes qw(sleep);
 
-use parent qw(Code::TidyAll);
-
-# Require some needed modules here for clarity / better error messages.
+# CPAN modules, Require some needed modules here for clarity / better error messages.
+use Code::TidyAll 0.56;
 use Perl::Critic;
 use Perl::Tidy;
 
@@ -79,8 +85,7 @@ sub DetermineFrameworkVersionFromDirectory {
             my @Content    = $FileHandle->getlines();
             for my $Line (@Content) {
                 if ( $Line =~ m{ <Framework (?: [ ]+ [^<>]* )? > }xms ) {
-                    my ( $VersionMajor, $VersionMinor )
-                        = $Line =~ m{ <Framework (?: [ ]+ [^<>]* )? > (\d+) \. (\d+) \. [^<*]+ <\/Framework> }xms;
+                    my ( $VersionMajor, $VersionMinor ) = $Line =~ m{ <Framework (?: [ ]+ [^<>]* )? > (\d+) \. (\d+) \. [^<*]+ <\/Framework> }xms;
                     if (
                         $VersionMajor > $FrameworkVersionMajor
                         || (
