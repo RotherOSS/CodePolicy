@@ -78,6 +78,10 @@ sub validate_file {
 
         # explicitly add standard policy with defaul severity $SEVERITY_LOW, that is 2
         $Critic->add_policy( -policy => 'ControlStructures::ProhibitUnlessBlocks' );
+        $Critic->add_policy( -policy => 'Miscellanea::ProhibitUselessNoCritic' );
+
+        # explicitly add standard policy with default severity $SEVERITY_MEDIUM, that is 3
+        $Critic->add_policy( -policy => 'Miscellanea::ProhibitUnrestrictedNoCritic' );
 
         $CachedPerlCritic->{$FrameworkVersion} = $Critic;
     }
