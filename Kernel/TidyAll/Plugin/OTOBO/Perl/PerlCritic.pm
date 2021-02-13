@@ -22,6 +22,9 @@ use v5.24;
 use namespace::autoclean;
 use utf8;
 
+use File::Basename qw(dirname);
+use lib dirname(__FILE__) . '/../';    # Find our Perl::Critic policies
+
 use parent qw(TidyAll::Plugin::OTOBO::Perl);
 
 use File::Basename qw(dirname);
@@ -34,7 +37,7 @@ use Perl::Critic;
 
 # OTOBO modules
 use Perl::Critic::Policy::OTOBO::ProhibitGoto;
-use Perl::Critic::Policy::OTOBO::ProhibitLowPrecendeceOps;
+use Perl::Critic::Policy::OTOBO::ProhibitLowPrecedenceOps;
 use Perl::Critic::Policy::OTOBO::ProhibitSmartMatchOperator;
 use Perl::Critic::Policy::OTOBO::ProhibitRandInTests;
 use Perl::Critic::Policy::OTOBO::ProhibitOpen;
@@ -56,7 +59,9 @@ sub validate_file {
 
     if ( !$CachedPerlCritic->{$FrameworkVersion} ) {
 
-        my $Severity = 4;    # STERN, only $SEVERITY_HIGHEST = 5 and $SEVERITY_HIGH = 4 are covered
+        # STERN, per default only $SEVERITY_HIGHEST = 5 and $SEVERITY_HIGH = 4 are covered.
+        # Lower severity policies can be explicitly added with add_policy().
+        my $Severity = 4;
 
         my $Critic = Perl::Critic->new(
             -severity => $Severity,
@@ -67,7 +72,7 @@ sub validate_file {
 
         # explicitly add the OTOBO policies, run them regardless of severity
         $Critic->add_policy( -policy => 'OTOBO::ProhibitGoto' );
-        $Critic->add_policy( -policy => 'OTOBO::ProhibitLowPrecendeceOps' );
+        $Critic->add_policy( -policy => 'OTOBO::ProhibitLowPrecedenceOps' );
         $Critic->add_policy( -policy => 'OTOBO::ProhibitOpen' );
         $Critic->add_policy( -policy => 'OTOBO::ProhibitRandInTests' );
         $Critic->add_policy( -policy => 'OTOBO::ProhibitSmartMatchOperator' );
@@ -75,8 +80,12 @@ sub validate_file {
         $Critic->add_policy( -policy => 'OTOBO::RequireLabels' );
         $Critic->add_policy( -policy => 'OTOBO::RequireParensWithMethods' );
 
-        # explicitly add standard policy mit severity $SEVERITY_LOW, that is 2
+        # explicitly add standard policy with defaul severity $SEVERITY_LOW, that is 2
         $Critic->add_policy( -policy => 'ControlStructures::ProhibitUnlessBlocks' );
+        $Critic->add_policy( -policy => 'Miscellanea::ProhibitUselessNoCritic' );
+
+        # explicitly add standard policy with default severity $SEVERITY_MEDIUM, that is 3
+        $Critic->add_policy( -policy => 'Miscellanea::ProhibitUnrestrictedNoCritic' );
 
         $CachedPerlCritic->{$FrameworkVersion} = $Critic;
     }
@@ -88,8 +97,11 @@ sub validate_file {
     # See https://metacpan.org/pod/Perl::Critic::Violation#OVERLOADS
     # for the  escape characters.
     Perl::Critic::Violation::set_format(
+
+        # useful for batch editing: 'sp +%l %f\\n no critic qw(%p)'
         '%p violated at line %l column %c (Severity: %s)\\n  %m\\n%e\\n'
     );
+
     if (@Violations) {
         return $Self->DieWithError("@Violations");
     }
