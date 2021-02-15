@@ -1,0 +1,19 @@
+# STERN, per default only $SEVERITY_HIGHEST = 5 and $SEVERITY_HIGH = 4 are covered.
+# Lower severity policies can be explicitly added below.
+severity = 4
+
+# test scripts are scripts
+program-extensions = .pl .t
+
+# The OTOBO specific policies don't have to be added explicity,
+
+# Raise the severity of some policies
+# that would not be included because their default severity is below 4.
+[ControlStructures::ProhibitUnlessBlocks]
+severity = 4
+
+[Miscellanea::ProhibitUselessNoCritic]
+severity = 4
+
+[Miscellanea::ProhibitUnrestrictedNoCritic]
+severity = 4
