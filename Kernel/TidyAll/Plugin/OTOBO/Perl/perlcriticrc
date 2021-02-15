@@ -27,3 +27,12 @@ severity = 4
 
 [Miscellanea::ProhibitUnrestrictedNoCritic]
 severity = 4
+
+# This setup does not work as
+#    return 1 unless $Content =~ m{<otrs_config.*?version="2.0"};
+# will still be triggered.
+# So leave this policy disabled.
+#[ControlStructures::ProhibitPostfixControls]
+#Severity = 4
+#Allow = if for until when while
+#Flowcontrol = warn die carp croak cluck confess goto exit return
