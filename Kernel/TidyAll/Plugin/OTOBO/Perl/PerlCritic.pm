@@ -66,9 +66,9 @@ sub validate_file {
 
     return unless @Violations;
 
-    if (@Violations) {
-        return $Self->DieWithError("@Violations");
-    }
+    # The format, for the stringification, has to be set up seperately.
+    my $Format = $PerlCritic->config->verbose // '%p violated at line %l column %c (Severity: %s)\\n  %m\\n%e\\n';
+    Perl::Critic::Violation::set_format($Format);
 
     return $Self->DieWithError("@Violations");
 }
