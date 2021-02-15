@@ -93,7 +93,7 @@ sub validate_source {
     # syntax check
     my $ErrorMessage;
     my $FileHandle;
-    if ( !open $FileHandle, '-|', "perl -cw " . $TempFile->filename() . " 2>&1" ) {    ## no critic
+    if ( !open $FileHandle, '-|', "perl -cw " . $TempFile->filename() . " 2>&1" ) {
         return $Self->DieWithError("FILTER: Can't open tempfile: $!\n");
     }
 

@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2020 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -37,7 +37,7 @@ sub transform_source {
 
     my $Copy = 'Rother OSS GmbH, https://otobo.de/';
 
-    my ( $Sec, $Min, $Hour, $Day, $Month, $Year ) = localtime( time() );    ## no critic
+    my ( $Sec, $Min, $Hour, $Day, $Month, $Year ) = localtime( time() );
     $Year += 1900;
 
     my $YearString = "2019-$Year";
@@ -78,7 +78,7 @@ sub transform_source {
         #   print "Copyright (c) 2003-2008 Rother OSS GmbH, http://www.otobo.com/\n";
         # $2 should only occur in: Kernel/Output/HTML/Templates/Standard/Copyright.tt
         elsif ( $Line =~ /^([^\n]*)Copyright.*Rother OSS.+?(\s+-->)?$/i ) {
-            my $End  = $2 // '';
+            my $End = $2 // '';
             $Line    = "$1Copyright (C) $YearString $Copy$End";
             $CopySet = 1;
         }

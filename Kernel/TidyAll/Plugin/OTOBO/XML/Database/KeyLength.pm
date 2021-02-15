@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2020 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -86,8 +86,8 @@ sub validate_source {
                         $CurrentColumns{$ColumnName} = $ColumnSize * $CharacterSize;
                     }
 
-                 # For decimal column type use approximate calculation, it should be enough for our purposes.
-                 #   More info here: https://dev.mysql.com/doc/refman/5.7/en/precision-math-decimal-characteristics.html
+                    # For decimal column type use approximate calculation, it should be enough for our purposes.
+                    #   More info here: https://dev.mysql.com/doc/refman/5.7/en/precision-math-decimal-characteristics.html
                     elsif ( uc $ColumnType eq 'DECIMAL' ) {
                         my ( $TotalDigits, $FractionalDigits ) = split m/,/, $ColumnSize;
                         $FractionalDigits //= 0;

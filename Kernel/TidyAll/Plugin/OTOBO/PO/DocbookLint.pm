@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2020 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -74,7 +74,7 @@ sub validate_file {
             my @SourceTags = $StrippedSource =~ m{<[^>]*>}smg;
             next STRING if !@SourceTags;
             my %SourceTagCount;
-            @SourceTags = map { $_ =~ s{^<([/a-zA-Z_0-9]+).*}{$1}esmxg; $_ } @SourceTags;    ## no critic
+            @SourceTags = map { $_ =~ s{^<([/a-zA-Z_0-9]+).*}{$1}esmxg; $_ } @SourceTags;    ## no critic qw(ControlStructures::ProhibitMutatingListFunctions)
 
             # Some tags which do not have to be validated as long as the xml structure is still valid.
             my %IgnoreTags = (
