@@ -5,6 +5,16 @@ severity = 4
 # test scripts are scripts
 program-extensions = .pl .t
 
+# Format the violations, indicating the policy name, brief description and explanation.
+# See https://metacpan.org/pod/Per l::Critic::Violation#OVERLOADS for the escape characters.
+verbose = %p violated at line %l column %c (Severity: %s)\n  %m\n%e\n
+
+# useful for batch editing:
+# verbose = sp +%l %f\n no critic qw(%p)
+
+# including the source code %r that causes the violation:
+#verbose = %p violated at line %l column %c (Severity: %s)\n  %m\n%r\n
+
 # The OTOBO specific policies don't have to be added explicity,
 
 # Raise the severity of some policies
