@@ -24,6 +24,8 @@ use utf8;
 use parent qw(TidyAll::Plugin::OTOBO::Perl);
 
 # core modules
+use File::Basename qw(dirname);
+use File::Spec qw();
 
 # CPAN modules
 use Perl::Critic;
@@ -38,34 +40,26 @@ sub validate_file {
     state $CachedPerlCritic = {};
 
     return if $Self->IsPluginDisabled( Filename => $Filename );
-    return if $Self->IsFrameworkVersionLessThan( 3, 2 );
 
     my $FrameworkVersion = "$TidyAll::OTOBO::FrameworkVersionMajor.$TidyAll::OTOBO::FrameworkVersionMinor";
 
     if ( !$CachedPerlCritic->{$FrameworkVersion} ) {
 
-        # STERN, per default only $SEVERITY_HIGHEST = 5 and $SEVERITY_HIGH = 4 are covered.
-        # Lower severity policies can be explicitly added with add_policy().
-        my $Severity = 4;
+        # find the perlcritic with the following priorities:
+        # i.   setting in the environment $ENV{PERLCRITIC}
+        # ii. the file perlcriticrc next to this module
+        my $Profile = eval {
 
-        my $Critic = Perl::Critic->new(
-            -severity => $Severity,
-            -exclude  => [
-            ],
-            '-program-extensions' => [qw(.pl .t)],
+            #Check explicit environment setting
+            return $ENV{PERLCRITIC} if $ENV{PERLCRITIC} && -f $ENV{PERLCRITIC};
+
+            # the default
+            return File::Spec->catfile( dirname(__FILE__), 'perlcriticrc' );
+        };
+
+        $CachedPerlCritic->{$FrameworkVersion} = Perl::Critic->new(
+            -profile => $Profile
         );
-
-        # The OTOBO specific policies don't have to be added explicity,
-        # as they have the default severity $SEVERITY_HIGHEST = 5
-
-        # explicitly add standard policy with defaul severity $SEVERITY_LOW, that is 2
-        $Critic->add_policy( -policy => 'ControlStructures::ProhibitUnlessBlocks' );
-        $Critic->add_policy( -policy => 'Miscellanea::ProhibitUselessNoCritic' );
-
-        # explicitly add standard policy with default severity $SEVERITY_MEDIUM, that is 3
-        $Critic->add_policy( -policy => 'Miscellanea::ProhibitUnrestrictedNoCritic' );
-
-        $CachedPerlCritic->{$FrameworkVersion} = $Critic;
     }
 
     # Force stringification of $Filename as it is a Path::Tiny object in Code::TidyAll 0.50+.
