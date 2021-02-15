@@ -23,12 +23,15 @@ use FindBin qw($RealBin);
 
 my $Directory = getcwd;
 
-# install hook
+# install hooks
+my $NumHooks = 0;
 unlink File::Spec->catfile( $Directory, '.git', 'hooks', 'pre-commit' );
 symlink(
     File::Spec->catfile( $RealBin, '..', 'Kernel', 'TidyAll', 'git-hooks', 'pre-commit.pl' ),
     File::Spec->catfile( $Directory, '.git', 'hooks', 'pre-commit' )
 );
+$NumHooks++;
+
 unlink File::Spec->catfile( $Directory, '.git', 'hooks', 'prepare-commit-msg' );
 symlink(
     File::Spec->catfile(
@@ -36,5 +39,6 @@ symlink(
     ),
     File::Spec->catfile( $Directory, '.git', 'hooks', 'prepare-commit-msg' )
 );
+$NumHooks++;
 
-print "Installed git commit hooks in $Directory.\n\n";
+print "Installed $NumHooks git hooks in $Directory.\n\n";
