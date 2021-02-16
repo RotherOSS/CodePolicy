@@ -34,7 +34,6 @@ sub applies_to           { return 'PPI::Statement::Break' }
 sub prepare_to_scan_document {
     my ( $Self, $Document ) = @_;
 
-
     return 1;
 }
 

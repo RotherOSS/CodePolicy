@@ -48,7 +48,6 @@ sub prepare_to_scan_document {
     # Cleanup, one instance can scan multiple files.
     delete $Self->{_IsDerivedModule};
 
-
     if ( $Document->logical_filename() !~ m{ (\.pm) \z }xms ) {
         return 1;
     }
