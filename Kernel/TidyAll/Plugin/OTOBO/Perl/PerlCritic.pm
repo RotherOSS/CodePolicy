@@ -28,6 +28,8 @@ use File::Basename qw(dirname);
 use lib dirname(__FILE__) . '/../';    # Find our Perl::Critic policies
 
 # core modules
+use File::Basename qw(dirname);
+use File::Spec qw();
 
 # CPAN modules
 use Perl::Critic;
@@ -48,47 +50,32 @@ sub validate_file {
 
     if ( !$CachedPerlCritic->{$FrameworkVersion} ) {
 
-        # STERN, per default only $SEVERITY_HIGHEST = 5 and $SEVERITY_HIGH = 4 are covered.
-        # Lower severity policies can be explicitly added with add_policy().
-        my $Severity = 4;
+        # find the perlcritic with the following priorities:
+        # i.  setting in the environment $ENV{PERLCRITIC}
+        # ii. the file perlcriticrc next to this module
+        my $Profile = ( $ENV{PERLCRITIC} && -f $ENV{PERLCRITIC} )
+            ?
+            $ENV{PERLCRITIC}
+            :
+            File::Spec->catfile( dirname(__FILE__), 'perlcriticrc' );
 
-        my $Critic = Perl::Critic->new(
-            -severity => $Severity,
-            -exclude  => [
-            ],
-            '-program-extensions' => [qw(.pl .t)],
+        $CachedPerlCritic->{$FrameworkVersion} = Perl::Critic->new(
+            -profile => $Profile
         );
-
-        # The OTOBO specific policies don't have to be added explicity,
-        # as they have the default severity $SEVERITY_HIGHEST = 5
-
-        # explicitly add standard policy with defaul severity $SEVERITY_LOW, that is 2
-        $Critic->add_policy( -policy => 'ControlStructures::ProhibitUnlessBlocks' );
-        $Critic->add_policy( -policy => 'Miscellanea::ProhibitUselessNoCritic' );
-
-        # explicitly add standard policy with default severity $SEVERITY_MEDIUM, that is 3
-        $Critic->add_policy( -policy => 'Miscellanea::ProhibitUnrestrictedNoCritic' );
-
-        $CachedPerlCritic->{$FrameworkVersion} = $Critic;
     }
+
+    my $PerlCritic = $CachedPerlCritic->{$FrameworkVersion};
 
     # Force stringification of $Filename as it is a Path::Tiny object in Code::TidyAll 0.50+.
-    my @Violations = $CachedPerlCritic->{$FrameworkVersion}->critique("$Filename");
+    my @Violations = $PerlCritic->critique("$Filename");
 
-    # Format the violations, indicating the policy name, brief description and explanation.
-    # See https://metacpan.org/pod/Perl::Critic::Violation#OVERLOADS
-    # for the  escape characters.
-    Perl::Critic::Violation::set_format(
+    return unless @Violations;
 
-        # useful for batch editing: 'sp +%l %f\\n no critic qw(%p)'
-        '%p violated at line %l column %c (Severity: %s)\\n  %m\\n%e\\n'
-    );
+    # The format, for the stringification, has to be set up seperately.
+    my $Format = $PerlCritic->config->verbose // '%p violated at line %l column %c (Severity: %s)\\n  %m\\n%e\\n';
+    Perl::Critic::Violation::set_format($Format);
 
-    if (@Violations) {
-        return $Self->DieWithError("@Violations");
-    }
-
-    return;
+    return $Self->DieWithError("@Violations");
 }
 
 1;

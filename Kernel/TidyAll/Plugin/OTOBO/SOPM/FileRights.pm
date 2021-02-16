@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2020 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -29,7 +29,7 @@ sub validate_source {
     # strict permission checks starting with OTOBO 10
     my $ExecutablePermissionCheck = qr{Permission="770"};
     my $StaticPermissionCheck     = qr{Permission="660"};
-    my $Explanation = 'A <File>-Tag has wrong permissions. Script files normally need 770 rights, the others 660.';
+    my $Explanation               = 'A <File>-Tag has wrong permissions. Script files normally need 770 rights, the others 660.';
 
     ## A lot more lenient before OTOBO 10 (world permissions)
     #if ( $Self->IsFrameworkVersionLessThan( 6, 0 ) ) {

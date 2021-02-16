@@ -3,7 +3,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2020 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -23,12 +23,15 @@ use FindBin qw($RealBin);
 
 my $Directory = getcwd;
 
-# install hook
+# install hooks
+my $NumHooks = 0;
 unlink File::Spec->catfile( $Directory, '.git', 'hooks', 'pre-commit' );
 symlink(
     File::Spec->catfile( $RealBin, '..', 'Kernel', 'TidyAll', 'git-hooks', 'pre-commit.pl' ),
     File::Spec->catfile( $Directory, '.git', 'hooks', 'pre-commit' )
 );
+$NumHooks++;
+
 unlink File::Spec->catfile( $Directory, '.git', 'hooks', 'prepare-commit-msg' );
 symlink(
     File::Spec->catfile(
@@ -36,5 +39,6 @@ symlink(
     ),
     File::Spec->catfile( $Directory, '.git', 'hooks', 'prepare-commit-msg' )
 );
+$NumHooks++;
 
-print "Installed git commit hooks in $Directory.\n\n";
+print "Installed $NumHooks git hooks in $Directory.\n\n";

@@ -77,8 +77,9 @@
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Migrations/OTOBO10/XMLFrontendNavigation.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/BinScripts.pm" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Critic/Policy/OTOBO/ProhibitLowPrecedenceOps.pm" />
+        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/CacheNew.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Critic/Policy/OTOBO/ProhibitGoto.pm" />
+        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Critic/Policy/OTOBO/ProhibitLowPrecedenceOps.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Critic/Policy/OTOBO/ProhibitOpen.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Critic/Policy/OTOBO/ProhibitRandInTests.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Critic/Policy/OTOBO/ProhibitSmartMatchOperator.pm" />
@@ -86,12 +87,11 @@
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Critic/Policy/OTOBO/RequireLabels.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Critic/Policy/OTOBO/RequireParensWithMethods.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Critic/PolicyOTOBO.pm" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/CacheNew.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/DBObject.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/DieExit.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Dumper.pm" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/ForeachToFor.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/ForMy.pm" />
+        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/ForeachToFor.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/ISA.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/LayoutObject.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/ModuleFormat.pm" />
@@ -104,8 +104,8 @@
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/PerlTidy.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Pod/FunctionPod.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Pod/NamePod.pm" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Pod/SpellCheck.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Pod/SpellCheck.Whitelist.txt" />
+        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Pod/SpellCheck.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Pod/Validator.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Print.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Require.pm" />
@@ -119,6 +119,7 @@
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/UnitTestConfigChanges.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/UseParent.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/UseWarnings.pm" />
+        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/perlcriticrc" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/PO/DocbookLint.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/PO/HTMLTags.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/PO/msgfmt.pm" />

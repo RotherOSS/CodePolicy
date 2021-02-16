@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2020 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -134,8 +134,7 @@ sub HandleInput {
             # Only allow "rel-*" as name for new and updated tags.
             if ( $Ref !~ m{ \A refs/tags/rel-\d+_\d+_\d+ (_alpha\d+ | _beta\d+ | _rc\d+)? \z }xms ) {
 
-                my $ErrorMessage
-                    = "Error: found invalid tag '$Ref' - please only use rel-A_B_C or rel-A_B_C_(alpha|beta|rc)D.";
+                my $ErrorMessage = "Error: found invalid tag '$Ref' - please only use rel-A_B_C or rel-A_B_C_(alpha|beta|rc)D.";
                 return $ErrorMessage;
             }
 
@@ -225,8 +224,7 @@ sub CreateTidyAll {
 
                 for my $Line (@Content) {
                     if ( $Line =~ m{ <Framework (?: [ ]+ [^<>]* )? > }xms ) {
-                        my ( $VersionMajor, $VersionMinor )
-                            = $Line =~ m{ <Framework (?: [ ]+ [^<>]* )? > (\d+) \. (\d+) \. [^<*]+ <\/Framework> }xms;
+                        my ( $VersionMajor, $VersionMinor ) = $Line =~ m{ <Framework (?: [ ]+ [^<>]* )? > (\d+) \. (\d+) \. [^<*]+ <\/Framework> }xms;
                         if (
                             $VersionMajor > $TidyAll::OTOBO::FrameworkVersionMajor
                             || (

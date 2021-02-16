@@ -1,0 +1,38 @@
+# STERN, per default only $SEVERITY_HIGHEST = 5 and $SEVERITY_HIGH = 4 are covered.
+# Lower severity policies can be explicitly added below.
+severity = 4
+
+# test scripts are scripts
+program-extensions = .pl .t
+
+# Format the violations, indicating the policy name, brief description and explanation.
+# See https://metacpan.org/pod/Per l::Critic::Violation#OVERLOADS for the escape characters.
+verbose = %p violated at line %l column %c (Severity: %s)\n  %m\n%e\n
+
+# useful for batch editing:
+# verbose = sp +%l %f\n no critic qw(%p)
+
+# including the source code %r that causes the violation:
+#verbose = %p violated at line %l column %c (Severity: %s)\n  %m\n%r\n
+
+# The OTOBO specific policies don't have to be added explicity,
+
+# Raise the severity of some policies
+# that would not be included because their default severity is below 4.
+[ControlStructures::ProhibitUnlessBlocks]
+severity = 4
+
+[Miscellanea::ProhibitUselessNoCritic]
+severity = 4
+
+[Miscellanea::ProhibitUnrestrictedNoCritic]
+severity = 4
+
+# This setup does not work as
+#    return 1 unless $Content =~ m{<otrs_config.*?version="2.0"};
+# will still be triggered.
+# So leave this policy disabled.
+#[ControlStructures::ProhibitPostfixControls]
+#Severity = 4
+#Allow = if for until when while
+#Flowcontrol = warn die carp croak cluck confess goto exit return
