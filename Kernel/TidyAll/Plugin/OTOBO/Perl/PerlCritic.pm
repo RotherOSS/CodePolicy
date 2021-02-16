@@ -24,9 +24,6 @@ use utf8;
 
 use parent qw(TidyAll::Plugin::OTOBO::Perl);
 
-use File::Basename qw(dirname);
-use lib dirname(__FILE__) . '/../';    # Find our Perl::Critic policies
-
 # core modules
 use File::Basename qw(dirname);
 use File::Spec qw();
