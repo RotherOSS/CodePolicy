@@ -18,6 +18,7 @@ use strict;
 use warnings;
 use v5.24;
 use utf8;
+use open IO => ':encoding(UTF-8)';
 
 use File::Basename qw(dirname);
 use FindBin qw($RealBin);
@@ -40,9 +41,8 @@ use IPC::System::Simple qw(capturex);
 # OTOBO modules
 use TidyAll::OTOBO;
 
-# Ensure UTF8 output works.
-binmode( \*STDOUT, ':encoding(UTF-8)' );
-binmode( \*STDERR, ':encoding(UTF-8)' );
+# avoid managling of output
+STDOUT->autoflush();
 
 my ( $Verbose, $Directory, $File, $Mode, $Cached, $All, $Help, $Processes );
 my $Plugins = [];

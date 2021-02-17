@@ -39,15 +39,18 @@ sub violates {
     return if $Element ne 'open';
 
     my $NextSibling = $Element->snext_sibling();
-    return if !$NextSibling;
+
+    return unless $NextSibling;
 
     # Find open mode specifier
-    my $OpenMode;
+    my $OpenMode = '';
 
     # parentheses around open are present: open()
     if ( $NextSibling->isa('PPI::Structure::List') ) {
         my $Quote = $NextSibling->find('PPI::Token::Quote');
-        return if ( ref $Quote ne 'ARRAY' );
+
+        return unless ref $Quote eq 'ARRAY';
+
         $OpenMode = $Quote->[0]->string();
     }
 
@@ -59,14 +62,21 @@ sub violates {
         while ( $Counter++ < 10 ) {
             $NextSibling = $NextSibling->snext_sibling();
 
+            # this happens for
+            #   use open IO => ':encoding(UTF-8)';
+            last COUNTER unless $NextSibling;
+
             if (
                 $NextSibling->isa('PPI::Token::Operator')
                 && $NextSibling->content() eq ','
                 )
             {
                 my $Quote = $NextSibling->snext_sibling();
+
                 return if ( !$Quote || !$Quote->isa('PPI::Token::Quote') );
+
                 $OpenMode = $Quote->string();
+
                 last COUNTER;
             }
         }
