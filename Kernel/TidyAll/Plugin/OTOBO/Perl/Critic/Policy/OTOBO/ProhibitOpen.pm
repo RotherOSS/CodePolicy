@@ -62,6 +62,10 @@ sub violates {
         while ( $Counter++ < 10 ) {
             $NextSibling = $NextSibling->snext_sibling();
 
+            # this happens for
+            #   use open IO => ':encoding(UTF-8)';
+            last COUNTER unless $NextSibling;
+
             if (
                 $NextSibling->isa('PPI::Token::Operator')
                 && $NextSibling->content() eq ','
