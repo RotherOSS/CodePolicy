@@ -66,6 +66,7 @@ sub validate_source {
         POSIX
         Readonly
         Template
+        Test2::V0
         Time::HiRes
     );
 
