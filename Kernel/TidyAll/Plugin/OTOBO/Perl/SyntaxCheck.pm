@@ -48,13 +48,14 @@ sub validate_source {
         lib
         v5.24
 
-        Archive::Zip
         Archive::Tar
-        Cwd
+        Archive::Zip
         Carp
+        Const::Fast
+        Cwd
+        DBI
         Data::Dumper
         DateTime
-        DBI
         Fcntl
         File::Basename
         FindBin
@@ -62,8 +63,8 @@ sub validate_source {
         List::Util
         Moo
         Moose
-        Perl::Critic::Utils
         POSIX
+        Perl::Critic::Utils
         Readonly
         Template
         Time::HiRes
