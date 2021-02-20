@@ -1,7 +1,8 @@
-
 # Editor swap files
 *.swn
 *.swp
 *.swo
 *~
 
+# .out files are usually temporary files
+*.out
