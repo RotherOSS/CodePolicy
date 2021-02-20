@@ -18,10 +18,17 @@ package TidyAll::Plugin::OTOBO::Perl::SyntaxCheck;
 
 use strict;
 use warnings;
+use v5.24;
+use namespace::autoclean;
 
 use parent qw(TidyAll::Plugin::OTOBO::Perl);
 
+# core modules
 use File::Temp;
+
+# CPAN modules
+
+# OTOBO modules
 
 sub validate_source {
     my ( $Self, $Code ) = @_;
@@ -76,14 +83,17 @@ sub validate_source {
             $Line = "#$Line";
         }
 
-        if ( $Line =~ m{ ; \s* \z }xms ) {
+        # Look for the end of the the 'use' statement.
+        # The statement terminator may be followed by an end of line comment.
+        # All assuming that the ';' is not part of an item in the import list.
+        if ( $Line =~ m{ ; \s* (?: \# .*)? \z }xms ) {
             $DeletableStatement = 0;
         }
 
         $CleanedSource .= $Line . "\n";
     }
 
-    #print STDERR $CleanedSource;
+    # say STDERR $CleanedSource;
 
     my $TempFile = File::Temp->new();
     print $TempFile $CleanedSource;
