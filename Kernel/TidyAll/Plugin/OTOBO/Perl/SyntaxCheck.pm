@@ -67,6 +67,7 @@ sub validate_source {
         Perl::Critic::Utils
         Readonly
         Template
+        Test2::V0
         Time::HiRes
     );
 
