@@ -26,18 +26,14 @@ use parent qw(TidyAll::Plugin::OTOBO::Perl);
 sub validate_source {
     my ( $Self, $Code ) = @_;
 
-    # temporarily disable
-    # TODO CHECK
-    #return;
-
     return $Code if $Self->IsPluginDisabled( Code => $Code );
 
     my $FunctionNameInPod = '';
     my $FunctionLineInPod = '';
     my $FunctionCallInPod = '';
-    my $Counter           = 0;
+    my $LineNumber        = 0;
 
-    my $ErrorMessage;
+    my $ErrorMessage = '';
 
     my $PackageIsRole;
     $PackageIsRole = 1 if $Code =~ m{^use \s+ Moose::Role}ismx;
@@ -45,7 +41,11 @@ sub validate_source {
     my @CodeLines = split /\n/, $Code;
 
     for my $Line (@CodeLines) {
-        $Counter++;
+        $LineNumber++;
+
+        # Check the formatting of the actual head2 line
+        # POD for functions is recognised by the single word after the '=head2'.
+        # POD for private functions, which have a leading '_' in their name, is not checked.
         if ( $Line =~ m{^=head2 \s+ ([A-Za-z0-9]+) (\(\))? \s* $}smx ) {
 
             my $FunctionName  = $1;
@@ -54,21 +54,22 @@ sub validate_source {
             if ($IsFunctionPod) {
                 $FunctionNameInPod = $FunctionName;
                 $FunctionLineInPod = $Line;
-                chomp($FunctionLineInPod);
+                chomp $FunctionLineInPod;
             }
             elsif ( $Code =~ m{sub $FunctionName} ) {
-                $ErrorMessage
-                    .= "Item without function (near Line $Counter), the line should look like '=item functionname()'\n";
-                $ErrorMessage .= "Line $Counter: $Line\n";
+                $ErrorMessage .= "Item without function (near Line $LineNumber), the line should look like '=head2 SampleFunction()'\n";
+                $ErrorMessage .= "Line $LineNumber: $Line\n";
             }
         }
-        if ( $FunctionNameInPod && $Line =~ /->(.+?)\(/ && !$FunctionCallInPod ) {
+
+        # look at the sample code in the POD
+        if ( $FunctionNameInPod && $Line =~ m/->(.+?)\(/ && !$FunctionCallInPod ) {
             $FunctionCallInPod = $1;
             $FunctionCallInPod =~ s/ //;
 
             if ( $Line =~ /\$Self->/ && !$PackageIsRole ) {
                 $ErrorMessage .= "Don't use \$Self in perldoc\n";
-                $ErrorMessage .= "Line $Counter: $Line\n";
+                $ErrorMessage .= "Line $LineNumber: $Line\n";
             }
             elsif ( $FunctionNameInPod ne $FunctionCallInPod ) {
                 if ( $FunctionNameInPod ne 'new' || ( $FunctionCallInPod ne 'Get' && $FunctionCallInPod ne 'Create' ) )
@@ -78,13 +79,16 @@ sub validate_source {
                     $ErrorMessage .= "$FunctionLineInPod <-> $DescriptionLine\n";
                 }
             }
+
             if ( $FunctionNameInPod && $Line !~ /\$[A-Za-z0-9:]+->(.+?)\(/ && $FunctionNameInPod ne 'new' ) {
                 $ErrorMessage .= "The function syntax is not correct!\n";
-                $ErrorMessage .= "Line $Counter: $Line\n";
+                $ErrorMessage .= "Line $LineNumber: $Line\n";
             }
         }
-        if ( $FunctionNameInPod && $Line =~ /sub/ ) {
-            if ( $Line =~ /sub (.+) \{/ ) {
+
+        # look at the sub declaration following the POD
+        if ( $FunctionNameInPod && $Line =~ m/sub/ ) {
+            if ( $Line =~ m/sub (.+) \{/ ) {
                 my $FunctionSub = $1;
                 $FunctionSub =~ s/ //;
                 my $SubLine = $Line;
@@ -100,7 +104,7 @@ sub validate_source {
     }
 
     if ($ErrorMessage) {
-        return $Self->DieWithError("$ErrorMessage");
+        return $Self->DieWithError($ErrorMessage);
     }
 
     return;
