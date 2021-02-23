@@ -18,11 +18,14 @@ package TidyAll::Plugin::OTOBO::Base;
 
 use strict;
 use warnings;
+use v5.24;
+use utf8;
 
-use Encode();
+use Moo;
+
+extends qw(Code::TidyAll::Plugin);
+
 use TidyAll::OTOBO;
-
-use parent qw(Code::TidyAll::Plugin);
 
 sub IsPluginDisabled {
     my ( $Self, %Param ) = @_;

@@ -18,13 +18,22 @@ package TidyAll::Plugin::OTOBO::Perl::PerlTidy;
 
 use strict;
 use warnings;
+use v5.24;
+use utf8;
 
-use parent qw(TidyAll::Plugin::OTOBO::Perl);
+use Moo;
 
+extends qw(TidyAll::Plugin::OTOBO::Perl);
+
+# core modules
+
+# CPAN modules
 use Capture::Tiny qw(capture_merged);
 
 # Require a recent version of Perl::Tidy for consistent formatting on all systems.
 use Perl::Tidy v20191203;
+
+# OTOBO modules
 
 # TODO: Latest release 20190915 of Perl::Tidy seems to be buggy about vertical indentation.
 #   Force a certain version for now.
@@ -35,7 +44,7 @@ if ( Perl::Tidy->VERSION() ne '20191203' ) {
     die $Error;
 }
 
-sub transform_source {
+sub transform_source {    ## no critic qw(OTOBO::RequireCamelCase)
     my ( $Self, $Code ) = @_;
 
     return $Code if $Self->IsPluginDisabled(Code => $Code);
