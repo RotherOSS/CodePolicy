@@ -19,22 +19,29 @@ package TidyAll::Plugin::OTOBO::Perl::PerlCritic;
 use strict;
 use warnings;
 use v5.24;
-use namespace::autoclean;
 use utf8;
 
-use parent qw(TidyAll::Plugin::OTOBO::Perl);
+use Moo;
+
+extends qw(TidyAll::Plugin::OTOBO::Perl);
 
 # core modules
-use File::Basename qw(dirname);
-use File::Spec qw();
 
 # CPAN modules
 use Perl::Critic;
+use Specio::Library::Builtins;
+use Specio::Library::String;
 
 # OTOBO modules
 
+# profile is a required parameter that has to be set in tidyallrc
+has profile => (
+    is  => 'ro',
+    isa => t('Str'),
+);
+
 # This sub will be called by Code::TidyAll
-sub validate_file {
+sub validate_file {    ## no critic qw(OTOBO::RequireCamelCase)
     my ( $Self, $Filename ) = @_;
 
     # Cache Perl::Critic object instance to save time. But cache it
@@ -54,7 +61,7 @@ sub validate_file {
             ?
             $ENV{PERLCRITIC}
             :
-            File::Spec->catfile( dirname(__FILE__), 'perlcriticrc' );
+            $Self->profile;
 
         $CachedPerlCritic->{$FrameworkVersion} = Perl::Critic->new(
             -profile => $Profile

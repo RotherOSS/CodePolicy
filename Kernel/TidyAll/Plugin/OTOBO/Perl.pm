@@ -18,11 +18,14 @@ package TidyAll::Plugin::OTOBO::Perl;
 
 use strict;
 use warnings;
+use v5.24;
+use utf8;
+
+use Moo;
+
+extends qw(TidyAll::Plugin::OTOBO::Base);
 
 use Pod::Strip();
-use TidyAll::OTOBO;
-
-use parent qw(TidyAll::Plugin::OTOBO::Base);
 
 # Process Perl code and replace all Pod sections with comments.
 sub StripPod {
