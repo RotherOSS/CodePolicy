@@ -19,7 +19,9 @@ package TidyAll::Plugin::OTOBO::Perl::CacheNew;
 use strict;
 use warnings;
 
-use parent qw(TidyAll::Plugin::OTOBO::Perl);
+use Moo;
+
+extends qw(TidyAll::Plugin::OTOBO::Perl);
 
 ## nofilter(TidyAll::Plugin::OTOBO::Perl::CacheNew)
 ## nofilter(TidyAll::Plugin::OTOBO::Perl::ObjectDependencies)

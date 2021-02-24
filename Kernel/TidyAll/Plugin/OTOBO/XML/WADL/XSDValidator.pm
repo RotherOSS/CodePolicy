@@ -20,7 +20,9 @@ use strict;
 use warnings;
 
 use File::Basename;
-use parent qw(TidyAll::Plugin::OTOBO::Base);
+use Moo;
+
+extends qw(TidyAll::Plugin::OTOBO::Base);
 
 sub _build_cmd {
     my $XSDFile = dirname(__FILE__) . '/../../StaticFiles/XSD/WADL/wadl.xsd';

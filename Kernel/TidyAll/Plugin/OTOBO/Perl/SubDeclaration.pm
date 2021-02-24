@@ -21,7 +21,9 @@ use warnings;
 
 use File::Basename;
 
-use parent qw(TidyAll::Plugin::OTOBO::Perl);
+use Moo;
+
+extends qw(TidyAll::Plugin::OTOBO::Perl);
 
 =head1 SYNOPSIS
 

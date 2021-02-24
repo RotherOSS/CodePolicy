@@ -21,7 +21,9 @@ use warnings;
 
 use File::Basename;
 
-use parent qw(TidyAll::Plugin::OTOBO::Perl);
+use Moo;
+
+extends qw(TidyAll::Plugin::OTOBO::Perl);
 
 # Perl::Critic will make sure that use strict is enabled.
 # Now we check that use warnings is also.

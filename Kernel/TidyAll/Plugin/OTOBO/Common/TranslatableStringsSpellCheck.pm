@@ -22,7 +22,9 @@ use warnings;
 
 use File::Temp();
 
-use parent 'TidyAll::Plugin::OTOBO::Base';
+use Moo;
+
+extends 'TidyAll::Plugin::OTOBO::Base';
 
 our $HunspellPath;
 our $HunspellDictionaryPath;

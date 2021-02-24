@@ -19,7 +19,9 @@ package TidyAll::Plugin::OTOBO::Migrations::OTOBO10::PermissionDataNotInSession;
 use strict;
 use warnings;
 
-use parent qw(TidyAll::Plugin::OTOBO::Base);
+use Moo;
+
+extends qw(TidyAll::Plugin::OTOBO::Base);
 
 ## nofilter(TidyAll::Plugin::OTOBO::Migrations::OTOBO10::PermissionDataNotInSession)
 ## nofilter(TidyAll::Plugin::OTOBO::Perl::ObjectDependencies)

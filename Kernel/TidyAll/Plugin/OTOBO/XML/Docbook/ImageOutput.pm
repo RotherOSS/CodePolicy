@@ -21,7 +21,9 @@ use warnings;
 
 use File::Basename;
 
-use parent qw(TidyAll::Plugin::OTOBO::Base);
+use Moo;
+
+extends qw(TidyAll::Plugin::OTOBO::Base);
 
 sub transform_source {
     my ( $Self, $Code ) = @_;

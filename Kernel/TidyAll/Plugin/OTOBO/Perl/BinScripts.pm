@@ -21,7 +21,9 @@ use warnings;
 
 use File::Basename;
 
-use parent qw(TidyAll::Plugin::OTOBO::Perl);
+use Moo;
+
+extends qw(TidyAll::Plugin::OTOBO::Perl);
 
 # We only want to allow a handful of scripts in bin. All the rest should be
 #   migrated to console commands.

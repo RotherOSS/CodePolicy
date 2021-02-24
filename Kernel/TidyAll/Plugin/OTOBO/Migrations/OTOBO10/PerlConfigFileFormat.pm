@@ -19,7 +19,9 @@ package TidyAll::Plugin::OTOBO::Migrations::OTOBO10::PerlConfigFileFormat;
 use strict;
 use warnings;
 
-use parent qw(TidyAll::Plugin::OTOBO::Base);
+use Moo;
+
+extends qw(TidyAll::Plugin::OTOBO::Base);
 
 sub validate_source {
     my ( $Self, $Code ) = @_;
