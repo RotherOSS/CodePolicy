@@ -41,7 +41,7 @@ has profile => (
 );
 
 # This sub will be called by Code::TidyAll
-sub validate_file {    ## no critic qw(OTOBO::RequireCamelCase)
+sub validate_file {
     my ( $Self, $Filename ) = @_;
 
     # Cache Perl::Critic object instance to save time. But cache it
