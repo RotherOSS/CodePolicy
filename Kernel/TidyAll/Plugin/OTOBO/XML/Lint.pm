@@ -19,7 +19,9 @@ package TidyAll::Plugin::OTOBO::XML::Lint;
 use strict;
 use warnings;
 
-use parent qw(TidyAll::Plugin::OTOBO::Base);
+use Moo;
+
+extends qw(TidyAll::Plugin::OTOBO::Base);
 
 sub _build_cmd {
     return 'xmllint --noout --nonet';

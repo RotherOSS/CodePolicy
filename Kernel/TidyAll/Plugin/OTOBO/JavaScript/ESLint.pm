@@ -20,7 +20,9 @@ use strict;
 use warnings;
 
 use Encode;
-use parent qw(TidyAll::Plugin::OTOBO::Base);
+use Moo;
+
+extends qw(TidyAll::Plugin::OTOBO::Base);
 
 our $NodePath;
 our $ESLintPath;

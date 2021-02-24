@@ -21,7 +21,9 @@ use warnings;
 
 use File::Basename;
 
-use parent qw(TidyAll::Plugin::OTOBO::Base);
+use Moo;
+
+extends qw(TidyAll::Plugin::OTOBO::Base);
 
 # We only want to allow two cron files from OTOBO 5 on as the rest is managed
 # via the cron daemon.

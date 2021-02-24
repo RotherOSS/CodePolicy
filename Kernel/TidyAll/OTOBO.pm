@@ -24,7 +24,9 @@ use utf8;
 use File::Basename qw(dirname);
 use lib dirname(__FILE__) . '/Plugin/OTOBO';    # Find our Perl::Critic policies
 
-use parent qw(Code::TidyAll);
+use Moo;
+
+extends qw(Code::TidyAll);
 
 # core modules
 use File::Basename;

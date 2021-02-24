@@ -21,7 +21,9 @@ use warnings;
 
 use File::Basename;
 use File::Copy qw(copy);
-use parent qw(TidyAll::Plugin::OTOBO::Base);
+use Moo;
+
+extends qw(TidyAll::Plugin::OTOBO::Base);
 
 =head1 SYNOPSIS
 

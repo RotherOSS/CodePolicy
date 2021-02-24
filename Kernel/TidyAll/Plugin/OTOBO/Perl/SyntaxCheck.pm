@@ -21,7 +21,9 @@ use warnings;
 use v5.24;
 use namespace::autoclean;
 
-use parent qw(TidyAll::Plugin::OTOBO::Perl);
+use Moo;
+
+extends qw(TidyAll::Plugin::OTOBO::Perl);
 
 # core modules
 use File::Temp;

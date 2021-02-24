@@ -23,7 +23,9 @@ package TidyAll::Plugin::OTOBO::PO::msgfmt;
 use strict;
 use warnings;
 
-use parent qw(TidyAll::Plugin::OTOBO::Base);
+use Moo;
+
+extends qw(TidyAll::Plugin::OTOBO::Base);
 
 sub _build_cmd {
     return 'msgfmt -c -o /dev/null';

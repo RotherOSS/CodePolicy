@@ -19,7 +19,9 @@ package TidyAll::Plugin::OTOBO::XML::Configuration::UnitTestBlacklist;
 use strict;
 use warnings;
 
-use parent qw(TidyAll::Plugin::OTOBO::Base);
+use Moo;
+
+extends qw(TidyAll::Plugin::OTOBO::Base);
 
 =head1 SYNOPSIS
 
