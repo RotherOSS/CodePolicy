@@ -214,6 +214,7 @@ ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
 select = **/*.{pm}
 select = Kernel/Config.pm.dist
 ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+ignore = Kernel/System/UnitTest/RegisterDriver.pm Custom/Kernel/System/UnitTest/RegisterDriver.pm
 
 [+TidyAll::Plugin::OTOBO::Perl::ObjectNameSpace]
 select = **/*.{pl,pm,t}
