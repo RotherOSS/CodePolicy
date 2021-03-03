@@ -24,7 +24,9 @@ use Capture::Tiny qw();
 use File::Temp();
 use Pod::Spell;
 
-use parent 'TidyAll::Plugin::OTOBO::Perl';
+use Moo;
+
+extends 'TidyAll::Plugin::OTOBO::Perl';
 
 our $HunspellPath;
 our $HunspellDictionaryPath;

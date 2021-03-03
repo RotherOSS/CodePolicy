@@ -19,7 +19,9 @@ package TidyAll::Plugin::OTOBO::XML::Docbook::ReplaceSupportEmail;
 use strict;
 use warnings;
 
-use parent qw(TidyAll::Plugin::OTOBO::Base);
+use Moo;
+
+extends qw(TidyAll::Plugin::OTOBO::Base);
 
 my $English1RegExp = <<'END_REGEXP';
 \n \s* <para> \s*

@@ -214,6 +214,7 @@ ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
 select = **/*.{pm}
 select = Kernel/Config.pm.dist
 ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+ignore = Kernel/System/UnitTest/RegisterDriver.pm Custom/Kernel/System/UnitTest/RegisterDriver.pm
 
 [+TidyAll::Plugin::OTOBO::Perl::ObjectNameSpace]
 select = **/*.{pl,pm,t}
@@ -224,9 +225,13 @@ ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
 [+TidyAll::Plugin::OTOBO::Perl::ParamObject]
 select = **/*.{pl,psgi}
 select = Kernel/System/**/*.pm Custom/Kernel/System/**/*.pm
-ignore = Kernel/System/Web/* Custom/Kernel/System/Web/*
-ignore = Kernel/System/DynamicField/**/* Custom/Kernel/System/DynamicField/**/*
-ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
+ignore = Kernel/System/Auth/*.pm Custom/Kernel/System/Auth/*.pm
+ignore = Kernel/System/AuthSession/**/*.pm Custom/Kernel/System/AuthSession/**/*.pm
+ignore = Kernel/System/CustomerAuth/**/*.pm Custom/Kernel/System/CustomerAuth/**/*.pm
+ignore = Kernel/System/DynamicField/**/*.pm Custom/Kernel/System/DynamicField/**/*.pm
+ignore = Kernel/System/Log.pm Custom/Kernel/System/Log.pm
+ignore = Kernel/System/SupportDataCollector/Plugin/Webserver/**/*.pm Custom/Kernel/System/SupportDataCollector/Plugin/Webserver/**/*.pm
+ignore = Kernel/System/Web/**/*.pm Custom/Kernel/System/Web/**/*.pm
 
 [+TidyAll::Plugin::OTOBO::Perl::PerlCritic]
 select = **/*.{pl,pm,psgi,t}
@@ -235,12 +240,13 @@ ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
 ignore = scripts/test/sample/**/*
 ; Ignore this slow plugin for more agile OTOBOCodePolicy filter development with a custom mode "fast".
 except_modes = fast
+profile = $ROOT/Plugin/OTOBO/Perl/perlcriticrc
 
 [+TidyAll::Plugin::OTOBO::Perl::PerlTidy]
 select = **/*.{pl,pm,psgi,t}
 ignore = Kernel/Config.pm Kernel/Config/Defaults.pm Kernel/Config/**/ZZZ*.pm Kernel/Config/Files/User/*.pm
 ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
-argv = -l=160 -vmll -i=4 -ci=4 -vt=0 -vtc=0 -cti=0 -pt=1 -bt=1 -sbt=1 -bbt=1 -nsfs -nolq -bbao -nola -ndnl -cab=0
+argv = -pro=$ROOT/Plugin/OTOBO/Perl/perltidyrc
 ; Ignore this slow plugin for more agile OTOBOCodePolicy filter development with a custom mode "fast".
 except_modes = fast
 

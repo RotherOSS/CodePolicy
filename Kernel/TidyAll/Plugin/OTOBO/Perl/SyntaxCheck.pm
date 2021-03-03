@@ -18,10 +18,19 @@ package TidyAll::Plugin::OTOBO::Perl::SyntaxCheck;
 
 use strict;
 use warnings;
+use v5.24;
+use namespace::autoclean;
 
-use parent qw(TidyAll::Plugin::OTOBO::Perl);
+use Moo;
 
+extends qw(TidyAll::Plugin::OTOBO::Perl);
+
+# core modules
 use File::Temp;
+
+# CPAN modules
+
+# OTOBO modules
 
 sub validate_source {
     my ( $Self, $Code ) = @_;
@@ -41,13 +50,14 @@ sub validate_source {
         lib
         v5.24
 
-        Archive::Zip
         Archive::Tar
-        Cwd
+        Archive::Zip
         Carp
+        Const::Fast
+        Cwd
+        DBI
         Data::Dumper
         DateTime
-        DBI
         Fcntl
         File::Basename
         FindBin
@@ -55,10 +65,11 @@ sub validate_source {
         List::Util
         Moo
         Moose
-        Perl::Critic::Utils
         POSIX
+        Perl::Critic::Utils
         Readonly
         Template
+        Test2::V0
         Time::HiRes
     );
 
@@ -76,14 +87,17 @@ sub validate_source {
             $Line = "#$Line";
         }
 
-        if ( $Line =~ m{ ; \s* \z }xms ) {
+        # Look for the end of the the 'use' statement.
+        # The statement terminator may be followed by an end of line comment.
+        # All assuming that the ';' is not part of an item in the import list.
+        if ( $Line =~ m{ ; \s* (?: \# .*)? \z }xms ) {
             $DeletableStatement = 0;
         }
 
         $CleanedSource .= $Line . "\n";
     }
 
-    #print STDERR $CleanedSource;
+    # say STDERR $CleanedSource;
 
     my $TempFile = File::Temp->new();
     print $TempFile $CleanedSource;

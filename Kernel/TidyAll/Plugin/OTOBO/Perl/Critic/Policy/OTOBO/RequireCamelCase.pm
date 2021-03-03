@@ -67,7 +67,20 @@ sub prepare_to_scan_document {
             sub { return $_[1]->isa('PPI::Statement::Include') && $_[1] =~ m{\A use \s+ Moose(::Role)?}smx }
         );
 
-        return 0 if !$MooseFound;
+        return 0 unless $MooseFound;
+
+        return $Document->find_any(
+            sub { return $_[1]->isa('PPI::Token::Word') && $_[1] =~ m{\A extends|with \Z}smx }
+        );
+    };
+
+    # Find any Moose or Moose::Role objects that extend another class or role (extends/with).
+    my $FindMooInheritance = sub {
+        my $MooFound = $Document->find_any(
+            sub { return $_[1]->isa('PPI::Statement::Include') && $_[1] =~ m{\A use \s+ Moo(::Role)?}smx }
+        );
+
+        return 0 unless $MooFound;
 
         return $Document->find_any(
             sub { return $_[1]->isa('PPI::Token::Word') && $_[1] =~ m{\A extends|with \Z}smx }
@@ -93,6 +106,7 @@ sub prepare_to_scan_document {
     if (
         $FindPerlInheritance->()
         || $FindMooseInheritance->()
+        || $FindMooInheritance->()
         || $FindMojoInheritance->()
         || $FindRequireBaseClass->()
         )

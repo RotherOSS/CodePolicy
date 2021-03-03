@@ -23,7 +23,9 @@ package TidyAll::Plugin::OTOBO::PO::HTMLTags;
 use strict;
 use warnings;
 
-use parent qw(TidyAll::Plugin::OTOBO::Base);
+use Moo;
+
+extends qw(TidyAll::Plugin::OTOBO::Base);
 
 use Locale::PO ();
 

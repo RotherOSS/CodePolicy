@@ -120,6 +120,7 @@
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/UseParent.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/UseWarnings.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/perlcriticrc" />
+        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/perltidyrc" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/PO/DocbookLint.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/PO/HTMLTags.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/PO/msgfmt.pm" />

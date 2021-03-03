@@ -18,8 +18,13 @@ package TidyAll::Plugin::OTOBO::Migrations::OTOBO10::TimeObject;
 
 use strict;
 use warnings;
+use v5.24;
+use namespace::autoclean;
 
-use parent qw(TidyAll::Plugin::OTOBO::Base);
+use Moo;
+
+extends qw(TidyAll::Plugin::OTOBO::Base);
+
 ## nofilter(TidyAll::Plugin::OTOBO::Migrations::OTOBO10::TimeObject)
 
 sub validate_source {
@@ -46,7 +51,7 @@ sub validate_source {
     if ($ErrorMessage) {
         return $Self->DieWithError(<<"EOF");
 Use of deprecated Kernel::System::Time is not allowed anymore except for legacy API interfaces. Please use Kernel::System::DateTime instead.
-    Please see http://doc.otobo.com/doc/manual/developer/6.0/en/html/package-porting.html#package-porting-5-to-6 for porting guidelines.
+    Please see https://doc.otobo.org/manual/developer/stable/en/content/how-it-works/date-time.html.
 $ErrorMessage
 EOF
     }

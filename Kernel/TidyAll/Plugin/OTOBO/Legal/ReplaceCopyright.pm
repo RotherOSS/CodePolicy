@@ -15,14 +15,18 @@
 # --
 
 package TidyAll::Plugin::OTOBO::Legal::ReplaceCopyright;
+
 ## nofilter(TidyAll::Plugin::OTOBO::Perl::Time)
 
 use strict;
 use warnings;
 
+use Moo;
+
+extends qw(TidyAll::Plugin::OTOBO::Base);
+
 use File::Basename;
 use File::Copy qw(copy);
-use parent qw(TidyAll::Plugin::OTOBO::Base);
 
 sub transform_source {
     my ( $Self, $Code ) = @_;

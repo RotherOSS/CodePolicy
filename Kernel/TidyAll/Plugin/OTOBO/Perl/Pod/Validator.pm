@@ -15,14 +15,16 @@
 # --
 
 package TidyAll::Plugin::OTOBO::Perl::Pod::Validator;
+
 use strict;
 use warnings;
 
+use Moo;
+
+extends qw(TidyAll::Plugin::OTOBO::Perl);
+
 use Capture::Tiny qw(capture_merged);
 use Pod::Checker;
-
-use parent 'Code::TidyAll::Plugin';
-use parent 'TidyAll::Plugin::OTOBO::Perl';
 
 #
 # Validated Pod with Pod::Checker for syntactical correctness.

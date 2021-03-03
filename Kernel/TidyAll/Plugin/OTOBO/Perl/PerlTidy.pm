@@ -18,13 +18,22 @@ package TidyAll::Plugin::OTOBO::Perl::PerlTidy;
 
 use strict;
 use warnings;
+use v5.24;
+use utf8;
 
-use parent qw(TidyAll::Plugin::OTOBO::Perl);
+use Moo;
 
+extends qw(TidyAll::Plugin::OTOBO::Perl);
+
+# core modules
+
+# CPAN modules
 use Capture::Tiny qw(capture_merged);
 
 # Require a recent version of Perl::Tidy for consistent formatting on all systems.
 use Perl::Tidy v20210111;
+
+# OTOBO modules
 
 # Force a certain version for uniformity
 if ( Perl::Tidy->VERSION() ne '20210111' ) {

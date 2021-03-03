@@ -19,7 +19,9 @@ package TidyAll::Plugin::OTOBO::Perl::UseParent;
 use strict;
 use warnings;
 
-use parent qw(TidyAll::Plugin::OTOBO::Perl);
+use Moo;
+
+extends qw(TidyAll::Plugin::OTOBO::Perl);
 
 sub transform_source {
     my ( $Self, $Code ) = @_;

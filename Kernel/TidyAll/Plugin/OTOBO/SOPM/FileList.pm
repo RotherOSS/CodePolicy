@@ -19,7 +19,9 @@ package TidyAll::Plugin::OTOBO::SOPM::FileList;
 use strict;
 use warnings;
 
-use parent qw(TidyAll::Plugin::OTOBO::Base);
+use Moo;
+
+extends qw(TidyAll::Plugin::OTOBO::Base);
 
 # This module verifies:
 #   - that all packaged files of an SOPM are available,

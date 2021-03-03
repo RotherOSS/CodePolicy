@@ -23,7 +23,9 @@ use warnings;
 
 use File::Basename;
 
-use parent qw(TidyAll::Plugin::OTOBO::Base);
+use Moo;
+
+extends qw(TidyAll::Plugin::OTOBO::Base);
 
 =head1 SYNOPSIS
 
