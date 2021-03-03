@@ -3,6 +3,7 @@
 -vmll
 -i=4
 -ci=4
+-xci
 -vt=0
 -vtc=0
 -cti=0
