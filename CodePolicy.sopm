@@ -6,7 +6,7 @@
 
     <Framework>10.0.x</Framework>
 
-    <ModuleRequired Version="0.17">Code::TidyAll</ModuleRequired>
+    <ModuleRequired Version="0.56">Code::TidyAll</ModuleRequired>
     <ModuleRequired>Perl::Critic</ModuleRequired>
 
     <Vendor>Rother OSS GmbH</Vendor>
