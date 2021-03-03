@@ -7,7 +7,7 @@
 package Perl::Tidy::HtmlWriter;
 use strict;
 use warnings;
-our $VERSION = '20191203';
+our $VERSION = '20210111';
 
 use File::Basename;
 
@@ -38,11 +38,50 @@ BEGIN {
     }
 }
 
+sub AUTOLOAD {
+
+    # Catch any undefined sub calls so that we are sure to get
+    # some diagnostic information.  This sub should never be called
+    # except for a programming error.
+    our $AUTOLOAD;
+    return if ( $AUTOLOAD =~ /\bDESTROY$/ );
+    my ( $pkg, $fname, $lno ) = caller();
+    my $my_package = __PACKAGE__;
+    print STDERR <<EOM;
+======================================================================
+Error detected in package '$my_package', version $VERSION
+Received unexpected AUTOLOAD call for sub '$AUTOLOAD'
+Called from package: '$pkg'  
+Called from File '$fname'  at line '$lno'
+This error is probably due to a recent programming change
+======================================================================
+EOM
+    exit 1;
+}
+
+sub DESTROY {
+
+    # required to avoid call to AUTOLOAD in some versions of perl
+}
+
 sub new {
 
-    my ( $class, $input_file, $html_file, $extension, $html_toc_extension,
-        $html_src_extension )
-      = @_;
+    my ( $class, @args ) = @_;
+
+    my %defaults = (
+        input_file         => undef,
+        html_file          => undef,
+        extension          => undef,
+        html_toc_extension => undef,
+        html_src_extension => undef,
+    );
+    my %args = ( %defaults, @args );
+
+    my $input_file         = $args{input_file};
+    my $html_file          = $args{html_file};
+    my $extension          = $args{extension};
+    my $html_toc_extension = $args{html_toc_extension};
+    my $html_src_extension = $args{html_src_extension};
 
     my $html_file_opened = 0;
     my $html_fh;
@@ -521,7 +560,8 @@ sub check_options {
     # check for conflict
     if ( $css_linkname && $rOpts->{'nohtml-style-sheets'} ) {
         $rOpts->{'nohtml-style-sheets'} = 0;
-        warning("You can't specify both -css and -nss; -nss ignored\n");
+        Perl::Tidy::Warn(
+            "You can't specify both -css and -nss; -nss ignored\n");
     }
 
     # write a style sheet file if necessary
@@ -682,7 +722,7 @@ sub pod_to_html {
         # "header!", "index!", "recurse!", "quiet!", "verbose!"
         foreach my $kw (qw(podheader podindex podrecurse podquiet podverbose)) {
             my $kwd = $kw;    # allows us to strip 'pod'
-            if ( $rOpts->{$kw} ) { $kwd =~ s/^pod//; push @args, "--$kwd" }
+            if    ( $rOpts->{$kw} ) { $kwd =~ s/^pod//; push @args, "--$kwd" }
             elsif ( defined( $rOpts->{$kw} ) ) {
                 $kwd =~ s/^pod//;
                 push @args, "--no$kwd";
@@ -700,7 +740,7 @@ sub pod_to_html {
             Perl::Tidy::Die( $_[0] );
         };
 
-        pod2html(@args);
+        Pod::Html::pod2html(@args);
     }
     $fh_tmp = IO::File->new( $tmpfile, 'r' );
     unless ($fh_tmp) {

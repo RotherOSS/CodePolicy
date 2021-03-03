@@ -7,13 +7,57 @@
 package Perl::Tidy::Logger;
 use strict;
 use warnings;
-our $VERSION = '20191203';
+our $VERSION = '20210111';
+
+sub AUTOLOAD {
+
+    # Catch any undefined sub calls so that we are sure to get
+    # some diagnostic information.  This sub should never be called
+    # except for a programming error.
+    our $AUTOLOAD;
+    return if ( $AUTOLOAD =~ /\bDESTROY$/ );
+    my ( $pkg, $fname, $lno ) = caller();
+    my $my_package = __PACKAGE__;
+    print STDERR <<EOM;
+======================================================================
+Error detected in package '$my_package', version $VERSION
+Received unexpected AUTOLOAD call for sub '$AUTOLOAD'
+Called from package: '$pkg'  
+Called from File '$fname'  at line '$lno'
+This error is probably due to a recent programming change
+======================================================================
+EOM
+    exit 1;
+}
+
+sub DESTROY {
+
+    # required to avoid call to AUTOLOAD in some versions of perl
+}
 
 sub new {
 
-    my ( $class, $rOpts, $log_file, $warning_file, $fh_stderr, $saw_extrude,
-        $display_name )
-      = @_;
+    my ( $class, @args ) = @_;
+
+    my %defaults = (
+        rOpts           => undef,
+        log_file        => undef,
+        warning_file    => undef,
+        fh_stderr       => undef,
+        saw_extruce     => undef,
+        display_name    => undef,
+        is_encoded_data => undef,
+    );
+
+    my %args = ( %defaults, @args );
+
+    my $rOpts           = $args{rOpts};
+    my $log_file        = $args{log_file};
+    my $warning_file    = $args{warning_file};
+    my $fh_stderr       = $args{fh_stderr};
+    my $saw_extrude     = $args{saw_extrude};
+    my $display_name    = $args{display_name};
+    my $is_encoded_data = $args{is_encoded_data};
 
     my $fh_warnings = $rOpts->{'standard-error-output'} ? $fh_stderr : undef;
 
@@ -32,6 +76,8 @@ sub new {
       : 50;
     if ( $logfile_gap == 0 ) { $logfile_gap = 1 }
 
+    my $filename_stamp    = $display_name ? $display_name . ':' : "??";
+    my $input_stream_name = $display_name ? $display_name       : "??";
     return bless {
         _log_file                      => $log_file,
         _logfile_gap                   => $logfile_gap,
@@ -48,12 +94,19 @@ sub new {
         _warning_file                  => $warning_file,
         _warning_count                 => 0,
         _complaint_count               => 0,
-        _saw_code_bug    => -1,             # -1=no 0=maybe 1=for sure
-        _saw_brace_error => 0,
-        _saw_extrude     => $saw_extrude,
-        _output_array    => [],
-        _filename_stamp => $display_name ? $display_name . ':' : "",
+        _is_encoded_data               => $is_encoded_data,
+        _saw_code_bug      => -1,                   # -1=no 0=maybe 1=for sure
+        _saw_brace_error   => 0,
+        _saw_extrude       => $saw_extrude,
+        _output_array      => [],
+        _input_stream_name => $input_stream_name,
+        _filename_stamp    => $filename_stamp,
     }, $class;
+}
+
+sub get_input_stream_name {
+    my $self = shift;
+    return $self->{_input_stream_name};
 }
 
 sub get_warning_count {
@@ -114,7 +167,6 @@ sub black_box {
     $self->{_wrote_line_information_string} = 0;
 
     my $last_input_line_written = $self->{_last_input_line_written};
-    my $rOpts                   = $self->{_rOpts};
     if (
         (
             ( $input_line_number - $last_input_line_written ) >=
@@ -181,7 +233,6 @@ sub make_line_information_string {
         my $square_bracket_depth = $line_of_tokens->{_square_bracket_depth};
         my $guessed_indentation_level =
           $line_of_tokens->{_guessed_indentation_level};
-        ##my $rtoken_array = $line_of_tokens->{_rtoken_array};
 
         my $structural_indentation_level = $line_of_tokens->{_level_0};
 
@@ -300,17 +351,21 @@ sub warning {
     #use constant WARNING_LIMIT => 50;
     my $WARNING_LIMIT = 50;
 
+    # Always bump the warn count, even if no message goes out
+    Perl::Tidy::Warn_count_bump();
+
     my $rOpts = $self->{_rOpts};
     unless ( $rOpts->{'quiet'} ) {
 
-        my $warning_count = $self->{_warning_count};
-        my $fh_warnings   = $self->{_fh_warnings};
+        my $warning_count   = $self->{_warning_count};
+        my $fh_warnings     = $self->{_fh_warnings};
+        my $is_encoded_data = $self->{_is_encoded_data};
         if ( !$fh_warnings ) {
             my $warning_file = $self->{_warning_file};
             ( $fh_warnings, my $filename ) =
-              Perl::Tidy::streamhandle( $warning_file, 'w' );
+              Perl::Tidy::streamhandle( $warning_file, 'w', $is_encoded_data );
             $fh_warnings or Perl::Tidy::Die("couldn't open $filename $!\n");
-            Perl::Tidy::Warn("## Please see file $filename\n")
+            Perl::Tidy::Warn_msg("## Please see file $filename\n")
               unless ref($warning_file);
             $self->{_fh_warnings} = $fh_warnings;
             $fh_warnings->print("Perltidy version is $Perl::Tidy::VERSION\n");
@@ -455,6 +510,24 @@ EOM
     return;
 }
 
+sub get_save_logfile {
+
+    # To be called after tokenizer has finished to make formatting more
+    # efficient.  This is not precisely the same as the check used below
+    # because we don't yet have the syntax check result, but since syntax
+    # checking is off by default it will be the same except in debug runs with
+    # syntax checking activated.  In that case it will tell the formatter to
+    # save the logfile even if it may actually be deleted based on the syntax
+    # check.
+    my $self         = shift;
+    my $saw_code_bug = $self->{_saw_code_bug};
+    my $rOpts        = $self->{_rOpts};
+    return
+         $saw_code_bug == 1
+      || $rOpts->{'logfile'}
+      || $rOpts->{'check-syntax'};
+}
+
 sub finish {
 
     # called after all formatting to summarize errors
@@ -492,8 +565,10 @@ sub finish {
     $self->ask_user_for_bug_report( $infile_syntax_ok, $formatter );
 
     if ($save_logfile) {
-        my $log_file = $self->{_log_file};
-        my ( $fh, $filename ) = Perl::Tidy::streamhandle( $log_file, 'w' );
+        my $log_file        = $self->{_log_file};
+        my $is_encoded_data = $self->{_is_encoded_data};
+        my ( $fh, $filename ) =
+          Perl::Tidy::streamhandle( $log_file, 'w', $is_encoded_data );
         if ($fh) {
             my $routput_array = $self->{_output_array};
             foreach ( @{$routput_array} ) { $fh->print($_) }
