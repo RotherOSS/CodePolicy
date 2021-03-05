@@ -53,16 +53,9 @@ sub transform_source {
         return $Code;
     }
 
-    # Force re-wrap of wrapped function calls
-    #   -> bring them back to the previous line so that PerlTidy can
-    #   decide again if they have to be wrapped.
-    $Code =~ s{ \n^\s+(->[a-zA-Z0-9_]+[(]) }{$1}smxg;
-    # Force re-wrap of assignments too.
-    $Code =~ s{ \n^\s+(=\s+) }{$1}smxg;
-
     # There was some custom code in place here to replace ',;' with ';', but that proved to
-    #   be much too slow on large files (> 40s on AgentTicketProcess.pm of OTOBO 7).
-    #   Therefore, this logic was removed.
+    # be much too slow on large files (> 40s on AgentTicketProcess.pm).
+    # Therefore, this logic was removed.
 
     # This bit of insanity is needed because if some other code calls
     # Getopt::Long::Configure() to change some options, then everything can go
@@ -74,7 +67,6 @@ sub transform_source {
     # perltidy reports errors in two different ways.
     # Argument/profile errors are output and an error_flag is returned.
     # Syntax errors are sent to errorfile.
-    #
     my ( $Output, $ErrorFlag, $ErrorFile, $Destination );
     $Output = capture_merged {
         $ErrorFlag = Perl::Tidy::perltidy(
