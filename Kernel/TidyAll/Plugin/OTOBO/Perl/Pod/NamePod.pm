@@ -31,9 +31,7 @@ sub transform_source {
     return $Code if $Self->IsPluginDisabled( Code => $Code );
 
     # Don't modify files which are derived files (have change markers).
-    if ( $Code =~ m{ \$OldId: | ^ \s* \# \s* \$origin: | ^ \s* \#UX3\# }xms ) {
-        return $Code;
-    }
+    return $Code if $Code =~ m{ \$OldId: | ^ \s* \# \s* \$origin: }xms;
 
     my $PackageName = '';
     my $InsideNamePod;
@@ -83,9 +81,7 @@ sub validate_source {
     return $Code if $Self->IsPluginDisabled( Code => $Code );
 
     # Don't check files which are derived files (have change markers).
-    if ( $Code =~ m{ \$OldId: | ^ \s* \# \s* \$origin: | ^ \s* \#UX3\# }xms ) {
-        return $Code;
-    }
+    return $Code if $Code =~ m{ \$OldId: | ^ \s* \# \s* \$origin: }xms;
 
     my $PackageName = '';
     my $InsideNamePod;
