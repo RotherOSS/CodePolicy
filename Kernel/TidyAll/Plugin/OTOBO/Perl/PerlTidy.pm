@@ -53,13 +53,6 @@ sub transform_source {
         return $Code;
     }
 
-    # Force re-wrap of wrapped function calls
-    #   -> bring them back to the previous line so that PerlTidy can
-    #   decide again if they have to be wrapped.
-    $Code =~ s{ \n^\s+(->[a-zA-Z0-9_]+[(]) }{$1}smxg;
-    # Force re-wrap of assignments too.
-    $Code =~ s{ \n^\s+(=\s+) }{$1}smxg;
-
     # There was some custom code in place here to replace ',;' with ';', but that proved to
     # be much too slow on large files (> 40s on AgentTicketProcess.pm).
     # Therefore, this logic was removed.
