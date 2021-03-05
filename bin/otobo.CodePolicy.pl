@@ -44,7 +44,7 @@ use TidyAll::OTOBO;
 # avoid managling of output
 STDOUT->autoflush();
 
-my ( $Verbose, $Directory, $File, $Mode, $Cached, $All, $Help, $Processes );
+my ( $Verbose, $Directory, $File, $Mode, $Cached, $All, $Help, $Processes, @FileList );
 my $Plugins = [];
 GetOptions(
     'verbose'     => \$Verbose,
@@ -56,6 +56,7 @@ GetOptions(
     'help'        => \$Help,
     'processes=s' => \$Processes,
     'plugins=s@'  => \$Plugins,
+    'list=s{1,}'  => \@FileList,
 );
 
 if ($Help) {
@@ -72,6 +73,7 @@ Options:
     -d, --directory     Check only subdirectory
     -c, --cached        Check only cached (staged files in git directory)
     -f, --file          Check only one file
+    -l, --list          Check several files
     -m, --mode          Use custom Code::TidyAll mode (default: cli)
     -v, --verbose       Activate diagnostics
     -p, --processes     The number of processes to use (default: env var OTOBOCODEPOLICY_PROCESSES if set, otherwise "6")
@@ -121,6 +123,9 @@ elsif ( defined $Directory && length $Directory ) {
 }
 elsif ( defined $File && length $File ) {
     @Files = ( File::Spec->catfile( $RootDir, $File ) );
+}
+elsif ( @FileList ) {
+    @Files = map { File::Spec->catfile( $RootDir, $_ ) } @FileList;
 }
 elsif ( defined $Cached && length $Cached ) {
     my @StagedFiles = `git diff --name-only --cached`;
