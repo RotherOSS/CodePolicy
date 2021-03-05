@@ -49,9 +49,7 @@ sub transform_source {
     return $Code if $Self->IsPluginDisabled(Code => $Code);
 
     # Don't modify files which are derived files (have change markers).
-    if ( $Code =~ m{ \$OldId: | ^ \s* \# \s* \$origin: | ^ \s* \#UX3\# }xms ) {
-        return $Code;
-    }
+    return $Code if $Code =~ m{ \$OldId: | ^ \s* \# \s* \$origin: }xms;
 
     # There was some custom code in place here to replace ',;' with ';', but that proved to
     # be much too slow on large files (> 40s on AgentTicketProcess.pm).
