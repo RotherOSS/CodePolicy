@@ -19,7 +19,7 @@ package Perl::Critic::Policy::OTOBO::ProhibitOpen;
 use strict;
 use warnings;
 
-use Perl::Critic::Utils qw{};
+use Perl::Critic::Utils qw{is_function_call};
 use parent 'Perl::Critic::Policy';
 
 our $VERSION = '0.01';
@@ -37,56 +37,9 @@ sub violates {
 
     # Only operate on calls of open()
     return if $Element ne 'open';
+    return if !is_function_call($Element);
 
-    my $NextSibling = $Element->snext_sibling();
-
-    return unless $NextSibling;
-
-    # Find open mode specifier
-    my $OpenMode = '';
-
-    # parentheses around open are present: open()
-    if ( $NextSibling->isa('PPI::Structure::List') ) {
-        my $Quote = $NextSibling->find('PPI::Token::Quote');
-
-        return unless ref $Quote eq 'ARRAY';
-
-        $OpenMode = $Quote->[0]->string();
-    }
-
-    # parentheses are not present
-    else {
-        # Loop until we found the Token after the first comma
-        my $Counter;
-        COUNTER:
-        while ( $Counter++ < 10 ) {
-            $NextSibling = $NextSibling->snext_sibling();
-
-            # this happens for
-            #   use open IO => ':encoding(UTF-8)';
-            last COUNTER unless $NextSibling;
-
-            if (
-                $NextSibling->isa('PPI::Token::Operator')
-                && $NextSibling->content() eq ','
-                )
-            {
-                my $Quote = $NextSibling->snext_sibling();
-
-                return if ( !$Quote || !$Quote->isa('PPI::Token::Quote') );
-
-                $OpenMode = $Quote->string();
-
-                last COUNTER;
-            }
-        }
-    }
-
-    if ( $OpenMode eq '>' || $OpenMode eq '<' ) {
-        return $Self->violation( $Description, $Explanation, $Element );
-    }
-
-    return;
+    return $Self->violation( $Description, $Explanation, $Element );
 }
 
 1;
