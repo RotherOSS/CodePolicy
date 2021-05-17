@@ -28,6 +28,12 @@ severity = 4
 [Miscellanea::ProhibitUnrestrictedNoCritic]
 severity = 4
 
+# Specific settings for some policies.
+
+# be a bit more relaxed about brief opens and allow more that the default 9 lines
+[InputOutput::RequireBriefOpen]
+lines = 20
+
 # This setup does not work as
 #    return 1 unless $Content =~ m{<otrs_config.*?version="2.0"};
 # will still be triggered.
