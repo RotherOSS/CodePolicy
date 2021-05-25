@@ -17,3 +17,4 @@
 -nola
 -ndnl
 -cab=0
+--character-encoding=none
