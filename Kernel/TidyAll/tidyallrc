@@ -11,6 +11,7 @@ ignore = **/thirdparty/**/*
 ; Ignore Loader cache files.
 ignore = **/{js-cache,css-cache}/**/*
 ; Ignore test data files.
+ignore = tmp/Test/**/*
 ;ignore = scripts/test/sample/**/*
 ; Ignore vagrant instance contents of the CI provisioner.
 ignore = var/Vagrant/Instances/**/*
@@ -392,6 +393,7 @@ ignore = doc/**/*.xml
 ignore = en/content/**/*.xml
 ignore = de/content/**/*.xml
 ignore = hu/content/**/*.xml
+ignore = scripts/test/sample/**/*.xml
 
 [+TidyAll::Plugin::OTOBO::XML::ConfigDescription]
 select = Kernel/Config/**/*.xml
