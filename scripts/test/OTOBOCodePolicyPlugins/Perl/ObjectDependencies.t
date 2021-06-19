@@ -13,13 +13,21 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
+
 use strict;
 use warnings;
-
-use vars (qw($Self));
+use v5.24;
 use utf8;
 
+# core modules
+
+# CPAN modules
+
+# OTOBO modules
 use scripts::test::OTOBOCodePolicyPlugins;
+use Kernel::System::UnitTest::RegisterDriver;
+
+our $Self;
 
 my @Tests = (
     {
@@ -73,6 +81,18 @@ EOF
         Framework => '4.0',
         Source    => <<'EOF',
 our @ObjectDependencies = ('Kernel::System::Ticket');
+$Kernel::OM->Get('Kernel::System::Ticket');
+EOF
+        Exception => 0,
+    },
+    {
+        Name      => 'ObjectDependencies, dependency declared in TestObjectDependencies
+',
+        Filename  => 'Test.pm',
+        Plugins   => [qw(TidyAll::Plugin::OTOBO::Perl::ObjectDependencies)],
+        Framework => '4.0',
+        Source    => <<'EOF',
+our @SoftObjectDependencies = ('Kernel::System::Ticket');
 $Kernel::OM->Get('Kernel::System::Ticket');
 EOF
         Exception => 0,
@@ -247,4 +267,4 @@ EOF
 
 $Self->scripts::test::OTOBOCodePolicyPlugins::Run( Tests => \@Tests );
 
-1;
+$Self->DoneTesting();
