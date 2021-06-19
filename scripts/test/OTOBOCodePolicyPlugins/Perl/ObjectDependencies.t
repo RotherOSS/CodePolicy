@@ -15,11 +15,18 @@
 # --
 use strict;
 use warnings;
-
-use vars (qw($Self));
+use v5.24;
 use utf8;
 
+# core modules
+
+# CPAN modules
+
+# OTOBO modules
 use scripts::test::OTOBOCodePolicyPlugins;
+use Kernel::System::UnitTest::RegisterDriver;
+
+our $Self;
 
 my @Tests = (
     {
@@ -247,4 +254,4 @@ EOF
 
 $Self->scripts::test::OTOBOCodePolicyPlugins::Run( Tests => \@Tests );
 
-1;
+$Self->DoneTesting();
