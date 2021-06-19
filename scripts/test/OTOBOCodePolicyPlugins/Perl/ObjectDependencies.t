@@ -13,6 +13,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
+
 use strict;
 use warnings;
 use v5.24;
@@ -80,6 +81,18 @@ EOF
         Framework => '4.0',
         Source    => <<'EOF',
 our @ObjectDependencies = ('Kernel::System::Ticket');
+$Kernel::OM->Get('Kernel::System::Ticket');
+EOF
+        Exception => 0,
+    },
+    {
+        Name      => 'ObjectDependencies, dependency declared in TestObjectDependencies
+',
+        Filename  => 'Test.pm',
+        Plugins   => [qw(TidyAll::Plugin::OTOBO::Perl::ObjectDependencies)],
+        Framework => '4.0',
+        Source    => <<'EOF',
+our @SoftObjectDependencies = ('Kernel::System::Ticket');
 $Kernel::OM->Get('Kernel::System::Ticket');
 EOF
         Exception => 0,
