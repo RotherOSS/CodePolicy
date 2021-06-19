@@ -99,7 +99,7 @@ sub validate_source {
     my %ObjectIsDeclared;
     {
         my @DeclaredObjectDependencies;
-        for my $Array ( qw(ObjectDependencies SoftObjectDependencies) ) {
+        for my $Array (qw(ObjectDependencies SoftObjectDependencies)) {
             $Code =~ s{
                 ^our\s+\@\Q$Array\E\s+=\s+\(($ValidListExpression)\);
             }{
@@ -116,10 +116,11 @@ sub validate_source {
     my @UndeclaredObjectDependencies = sort grep { !$ObjectIsDeclared{$_} } uniq @UsedObjects;
 
     if (@UndeclaredObjectDependencies) {
-        $ErrorMessage .= "The following objects are used in the code, but not declared as dependencies:\n";
-        $ErrorMessage
-            .= join( ",\n", map {"    '$_'"} sort { $a cmp $b } @UndeclaredObjectDependencies )
-            . ",\n";
+        $ErrorMessage .=
+            "The following objects are used in the code, but not declared as dependencies:\n"
+            . join( ",\n", map {"    '$_'"} sort { $a cmp $b } @UndeclaredObjectDependencies )
+            . ",\n"
+            . 'Please add the missing dependencies to the array @ObjectDependencies.';
     }
 
     if ($ErrorMessage) {
