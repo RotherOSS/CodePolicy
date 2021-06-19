@@ -95,29 +95,25 @@ sub validate_source {
     }esmxg;
 
     # Now check the declared dependencies and compare.
-    #
-    my @DeclaredObjectDependencies;
-    $Code =~ s{
-        ^our\s+\@ObjectDependencies\s+=\s+\(($ValidListExpression)\);
-    }{
-        @DeclaredObjectDependencies = $Self->_CleanupObjectList(
-            Code => $1,
-        );
-        '';
-    }esmx;
-
-    my %DeclaredObjectDependencyLookup;
-    @DeclaredObjectDependencyLookup{@DeclaredObjectDependencies} = undef;
-
-    my @UndeclaredObjectDependencies;
-    my %Seen;
-    USED_OBJECT:
-    for my $UsedObject (@UsedObjects) {
-        next USED_OBJECT if $Seen{$UsedObject}++;
-        if ( !exists $DeclaredObjectDependencyLookup{$UsedObject} ) {
-            push @UndeclaredObjectDependencies, $UsedObject;
+    # Dependencies can be declared in the array ObjectDependencies and SoftObjectDependencies.
+    my %ObjectIsDeclared;
+    {
+        my @DeclaredObjectDependencies;
+        for my $Array ( qw(ObjectDependencies SoftObjectDependencies) ) {
+            $Code =~ s{
+                ^our\s+\@\Q$Array\E\s+=\s+\(($ValidListExpression)\);
+            }{
+                push @DeclaredObjectDependencies, $Self->_CleanupObjectList(
+                    Code => $1,
+                );
+                '';
+            }esmx;
         }
+
+        %ObjectIsDeclared = map { $_ => 1 } @DeclaredObjectDependencies;
     }
+
+    my @UndeclaredObjectDependencies = sort grep { !$ObjectIsDeclared{$_} } uniq @UsedObjects;
 
     if (@UndeclaredObjectDependencies) {
         $ErrorMessage .= "The following objects are used in the code, but not declared as dependencies:\n";
