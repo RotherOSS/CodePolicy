@@ -18,14 +18,23 @@ package TidyAll::Plugin::OTOBO::Perl::ObjectDependencies;
 
 use strict;
 use warnings;
+use v5.24;
+use utf8;
 
 #
 # This plugin scans perl packages and compares the objects they request
-#   from the ObjectManager with the dependencies they declare and complains
-#   about any missing dependencies.
+# from the ObjectManager with the dependencies they declare and complains
+# about any missing dependencies.
+# Dependencies are declared with @ObjectDependencies and @SoftObjectDependencies.
 #
 
+# core modules
+use List::Util qw(uniq);
+
+# CPAN modules
 use Moo;
+
+# OTOBO modules
 
 extends qw(TidyAll::Plugin::OTOBO::Perl);
 
@@ -38,7 +47,7 @@ sub validate_source {
     $Code = $Self->StripComments( Code => $Code );
 
     # Skip if the code doesn't use the ObjectManager
-    return if $Code !~ m{\$Kernel::OM}smx;
+    return unless $Code =~ m{\$Kernel::OM}smx;
 
     # Skip if we have a role, as it cannot be instantiated.
     return if $Code =~ m{use\s+Moose::Role}smx;
@@ -57,12 +66,10 @@ sub validate_source {
         $ErrorMessage .= "Don't use the deprecated flag \$ObjectManagerAware. It can be removed.\n";
     }
 
-    #
     # Ok, first check for the objects that are requested from OM.
-    #
     my @UsedObjects;
 
-    # Only math what is absolutely needed to avoid false positives.
+    # Only match what is absolutely needed to avoid false positives.
     my $ValidListExpression = "[\@a-zA-Z0-9_[:space:]:'\",()]+?";
 
     # Real Get() calls.
@@ -87,7 +94,6 @@ sub validate_source {
         '';
     }esmxg;
 
-    #
     # Now check the declared dependencies and compare.
     #
     my @DeclaredObjectDependencies;
@@ -114,8 +120,7 @@ sub validate_source {
     }
 
     if (@UndeclaredObjectDependencies) {
-        $ErrorMessage
-            .= "The following objects are used in the code, but not declared as dependencies:\n";
+        $ErrorMessage .= "The following objects are used in the code, but not declared as dependencies:\n";
         $ErrorMessage
             .= join( ",\n", map {"    '$_'"} sort { $a cmp $b } @UndeclaredObjectDependencies )
             . ",\n";
@@ -141,7 +146,9 @@ sub _CleanupObjectList {
         $Object =~ s/qw\(//;        # remove qw() marker start
         $Object =~ s/^[("']+//;     # remove leading quotes and parentheses
         $Object =~ s/[)"',]+$//;    # remove trailing comma, quotes and parentheses
-        next OBJECT if !$Object;
+
+        next OBJECT unless $Object;
+
         push @Result, $Object;
     }
 
