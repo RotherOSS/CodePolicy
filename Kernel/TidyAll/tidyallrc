@@ -226,12 +226,6 @@ ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
 [+TidyAll::Plugin::OTOBO::Perl::ParamObject]
 select = **/*.{pl,psgi}
 select = Kernel/System/**/*.pm Custom/Kernel/System/**/*.pm
-ignore = Kernel/System/Auth/*.pm Custom/Kernel/System/Auth/*.pm
-ignore = Kernel/System/AuthSession/**/*.pm Custom/Kernel/System/AuthSession/**/*.pm
-ignore = Kernel/System/CustomerAuth/**/*.pm Custom/Kernel/System/CustomerAuth/**/*.pm
-ignore = Kernel/System/DynamicField/**/*.pm Custom/Kernel/System/DynamicField/**/*.pm
-ignore = Kernel/System/Log.pm Custom/Kernel/System/Log.pm
-ignore = Kernel/System/SupportDataCollector/Plugin/Webserver/**/*.pm Custom/Kernel/System/SupportDataCollector/Plugin/Webserver/**/*.pm
 ignore = Kernel/System/Web/**/*.pm Custom/Kernel/System/Web/**/*.pm
 
 [+TidyAll::Plugin::OTOBO::Perl::PerlCritic]
