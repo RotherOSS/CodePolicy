@@ -155,7 +155,10 @@ shell> bin/otobo.Console.pl Admin::Package::Install /path/to/$Name-$Version.opm
 </chapter>
 
 <chapter>
-    <!-- You can build this chapter by running module-tools/Config2Docbook.pl -->
+    <!--
+        When configuration is added in future, then the OTOBO console command Dev::Tools::Config2Docbook
+        can be used for generating the documentation.
+    -->
     <title>Configuration</title>
     <para>
         This package does not need to be configured.
