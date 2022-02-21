@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2022 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -75,11 +75,17 @@ sub validate_file {
 
     return unless @Violations;
 
+    # Note that the violations have overloaded stringification.
     # The format, for the stringification, has to be set up seperately.
-    my $Format = $PerlCritic->config->verbose // '%p violated at line %l column %c (Severity: %s)\\n  %m\\n%e\\n';
+    my $Format = $PerlCritic->config->verbose // '%p violated at %f %l column %c (Severity: %s)\\n  %m\\n%e\\n';
     Perl::Critic::Violation::set_format($Format);
 
-    return $Self->DieWithError("@Violations");
+    # Fiddle with the file names as reported by Perl::Critic. We want the actual files,
+    # not the temporary copies.
+    my $Report = "@Violations";
+    $Report =~ s!violated at /tmp/Code-TidyAll-\w+/!violated at !g;
+
+    return $Self->DieWithError($Report);
 }
 
 1;

@@ -7,7 +7,9 @@ program-extensions = .pl .t
 
 # Format the violations, indicating the policy name, brief description and explanation.
 # See https://metacpan.org/pod/Per l::Critic::Violation#OVERLOADS for the escape characters.
-verbose = %p violated at line %l column %c (Severity: %s)\n  %m\n%e\n
+# In vim move the cursor to the file name and type <c-w>F for opening the file at the relevant line
+# in a new horizontal split window.
+verbose = %p violated at %f %l column %c (Severity: %s)\n  %m\n%e\n
 
 # useful for batch editing:
 # verbose = sp +%l %f\n no critic qw(%p)
