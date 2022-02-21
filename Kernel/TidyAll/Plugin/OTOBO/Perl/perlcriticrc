@@ -24,6 +24,9 @@ verbose = %p violated at %f %l column %c (Severity: %s)\n  %m\n%e\n
 [ControlStructures::ProhibitUnlessBlocks]
 severity = 4
 
+[Variables::ProhibitUnusedVariables]
+severity = 4
+
 [Miscellanea::ProhibitUselessNoCritic]
 severity = 4
 
