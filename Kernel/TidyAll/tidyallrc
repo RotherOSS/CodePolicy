@@ -20,6 +20,8 @@ ignore = node_modules/**/*
 ignore = Frontend/Vendor/**/*
 ; Webpack generated output files
 ignore = var/public/dist/**/*
+; ignore the CodePolicy that is used by the git commit hooks
+ignore = TidyAll/**/*
 
 ;
 ; Common
