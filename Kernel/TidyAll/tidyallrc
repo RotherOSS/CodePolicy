@@ -3,7 +3,7 @@
 ;
 
 ; Ignore all CPAN content.
-ignore = Kernel/cpan-lib/**/* Custom/Kernel/cpan-lib/**/*
+ignore = Kernel/cpan-lib/**/* Custom/Kernel/cpan-lib/**/* local/lib/perl5/**/* local/bin/**/*
 ; Ignore all dynamic/temporary data.
 ignore = var/{article,log,run,sessions,spool,tmp,virtualfs}/**/*
 ; Ignore thirdparty content.
