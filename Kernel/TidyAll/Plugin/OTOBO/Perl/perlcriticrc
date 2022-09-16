@@ -21,10 +21,10 @@ verbose = %p violated at %f %l column %c (Severity: %s)\n  %m\n%e\n
 
 # Raise the severity of some policies
 # that would not be included because their default severity is below 4.
-[ControlStructures::ProhibitUnlessBlocks]
+[ClassHierarchies::ProhibitExplicitISA]
 severity = 4
 
-[Variables::ProhibitUnusedVariables]
+[ControlStructures::ProhibitUnlessBlocks]
 severity = 4
 
 [Miscellanea::ProhibitUselessNoCritic]
@@ -32,6 +32,21 @@ severity = 4
 
 [Miscellanea::ProhibitUnrestrictedNoCritic]
 severity = 4
+
+#[Modules::ProhibitConditionalUseStatements]
+#severity = 4
+
+#[Subroutines::ProhibitAmpersandSigils]
+#severity = 4
+
+#[ValuesAndExpressions::ProhibitSpecialLiteralHeredocTerminator]
+#severity = 4
+
+[Variables::ProhibitUnusedVariables]
+severity = 4
+
+#[Variables::RequireInitializationForLocalVars]
+#severity = 4
 
 # Specific settings for some policies.
 

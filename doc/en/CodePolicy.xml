@@ -75,7 +75,7 @@
 
                 <screen><![CDATA[
                 Example Perl:
-                ## nofilter(TidyAll::Plugin::OTOBO::Perl::ISA)
+                ## nofilter(TidyAll::Plugin::OTOBO::Perl::DieExit)
 
                 Example SOPM:
                 <!-- nofilter(TidyAll::Plugin::OTOBO::SOPM::FileRights) -->
