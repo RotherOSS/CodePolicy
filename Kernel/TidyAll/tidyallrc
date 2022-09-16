@@ -186,11 +186,6 @@ select = **/*.{pl,psgi,pm,t}
 select = Kernel/Config.pm.dist
 ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
 
-[+TidyAll::Plugin::OTOBO::Perl::ISA]
-select = **/*.{pl,pm,psgi,t}
-select = Kernel/Config.pm.dist
-ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
-
 [+TidyAll::Plugin::OTOBO::Perl::LayoutObject]
 select = **/*.{pl,pm,psgi,t}
 select = Kernel/Config.pm.dist
