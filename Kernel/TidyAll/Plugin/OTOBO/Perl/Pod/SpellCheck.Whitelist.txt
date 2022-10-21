@@ -49,3 +49,4 @@ decrypt
 decrypted
 unmanaged
 preselect
+iCalendar
