@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2022 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -15,6 +15,7 @@
 # --
 
 package TidyAll::Plugin::OTOBO::Perl::Pod::SpellCheck;
+
 use strict;
 use warnings;
 
@@ -42,14 +43,12 @@ sub validate_file {
         chomp $HunspellPath;
         if ( !$HunspellPath ) {
             print STDERR __PACKAGE__ . "\nCould not find 'hunspell', skipping spell checker tests.\n";
+
             return;
         }
 
-        $HunspellDictionaryPath = __FILE__;
-        $HunspellDictionaryPath =~ s{SpellCheck\.pm$}{../../StaticFiles/Hunspell/Dictionaries};
-
-        $HunspellWhitelistPath = __FILE__;
-        $HunspellWhitelistPath =~ s{\.pm$}{.Whitelist.txt};
+        $HunspellDictionaryPath = __FILE__ =~ s{SpellCheck\.pm$}{../../StaticFiles/Hunspell/Dictionaries}r;
+        $HunspellWhitelistPath  = __FILE__ =~ s{\.pm$}{.Whitelist.txt}r;
     }
 
     # # TODO: MOVE TO SEPARATE Perl::CommentsSpellCheck plugin later
@@ -62,6 +61,7 @@ sub validate_file {
     # $Comments    =~ s{^ \s* [#] \s* }{}smxg;      # Remove comment signs
 
     my ( $PodText, $Error ) = Capture::Tiny::capture( sub { Pod::Spell->new()->parse_from_file( $File->stringify() ) } );
+
     die $Error if $Error;
 
     my $TempFile = File::Temp->new();
@@ -95,6 +95,7 @@ sub validate_file {
             }
         }
     }
+
     if (@Errors) {
         return $Self->DieWithError(
             sprintf( "\nPerl Pod contains unrecognized words:\n%s\n", join( "\n", sort @Errors ) )

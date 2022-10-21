@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2022 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -15,6 +15,7 @@
 # --
 
 package TidyAll::Plugin::OTOBO::Common::TranslatableStringsSpellCheck;
+
 use strict;
 use warnings;
 
@@ -40,14 +41,12 @@ sub validate_file {
         chomp $HunspellPath;
         if ( !$HunspellPath ) {
             print STDERR __PACKAGE__ . "\nCould not find 'hunspell', skipping spell checker tests.\n";
+
             return;
         }
 
-        $HunspellDictionaryPath = __FILE__;
-        $HunspellDictionaryPath =~ s{TranslatableStringsSpellCheck\.pm$}{../StaticFiles/Hunspell/Dictionaries};
-
-        $HunspellWhitelistPath = __FILE__;
-        $HunspellWhitelistPath =~ s{\.pm$}{.Whitelist.txt};
+        $HunspellDictionaryPath = __FILE__ =~ s{TranslatableStringsSpellCheck\.pm$}{../StaticFiles/Hunspell/Dictionaries}r;
+        $HunspellWhitelistPath  = __FILE__ =~ s{\.pm$}{.Whitelist.txt}r;
     }
 
     my $Text = $Self->_ExtractTranslatableStrings($File);
@@ -87,8 +86,9 @@ sub validate_file {
     }
 
     if (@Errors) {
-        my $Error = sprintf( "\nTranslatable strings contains unrecognized words:\n%s\n", join( "\n", sort @Errors ) );
-        return $Self->DieWithError($Error);
+        return $Self->DieWithError(
+            sprintf( "\nTranslatable strings contains unrecognized words:\n%s\n", join( "\n", sort @Errors ) )
+        );
     }
 
     return;
