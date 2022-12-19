@@ -45,6 +45,9 @@ severity = 4
 [Variables::ProhibitUnusedVariables]
 severity = 4
 
+[BuiltinFunctions::ProhibitStringySplit]
+severity = 4
+
 #[Variables::RequireInitializationForLocalVars]
 #severity = 4
 
