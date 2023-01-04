@@ -50,3 +50,7 @@ decrypted
 unmanaged
 preselect
 iCalendar
+
+POSTDATA
+PATCHDATA
+PUTDATA
