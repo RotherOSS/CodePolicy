@@ -39,8 +39,12 @@ severity = 4
 #[Subroutines::ProhibitAmpersandSigils]
 #severity = 4
 
-#[ValuesAndExpressions::ProhibitSpecialLiteralHeredocTerminator]
-#severity = 4
+[ValuesAndExpressions::ProhibitSpecialLiteralHeredocTerminator]
+severity = 4
+[ValuesAndExpressions::RequireQuotedHeredocTerminator]
+severity = 4
+[ValuesAndExpressions::RequireUpperCaseHeredocTerminator]
+severity = 4
 
 [Variables::ProhibitUnusedVariables]
 severity = 4
