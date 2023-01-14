@@ -36,8 +36,8 @@ severity = 4
 #[Modules::ProhibitConditionalUseStatements]
 #severity = 4
 
-#[Subroutines::ProhibitAmpersandSigils]
-#severity = 4
+[Subroutines::ProhibitAmpersandSigils]
+severity = 4
 
 [ValuesAndExpressions::ProhibitSpecialLiteralHeredocTerminator]
 severity = 4
