@@ -1,5 +1,5 @@
 # STERN, per default only $SEVERITY_HIGHEST = 5 and $SEVERITY_HIGH = 4 are covered.
-# Lower severity policies can be explicitly added below.
+# Policies with a lower severity policies can be explicitly added below.
 severity = 4
 
 # test scripts are scripts
@@ -12,7 +12,7 @@ program-extensions = .pl .t
 verbose = %p violated at %f %l column %c (Severity: %s)\n  %m\n%e\n
 
 # useful for batch editing:
-# verbose = sp +%l %f\n no critic qw(%p)
+#verbose = sp +%l %f\n no critic qw(%p)
 
 # including the source code %r that causes the violation:
 #verbose = %p violated at line %l column %c (Severity: %s)\n  %m\n%r\n
