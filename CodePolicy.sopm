@@ -85,7 +85,6 @@
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Critic/PolicyOTOBO.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/DBObject.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/DieExit.pm" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Dumper.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/ForMy.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/ForeachToFor.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/LayoutObject.pm" />

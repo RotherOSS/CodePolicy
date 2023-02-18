@@ -171,11 +171,6 @@ ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
 select = Kernel/Modules/**/*.pm Custom/Kernel/Modules/**/*.pm
 ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
 
-[+TidyAll::Plugin::OTOBO::Perl::Dumper]
-select = **/*.{pl,pm,psgi}
-select = Kernel/Config.pm.dist
-ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
-
 [+TidyAll::Plugin::OTOBO::Perl::ForeachToFor]
 select = **/*.{pl,pm,psgi,t}
 select = Kernel/Config.pm.dist

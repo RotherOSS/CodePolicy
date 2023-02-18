@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2023 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -44,11 +44,11 @@ sub transform_source {
     #     # nofilter (TidyAll::Plugin::OTOBO::Legal::LicenseValidator)
     #     ## nofilter (TidyAll::Plugin::OTOBO::Legal::LicenseValidator)
     #     ## nofilter(TidyAll::Plugin::OTOBO::Legal::LicenseValidator);
-    #     my $Dump = Data::Dumper::Dumper($HashRef);    #nofilter(TidyAll::Plugin::OTOBO::Perl::Dumper)
+    #     my $Email = 'support@otobo.com';    #nofilter(TidyAll::Plugin::OTOBO::Common::ProhibitEmailAddresses)
     #
     # Replacement:
     #     ## nofilter (TidyAll::Plugin::OTOBO::Legal::LicenseValidator)
-    #     my $Dump = Data::Dumper::Dumper($HashRef);    ## nofilter(TidyAll::Plugin::OTOBO::Perl::Dumper)
+    #     my $Email = 'support@otobo.com';    ## nofilter(TidyAll::Plugin::OTOBO::Common::ProhibitEmailAddresses)
     #
     $Code =~ s{ ^ ( [^\#\n]* ) \#+ \s* no \s* filter \s* \( ( .+? ) \) .*? \n }{$1## nofilter($2)\n}xmsg;
 
@@ -59,11 +59,11 @@ sub transform_source {
     #     // nofilter(TidyAll::Plugin::OTOBO::Legal::LicenseValidator)
     #     // nofilter(TidyAll::Plugin::OTOBO::JavaScript::FileName)
     #     // nofilter(TidyAll::Plugin::OTOBO::Legal::LicenseValidator)
-    #     my $Dump = Data::Dumper::Dumper($HashRef);    // nofilter(TidyAll::Plugin::OTOBO::Perl::Dumper)
+    #     var email = 'support@otobo.de';    // nofilter(TidyAll::Plugin::OTOBO::Common::ProhibitEmailAddresses)
     #
     # Replacement:
     #     // nofilter(TidyAll::Plugin::OTOBO::Legal::LicenseValidator)
-    #     my $Dump = Data::Dumper::Dumper($HashRef);    // nofilter(TidyAll::Plugin::OTOBO::Perl::Dumper)
+    #     var email = 'support@otobo.de';    // nofilter(TidyAll::Plugin::OTOBO::Common::ProhibitEmailAddresses)
     #
     $Code =~ s{ ^ ( [^\/\n]* ) \/+ \s* no \s* filter \s* \( ( .+? ) \) .*? \n }{$1// nofilter($2)\n}xmsg;
 
