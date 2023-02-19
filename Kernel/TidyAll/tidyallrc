@@ -208,6 +208,7 @@ select = **/*.{pm}
 select = Kernel/Config.pm.dist
 ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
 ignore = Kernel/System/UnitTest/RegisterDriver.pm Custom/Kernel/System/UnitTest/RegisterDriver.pm
+ignore = Kernel/System/UnitTest/RegisterOM.pm Custom/Kernel/System/UnitTest/RegisterOM.pm
 
 [+TidyAll::Plugin::OTOBO::Perl::ObjectNameSpace]
 select = **/*.{pl,pm,t}
