@@ -112,7 +112,6 @@ select = doc/**/*.xml
 select = **/*.{pl,pm,psgi,t,tt,spec,js,css,scss,vue,dist,sh,skel,xml,sopm}
 ignore = COPYING RELEASE CREDITS
 ignore = Kernel/Config.pm Kernel/Config/**/ZZZ*.pm Kernel/Config/Files/User/*.pm
-ignore = Kernel/WebApp.conf.dist
 ignore = scripts/auto_build/spec/templates/**/*
 ignore = scripts/test/sample/Loader/*.min.{css,js}
 ignore = scripts/test/sample/SysConfig/Migration/**/ZZZ*.pm

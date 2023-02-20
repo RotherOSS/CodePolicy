@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2023 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -86,7 +86,7 @@ EOF
         Exception => 0,
     },
     {
-        Name      => 'ObjectDependencies, dependency declared in TestObjectDependencies
+        Name => 'ObjectDependencies, dependency declared in TestObjectDependencies
 ',
         Filename  => 'Test.pm',
         Plugins   => [qw(TidyAll::Plugin::OTOBO::Perl::ObjectDependencies)],
@@ -226,39 +226,6 @@ EOF
         Framework => '4.0',
         Source    => <<'EOF',
 use Moose::Role;
-$Kernel::OM->Get('Kernel::System::Ticket');
-EOF
-        Exception => 0,
-    },
-    {
-        Name      => 'ObjectDependencies, WebApp controller',
-        Filename  => 'Test.pm',
-        Plugins   => [qw(TidyAll::Plugin::OTOBO::Perl::ObjectDependencies)],
-        Framework => '4.0',
-        Source    => <<'EOF',
-package Kernel::WebApp::Controller::Test;
-$Kernel::OM->Get('Kernel::System::Ticket');
-EOF
-        Exception => 0,
-    },
-    {
-        Name      => 'ObjectDependencies, WebApp plugin',
-        Filename  => 'Test.pm',
-        Plugins   => [qw(TidyAll::Plugin::OTOBO::Perl::ObjectDependencies)],
-        Framework => '4.0',
-        Source    => <<'EOF',
-package Kernel::WebApp::Plugin::Test;
-$Kernel::OM->Get('Kernel::System::Ticket');
-EOF
-        Exception => 0,
-    },
-    {
-        Name      => 'ObjectDependencies, WebApp server',
-        Filename  => 'Test.pm',
-        Plugins   => [qw(TidyAll::Plugin::OTOBO::Perl::ObjectDependencies)],
-        Framework => '4.0',
-        Source    => <<'EOF',
-package Kernel::WebApp::Server::Test;
 $Kernel::OM->Get('Kernel::System::Ticket');
 EOF
         Exception => 0,

@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2023 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -51,9 +51,6 @@ sub validate_source {
 
     # Skip if we have a role, as it cannot be instantiated.
     return if $Code =~ m{use\s+Moose::Role}smx;
-
-    # Skip if we have a webapp controller, as these are not managed via OM.
-    return if $Code =~ m{package\s+Kernel::WebApp::(Controller|Plugin|Server)::}smx;
 
     # Skip if the package cannot be loaded via ObjectManager
     return if $Code =~ m{
