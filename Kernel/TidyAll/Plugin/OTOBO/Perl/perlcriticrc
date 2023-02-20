@@ -64,6 +64,9 @@ lines = 20
 [Modules::ProhibitEvilModules]
 modules = Class::ISA Pod::Plainer Shell Switch vars {Use 'our' variables instead of 'use vars'} Data::Dumper {Use Main::Dump() instead of Dumper() and don't forget to remove debug code like print STDERR Dumper(...)}
 
+[Variables::ProhibitEvilVariables]
+variables = $DB::single {clean up your debug statements}
+
 # This setup does not work as
 #    return 1 unless $Content =~ m{<otrs_config.*?version="2.0"};
 # will still be triggered.
