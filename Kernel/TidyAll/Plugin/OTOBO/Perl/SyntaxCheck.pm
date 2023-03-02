@@ -70,6 +70,7 @@ sub validate_source {
         Readonly
         Template
         Test2::V0
+        Test2::Tools::Spec
         Time::HiRes
     );
 
