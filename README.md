@@ -9,7 +9,7 @@ You can use it to check your code against the OTOBO code style guide.
 
 Call _/path/to/CodePolicy/bin/otobo.CodePolicy.pl_ from the toplevel of your repository. Available options are:
 
-- Checks changed files when no argumant is given
+- Checks changed files when no argument is given
 - **--all**: Checks all files
 - **--directory**: Checks a directory
 - **--file**: Checks a file
