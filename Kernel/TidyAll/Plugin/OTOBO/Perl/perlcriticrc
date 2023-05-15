@@ -55,6 +55,9 @@ severity = 4
 [Variables::RequireInitializationForLocalVars]
 severity = 4
 
+[RegularExpressions::ProhibitCaptureWithoutTest]
+severity = 4
+
 # Specific settings for some policies.
 
 # be a bit more relaxed about brief opens and allow more that the default 9 lines
