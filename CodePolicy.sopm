@@ -4,7 +4,7 @@
     <Version>0.0.0</Version>
     <Framework>10.1.x</Framework>
     <ModuleRequired Version="0.56">Code::TidyAll</ModuleRequired>
-    <ModuleRequired>Perl::Critic</ModuleRequired>
+    <ModuleRequired Version="1.140">Perl::Critic</ModuleRequired>
     <Vendor>Rother OSS GmbH</Vendor>
     <URL>https://otobo.de/</URL>
     <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>

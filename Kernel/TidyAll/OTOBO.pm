@@ -38,7 +38,7 @@ use Time::HiRes qw(sleep);
 
 # CPAN modules, Require some needed modules here for clarity / better error messages.
 use Code::TidyAll 0.56;
-use Perl::Critic;
+use Perl::Critic 1.140;
 use Perl::Tidy;
 
 our $FrameworkVersionMajor = 0;
