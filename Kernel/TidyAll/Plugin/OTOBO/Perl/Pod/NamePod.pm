@@ -42,7 +42,7 @@ sub transform_source {
 
     LINE:
     for my $Line (@CodeLines) {
-        if ( $Line =~ m{^package \s+? ([A-Za-z0-9:]+?);}smx ) {
+        if ( $Line =~ m{^package \s+? ([A-Za-z0-9:_]+?);}smx ) {
             $PackageName = $1;
             next LINE;
         }
@@ -57,10 +57,10 @@ sub transform_source {
         last LINE if $Line =~ m{^=cut \s* $}smx;
         last LINE if $Line =~ m{^=head1}smx;
 
-        if ( $Line =~ m{^\s* ([A-Za-z0-9:/\.]+)}smx ) {
+        if ( $Line =~ m{^\s* ([A-Za-z0-9:_/\.]+)}smx ) {
             $PackageNamePod = $1;
             if ( $PackageName ne $PackageNamePod ) {
-                $Line =~ s{^\s* ([A-Za-z0-9:/\.]+)}{$PackageName}smx;
+                $Line =~ s{^\s* ([A-Za-z0-9:_/\.]+)}{$PackageName}smx;
                 $Updated = 1;
             }
             last LINE;
@@ -95,7 +95,7 @@ sub validate_source {
     for my $Line (@CodeLines) {
         $Counter++;
 
-        if ( $Line =~ m{^package \s+? ([A-Za-z0-9:]+?);}smx ) {
+        if ( $Line =~ m{^package \s+? ([A-Za-z0-9:_]+?);}smx ) {
             $PackageName = $1;
             next LINE;
         }
@@ -110,7 +110,7 @@ sub validate_source {
         last LINE if $Line =~ m{^=cut \s* $}smx;
         last LINE if $Line =~ m{^=head1}smx;
 
-        if ( $Line =~ m{^\s* ([A-Za-z0-9:/\.]+)}smx ) {
+        if ( $Line =~ m{^\s* ([A-Za-z0-9:_/\.]+)}smx ) {
             $PackageNamePod = $1;
             if ( $PackageName ne $PackageNamePod ) {
                 $ErrorMessage = "PackageName $PackageNamePod does not match package $PackageName\n";
