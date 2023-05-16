@@ -65,7 +65,7 @@ severity = 4
 lines = 20
 
 [Modules::ProhibitEvilModules]
-modules = Class::ISA Pod::Plainer Shell Switch vars {Use 'our' variables instead of 'use vars'} Data::Dumper {Use Main::Dump() instead of Dumper() and don't forget to remove debug code like print STDERR Dumper(...)} /Acme::/ {Acme modules are just for fun}
+modules = Class::ISA Pod::Plainer Shell Switch vars {Use 'our' variables instead of 'use vars'} Data::Dumper {Use Main::Dump() instead of Dumper() and don't forget to remove debug code like print STDERR Dumper(...)} /Acme::/ {Acme modules are just for fun} Module::Refresh {Use Kernel::System::ModuleRefresh instead}
 
 [Variables::ProhibitEvilVariables]
 variables = $DB::single {clean up your debug statements}
