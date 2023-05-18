@@ -13,6 +13,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
+
 use strict;
 use warnings;
 use utf8;
@@ -30,7 +31,8 @@ my @Tests = (
         Name      => 'ESLint (valid)',
         Filename  => 'Test.js',
         Plugins   => [qw(TidyAll::Plugin::OTOBO::JavaScript::ESLint)],
-        Framework => '8.0',
+        Framework => '11.0',
+        Todo      => 'ESLint is not a requirement',
         Source    => <<'EOF',
 "use strict;"
 EOF
@@ -40,7 +42,7 @@ EOF
         Name      => 'ESLint (syntax error)',
         Filename  => 'Test.js',
         Plugins   => [qw(TidyAll::Plugin::OTOBO::JavaScript::ESLint)],
-        Framework => '8.0',
+        Framework => '11.0',
         Source    => <<'EOF',
 some syntax error
 EOF

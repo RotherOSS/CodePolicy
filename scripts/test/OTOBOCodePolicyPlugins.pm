@@ -78,19 +78,26 @@ sub Run {
 
         my $Exception = $@;
 
-        is(
-            $Exception ? 1 : 0,
-            $Test->{Exception},
-            "$Test->{Name} - " . ( $Exception ? "exception found:\n$Exception" : 'no exception' ),
-        );
+        {
+            my $Todo;
+            if ( $Test->{Todo} ) {
+                $Todo = todo $Test->{Todo};
+            }
 
-        next TEST if $Exception;
+            is(
+                $Exception ? 1 : 0,
+                $Test->{Exception},
+                "$Test->{Name} - " . ( $Exception ? "exception found:\n$Exception" : 'no exception' ),
+            );
 
-        is(
-            $Source,
-            $Test->{Result} // $Test->{Source},
-            "$Test->{Name} - result",
-        );
+            next TEST if $Exception;
+
+            is(
+                $Source,
+                $Test->{Result} // $Test->{Source},
+                "$Test->{Name} - result",
+            );
+        }
     }
 
     return;
