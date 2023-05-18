@@ -15,13 +15,10 @@
 # --
 use strict;
 use warnings;
-
-use vars (qw($Self));
 use utf8;
 
 use File::Basename;
-use FindBin qw($RealBin);
-use lib dirname($RealBin) . '/Kernel/';    # find TidyAll
+use Test2::V0;
 
 # Work around a Perl bug that is triggered in Devel::StackTrace
 #   (probaly from Exception::Class and this from Perl::Critic).
@@ -74,11 +71,11 @@ for my $File (@Files) {
 
     next FILE if $Result->state() eq 'no_match';    # no plugins apply, ignore file
 
-    $Self->Is(
-        $Result->state(),
+    is(
+        $Result->state,
         'checked',
         "$File check results " . ( $Result->error() || '' ),
     );
 }
 
-1;
+done_testing;

@@ -16,15 +16,15 @@
 
 use strict;
 use warnings;
-
-use vars (qw($Self));
 use utf8;
 
+# core modules
+
+# CPAN modules
+use Test2::V0;
+
+# OTOBO modules
 use scripts::test::OTOBOCodePolicyPlugins;
-
-my $Helper = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-
-my $RandomID = $Helper->GetRandomID();
 
 my @Tests = (
     {
@@ -89,6 +89,6 @@ EOF
     },
 );
 
-$Self->scripts::test::OTOBOCodePolicyPlugins::Run( Tests => \@Tests );
+scripts::test::OTOBOCodePolicyPlugins::Run( Tests => \@Tests );
 
-1;
+done_testing;

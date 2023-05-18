@@ -22,10 +22,10 @@ use utf8;
 # core modules
 
 # CPAN modules
+use Test2::V0;
 
 # OTOBO modules
 use scripts::test::OTOBOCodePolicyPlugins;
-use Kernel::System::UnitTest::RegisterDriver;
 
 our $Self;
 
@@ -232,6 +232,6 @@ EOF
     },
 );
 
-$Self->scripts::test::OTOBOCodePolicyPlugins::Run( Tests => \@Tests );
+scripts::test::OTOBOCodePolicyPlugins::Run( Tests => \@Tests );
 
-$Self->DoneTesting();
+done_testing;

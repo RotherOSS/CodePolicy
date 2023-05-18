@@ -15,8 +15,6 @@
 # --
 use strict;
 use warnings;
-
-use vars (qw($Self));
 use utf8;
 
 # Work around a Perl bug that is triggered in Devel::StackTrace
@@ -29,6 +27,12 @@ use Devel::StackTrace ();
 local *Devel::StackTrace::new = sub { };    # no-op
 use warnings 'redefine';
 
+# core modules
+
+# CPAN modules
+use Test2::V0;
+
+# OTOBO modules
 use scripts::test::OTOBOCodePolicyPlugins;
 
 my @Tests = (
@@ -154,6 +158,6 @@ EOF
     },
 );
 
-$Self->scripts::test::OTOBOCodePolicyPlugins::Run( Tests => \@Tests );
+scripts::test::OTOBOCodePolicyPlugins::Run( Tests => \@Tests );
 
-1;
+done_testing;

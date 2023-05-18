@@ -17,13 +17,16 @@ package scripts::test::OTOBOCodePolicyPlugins;
 
 use strict;
 use warnings;
+use utf8;
 
 use File::Basename;
 use FindBin qw($RealBin);
 use lib dirname($RealBin) . '/Kernel/';    # find TidyAll
 
-use utf8;
+# CPAN modules
+use Test2::V0;
 
+# OTOBO modules
 use TidyAll::OTOBO;
 
 use Kernel::Config;
@@ -54,7 +57,7 @@ sub Run {
     local $ENV{OTOBOCODEPOLICY_NOCOLOR} = 1;
 
     my $TidyAll = TidyAll::OTOBO->new_from_conf_file(
-        "$Home/Kernel/TidyAll/tidyallrc",
+        "Kernel/TidyAll/tidyallrc",
         no_cache   => 1,
         check_only => 1,
         mode       => 'tests',
@@ -65,7 +68,7 @@ sub Run {
     );
 
     TEST:
-    for my $Test ( @{ $Param{Tests} } ) {
+    for my $Test ( $Param{Tests}->@* ) {
 
         # Set framework version in TidyAll so that plugins can use it.
         my ( $FrameworkVersionMajor, $FrameworkVersionMinor ) = $Test->{Framework} =~ m/(\d+)[.](\d+)/xms;
@@ -93,7 +96,7 @@ sub Run {
 
         my $Exception = $@;
 
-        $Self->Is(
+        is(
             $Exception ? 1 : 0,
             $Test->{Exception},
             "$Test->{Name} - " . ( $Exception ? "exception found:\n$Exception" : 'no exception' ),
@@ -101,7 +104,7 @@ sub Run {
 
         next TEST if $Exception;
 
-        $Self->Is(
+        is(
             $Source,
             $Test->{Result} // $Test->{Source},
             "$Test->{Name} - result",

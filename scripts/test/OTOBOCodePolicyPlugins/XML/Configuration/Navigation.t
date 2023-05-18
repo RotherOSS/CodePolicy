@@ -18,10 +18,13 @@ use strict;
 use warnings;
 use utf8;
 
-use scripts::test::OTOBOCodePolicyPlugins;
+# core modules
 
-# package variables
-our $Self;
+# CPAN modules
+use Test2::V0;
+
+# OTOBO modules
+use scripts::test::OTOBOCodePolicyPlugins;
 
 my $SettingTemplate = <<'EOF';
         <Description Translatable="1">Test config setting definition for purposes of the unit testing.</Description>
@@ -575,6 +578,6 @@ EOF
     },
 );
 
-$Self->scripts::test::OTOBOCodePolicyPlugins::Run( Tests => \@Tests );
+scripts::test::OTOBOCodePolicyPlugins::Run( Tests => \@Tests );
 
-1;
+done_testing;
