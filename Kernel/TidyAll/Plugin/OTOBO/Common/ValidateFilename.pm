@@ -38,7 +38,7 @@ sub validate_file {
 
     my @ForbiddenCharacters = (
         ' ', "\n", "\t", '"', '`', '´', '\'', '$', '!', '?,', '*',
-        '(', ')', '{', '}', '[', ']', '#', '<', '>', ':', '\\', '|',
+        '(', ')',  '{',  '}', '[', ']',  '#',  '<', '>', ':',  '\\', '|',
     );
 
     for my $ForbiddenCharacter (@ForbiddenCharacters) {
