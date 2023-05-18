@@ -19,9 +19,7 @@ use strict;
 use warnings;
 use utf8;
 
-use File::Basename;
-use FindBin qw($RealBin);
-use lib dirname($RealBin) . '/Kernel/';    # find TidyAll
+# core modules
 
 # CPAN modules
 use Test2::V0;
@@ -29,39 +27,18 @@ use Test2::V0;
 # OTOBO modules
 use TidyAll::OTOBO;
 
-use Kernel::Config;
-use Kernel::System::Encode;
-use Kernel::System::Log;
-use Kernel::System::Main;
-
 sub Run {
-    my ( $Self, %Param ) = @_;
-
-    my $ConfigObject = Kernel::Config->new();
-    my $EncodeObject = Kernel::System::Encode->new(
-        ConfigObject => $ConfigObject,
-    );
-    my $LogObject = Kernel::System::Log->new(
-        ConfigObject => $ConfigObject,
-        EncodeObject => $EncodeObject,
-    );
-    my $MainObject = Kernel::System::Main->new(
-        ConfigObject => $ConfigObject,
-        EncodeObject => $EncodeObject,
-        LogObject    => $LogObject,
-    );
-
-    my $Home = $ConfigObject->Get('Home');
+    my ( %Param ) = @_;
 
     # Suppress colored output to not clutter log files.
     local $ENV{OTOBOCODEPOLICY_NOCOLOR} = 1;
 
     my $TidyAll = TidyAll::OTOBO->new_from_conf_file(
-        "Kernel/TidyAll/tidyallrc",
+        "./Kernel/TidyAll/tidyallrc",
         no_cache   => 1,
         check_only => 1,
         mode       => 'tests',
-        root_dir   => $Home,
+        root_dir   => '.',
         data_dir   => File::Spec->tmpdir(),
 
         #verbose    => 1,
@@ -82,7 +59,8 @@ sub Run {
 
         eval {
             for my $PluginModule ( @{ $Test->{Plugins} } ) {
-                $MainObject->Require($PluginModule);
+                my $FileName = "$PluginModule.pm" =~ s{::}{/}smxgr;
+                require $FileName;
                 my $Plugin = $PluginModule->new(
                     name    => $PluginModule,
                     tidyall => $TidyAll,
