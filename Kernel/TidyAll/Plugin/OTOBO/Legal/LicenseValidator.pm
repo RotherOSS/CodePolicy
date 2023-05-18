@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2023 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -222,8 +222,10 @@ END_GPLGENERIC
 }
 
 sub _GPLPerldoc {
-    return <<'END_GPLPERLDOC';
-=head1 TERMS AND CONDITIONS
+
+    # avoid that CodePolicy incorrectly detects real POD
+    return '=head1 ' . <<'END_GPLPERLDOC';
+TERMS AND CONDITIONS
 
 This software is part of the OTOBO project (L<https://otobo.org/>).
 
@@ -231,6 +233,7 @@ This software comes with ABSOLUTELY NO WARRANTY. For details, see
 the enclosed file COPYING for license information (GPL). If you
 did not receive this file, see L<https://www.gnu.org/licenses/gpl-3.0.txt>.
 END_GPLPERLDOC
+
 }
 
 sub _DescPerl {
