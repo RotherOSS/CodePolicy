@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2023 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -106,17 +106,19 @@ sub validate_source {
 
     # syntax check
     my $ErrorMessage;
-    my $FileHandle;
-    if ( !open $FileHandle, '-|', "perl -cw " . $TempFile->filename() . " 2>&1" ) {
-        return $Self->DieWithError("FILTER: Can't open tempfile: $!\n");
-    }
-
-    while ( my $Line = <$FileHandle> ) {
-        if ( $Line !~ /(syntax OK|used only once: possible typo)/ ) {
-            $ErrorMessage .= $Line;
+    {
+        if ( open my $FileHandle, '-|', "perl -cw " . $TempFile->filename() . " 2>&1" ) {    ## no critic qw(OTOBO::ProhibitOpen)
+            while ( my $Line = <$FileHandle> ) {
+                if ( $Line !~ /(syntax OK|used only once: possible typo)/ ) {
+                    $ErrorMessage .= $Line;
+                }
+            }
+            close $FileHandle;
+        }
+        else {
+            return $Self->DieWithError("FILTER: Can't open tempfile: $!\n");
         }
     }
-    close $FileHandle;
 
     if ($ErrorMessage) {
         return $Self->DieWithError("$ErrorMessage");
