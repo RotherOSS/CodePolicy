@@ -30,23 +30,18 @@ use Devel::StackTrace ();
 local *Devel::StackTrace::new = sub { };    # no-op
 use warnings 'redefine';
 
-use File::Spec();
+use Cwd qw(abs_path);
+use File::Spec qw();
 use TidyAll::OTOBO;
-
-# Don't use OM so that this also works for OTOBO 3.3 and lower
-use Kernel::Config;
-
-my $ConfigObject = Kernel::Config->new();
-my $Home         = $ConfigObject->Get('Home');
 
 # Suppress colored output to not clutter log files.
 local $ENV{OTOBOCODEPOLICY_NOCOLOR} = 1;
 
 my $TidyAll = TidyAll::OTOBO->new_from_conf_file(
-    "$Home/Kernel/TidyAll/tidyallrc",
+    "Kernel/TidyAll/tidyallrc",
     check_only => 1,
     mode       => 'tests',
-    root_dir   => $Home,
+    root_dir   => '.',
     data_dir   => File::Spec->tmpdir(),
     quiet      => 1,
 );
@@ -58,8 +53,9 @@ $TidyAll->GetFileListFromDirectory();
 #
 
 # Don't use TidyAll::process_all() or TidyAll::find_matched_files() as it is too slow on large code bases.
-my @Files = $TidyAll->FilterMatchedFiles( Files => \@TidyAll::OTOBO::FileList );
-@Files = map { File::Spec->catfile( $Home, $_ ) } @Files;
+my @Files = map
+    { abs_path($_) }
+    $TidyAll->FilterMatchedFiles( Files => \@TidyAll::OTOBO::FileList );
 
 FILE:
 for my $File (@Files) {
