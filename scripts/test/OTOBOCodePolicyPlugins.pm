@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2023 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -14,6 +14,8 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # --
 package scripts::test::OTOBOCodePolicyPlugins;
+
+## nofilter(TidyAll::Plugin::OTOBO::Perl::Require)
 
 use strict;
 use warnings;
@@ -28,7 +30,7 @@ use Test2::V0;
 use TidyAll::OTOBO;
 
 sub Run {
-    my ( %Param ) = @_;
+    my (%Param) = @_;
 
     # Suppress colored output to not clutter log files.
     local $ENV{OTOBOCODEPOLICY_NOCOLOR} = 1;
@@ -60,7 +62,9 @@ sub Run {
         eval {
             for my $PluginModule ( @{ $Test->{Plugins} } ) {
                 my $FileName = "$PluginModule.pm" =~ s{::}{/}smxgr;
+
                 require $FileName;
+
                 my $Plugin = $PluginModule->new(
                     name    => $PluginModule,
                     tidyall => $TidyAll,
