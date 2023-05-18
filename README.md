@@ -14,7 +14,7 @@ Call _/path/to/CodePolicy/bin/otobo.CodePolicy.pl_ from the toplevel of your rep
 - **--directory**: Checks a directory
 - **--file**: Checks a file
 
-## pre commit hook 
+## pre commit hook
 
 Call _/path/to/CodePolicy/scripts/install-git-hooks.pl_ in every local repository that you want to have the pre commit hook.
 It will automatically be run by "git commit" and reject your commit if a problem was found.
@@ -23,4 +23,3 @@ Skip with "git commit --no-verify".
 ## unit test
 
 Install package into OTOBO, then run _bin/otobo.Console.pl Dev::UnitTest::Run_.
-
