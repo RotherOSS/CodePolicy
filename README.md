@@ -23,3 +23,15 @@ Skip with "git commit --no-verify".
 ## unit test
 
 Install package into OTOBO, then run _bin/otobo.Console.pl Dev::UnitTest::Run_.
+
+# Testing the CodePolicy itself
+
+## Run the test suite
+
+The test suite does not require an installed OTOBO:
+
+`prove -r -v --merge -I Kernel/cpan-lib/ -I Kernel -I . 2>&1 | tee prove.out`
+
+## Run the CodePolicy on itself
+
+`./bin/otobo.CodePolicy.pl -a 2>&1 | tee pol.out`
