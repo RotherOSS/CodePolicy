@@ -241,10 +241,6 @@ except_modes = fast
 select = **/*.{pm}
 ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
 
-[+TidyAll::Plugin::OTOBO::Perl::Pod::NamePod]
-select = **/*.{pm}
-ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm
-
 [+TidyAll::Plugin::OTOBO::Perl::Pod::SpellCheck]
 select = **/*.{pm,pod}
 ignore = Kernel/Language/*.pm Custom/Kernel/Language/*.pm

@@ -97,7 +97,6 @@
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/PerlCritic.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/PerlTidy.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Pod/FunctionPod.pm" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Pod/NamePod.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Pod/SpellCheck.Whitelist.txt" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Pod/SpellCheck.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/Perl/Pod/Validator.pm" />
@@ -199,7 +198,6 @@
         <File Permission="660" Location="scripts/test/OTOBOCodePolicyPlugins/Perl/NoExitInConsoleCommands.t" />
         <File Permission="660" Location="scripts/test/OTOBOCodePolicyPlugins/Perl/ObjectDependencies.t" />
         <File Permission="660" Location="scripts/test/OTOBOCodePolicyPlugins/Perl/Pod/FunctionPod.t" />
-        <File Permission="660" Location="scripts/test/OTOBOCodePolicyPlugins/Perl/Pod/NamePod.t" />
         <File Permission="660" Location="scripts/test/OTOBOCodePolicyPlugins/Perl/Tests/Helper.t" />
         <File Permission="660" Location="scripts/test/OTOBOCodePolicyPlugins/PerlCritic/ProhibitOpen.t" />
         <File Permission="660" Location="scripts/test/OTOBOCodePolicyPlugins/PerlCritic/ProhibitStringySplit.t" />
