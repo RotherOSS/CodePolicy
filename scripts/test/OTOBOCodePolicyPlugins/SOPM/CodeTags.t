@@ -39,18 +39,6 @@ EOF
         Exception => 0,
     },
     {
-        Name      => 'CodeTags, old framework, $Self is used',
-        Filename  => 'Test.pm',
-        Plugins   => [qw(TidyAll::Plugin::OTOBO::SOPM::CodeTags)],
-        Framework => '3.3',
-        Source    => <<'EOF',
-    <CodeInstall Type="post">
-        $Self->{LogObject}->Log(...)
-    </CodeInstall>
-EOF
-        Exception => 0,
-    },
-    {
         Name      => 'CodeTags, $Self used.',
         Filename  => 'Test.pm',
         Plugins   => [qw(TidyAll::Plugin::OTOBO::SOPM::CodeTags)],

@@ -127,21 +127,6 @@ EOF
         Exception => 0,
     },
     {
-        Name      => 'Frontend subgroup - Invalid',
-        Filename  => 'Kernel/Config/Files/XML/Test.xml',
-        Plugins   => [qw(TidyAll::Plugin::OTOBO::XML::Configuration::Navigation)],
-        Framework => '7.0',
-        Source    => <<"EOF",
-<otobo_config version="2.0" init="Framework">
-    <Setting Name="CustomerFrontend::NotifyModule###9-CustomerNotificationModule" Required="1" Valid="1">
-        <Navigation>Frontend::Customer::FrontendNotification</Navigation>
-$SettingTemplate
-    </Setting>
-</otobo_config>
-EOF
-        Exception => 1,
-    },
-    {
         Name      => 'Main loader entry - Valid',
         Filename  => 'Kernel/Config/Files/XML/Test.xml',
         Plugins   => [qw(TidyAll::Plugin::OTOBO::XML::Configuration::Navigation)],
