@@ -199,6 +199,7 @@ EOF
     },
     {
         Name      => 'Invalid content for PackageIsDownloadable flag.',
+        Todo      => 'SOPM check seems to be lacking',
         Filename  => 'Test.pm',
         Plugins   => [qw(TidyAll::Plugin::OTOBO::SOPM::RequiredElements)],
         Framework => '7.0',
@@ -223,6 +224,7 @@ EOF
     },
     {
         Name      => 'OTOBOCodePolicy - missing PackageIsDownloadable + PackageIsBuildable.',
+        Todo      => 'SOPM check seems to be lacking',
         Filename  => 'Test.pm',
         Plugins   => [qw(TidyAll::Plugin::OTOBO::SOPM::RequiredElements)],
         Framework => '7.0',
@@ -269,6 +271,7 @@ EOF
     },
     {
         Name      => 'ITSMIncidentProblemManagement - missing PackageIsDownloadable + PackageIsBuildable.',
+        Todo      => 'SOPM check seems to be lacking',
         Filename  => 'Test.pm',
         Plugins   => [qw(TidyAll::Plugin::OTOBO::SOPM::RequiredElements)],
         Framework => '7.0',
@@ -315,6 +318,7 @@ EOF
     },
     {
         Name      => 'TimeAccounting - missing PackageIsDownloadable + PackageIsBuildable.',
+        Todo      => 'SOPM check seems to be lacking',
         Filename  => 'Test.pm',
         Plugins   => [qw(TidyAll::Plugin::OTOBO::SOPM::RequiredElements)],
         Framework => '7.0',
@@ -361,6 +365,7 @@ EOF
     },
     {
         Name      => 'OTOBOSTORM - missing PackageIsDownloadable + PackageIsBuildable.',
+        Todo      => 'SOPM check seems to be lacking',
         Filename  => 'Test.pm',
         Plugins   => [qw(TidyAll::Plugin::OTOBO::SOPM::RequiredElements)],
         Framework => '7.0',

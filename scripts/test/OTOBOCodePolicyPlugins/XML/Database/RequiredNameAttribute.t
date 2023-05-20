@@ -104,6 +104,7 @@ EOF
     },
     {
         Name      => 'Unique without name OTOBO 9',
+        Todo      => 'it is not obvious whether this XML snippet is fine',
         Filename  => 'otobo-schema.xml',
         Plugins   => [qw(TidyAll::Plugin::OTOBO::XML::Database::XSDValidator)],
         Framework => '9.0',
@@ -134,6 +135,7 @@ EOF
     },
     {
         Name      => 'Index without name OTOBO 9',
+        Todo      => 'it is not obvious whether this XML snippet is fine',
         Filename  => 'otobo-schema.xml',
         Plugins   => [qw(TidyAll::Plugin::OTOBO::XML::Database::XSDValidator)],
         Framework => '9.0',

@@ -114,6 +114,7 @@ EOF
     },
     {
         Name      => 'Missing ProvideTestPGPEnvironment in a Selenium test',
+        Todo      => 'ProvideTestPGPEnvironment not supported in OTOBO',
         Filename  => 'test.t',
         Plugins   => [qw(TidyAll::Plugin::OTOBO::Perl::Tests::Helper)],
         Framework => '8.0',
@@ -141,6 +142,7 @@ EOF
     },
     {
         Name      => 'Missing ProvideTestSMIMEEnvironment in a Selenium test',
+        Todo      => 'ProvideTestPGPEnvironment not supported in OTOBO',
         Filename  => 'test.t',
         Plugins   => [qw(TidyAll::Plugin::OTOBO::Perl::Tests::Helper)],
         Framework => '8.0',

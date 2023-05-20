@@ -39,7 +39,7 @@ EOF
         Exception => 0,
     },
     {
-        Name      => 'CodeTags, old framework.',
+        Name      => 'CodeTags, old framework, $Self is used',
         Filename  => 'Test.pm',
         Plugins   => [qw(TidyAll::Plugin::OTOBO::SOPM::CodeTags)],
         Framework => '3.3',

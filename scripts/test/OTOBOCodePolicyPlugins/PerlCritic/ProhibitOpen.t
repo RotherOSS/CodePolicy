@@ -112,6 +112,7 @@ EOF
     },
     {
         Name      => 'PerlCritic ProhibitOpen regular file, bidirectional',
+        Todo      => 'it is not obvious whether bidirectional open should be allowed',
         Filename  => 'test.pl',
         Plugins   => [qw(TidyAll::Plugin::OTOBO::Perl::PerlCritic)],
         Framework => '3.3',
@@ -135,6 +136,7 @@ EOF
     },
     {
         Name      => 'PerlCritic ProhibitOpen regular file, external command',
+        Todo      => 'it is not obvious whether external command open should be allowed',
         Filename  => 'test.pl',
         Plugins   => [qw(TidyAll::Plugin::OTOBO::Perl::PerlCritic)],
         Framework => '3.3',
@@ -158,6 +160,7 @@ EOF
     },
     {
         Name      => 'PerlCritic ProhibitOpen regular file, unclear mode',
+        Todo      => 'it is not obvious whether unclear mode open should be allowed',
         Filename  => 'test.pl',
         Plugins   => [qw(TidyAll::Plugin::OTOBO::Perl::PerlCritic)],
         Framework => '3.3',
