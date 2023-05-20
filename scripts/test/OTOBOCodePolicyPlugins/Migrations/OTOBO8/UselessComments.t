@@ -27,6 +27,8 @@ use Test2::V0;
 use scripts::test::OTOBOCodePolicyPlugins;
 ## nofilter(TidyAll::Plugin::OTOBO::Migrations::OTOBO8::UselessComments)
 
+skip_all('TidyAll plugin does not exist in CodePolicy');
+
 my @Tests = (
     {
         Name      => 'Normal comments',

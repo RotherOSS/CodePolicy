@@ -26,6 +26,8 @@ use Test2::V0;
 # OTOBO modules
 use scripts::test::OTOBOCodePolicyPlugins;
 
+skip_all('TidyAll plugin does not exist in CodePolicy');
+
 my @Tests = (
     {
         Name      => 'YAML, no indentation',

@@ -26,6 +26,8 @@ use Test2::V0;
 # OTOBO modules
 use scripts::test::OTOBOCodePolicyPlugins;
 
+skip_all('TidyAll plugin does not exist in CodePolicy');
+
 my $SettingTemplate = <<'EOF';
         <Description Translatable="1">Test config setting definition for purposes of the unit testing.</Description>
         <Navigation>Core::Test</Navigation>
