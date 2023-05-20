@@ -78,24 +78,30 @@ sub Run {
 
         my $Exception = $@;
 
-        {
+        subtest $Test->{Name} => sub {
             my $Todo;
             if ( $Test->{Todo} ) {
                 $Todo = todo $Test->{Todo};
             }
 
-            is(
-                $Exception ? 1 : 0,
-                $Test->{Exception},
-                "$Test->{Name} - " . ( $Exception ? "exception found:\n$Exception" : 'no exception' ),
-            );
+            if ( $Test->{Exception} ) {
+                ok( $Exception, 'found expected exception' );
+            }
+            else {
+                ok( !$Exception, 'confirmed that there is no exception' );
+            }
 
-            next TEST if $Exception;
+            if ($Exception) {
+                diag "got exception: $Exception";
 
+                return;
+            }
+
+            # also check the modified source when there was no exception
             is(
                 $Source,
                 $Test->{Result} // $Test->{Source},
-                "$Test->{Name} - result",
+                'got the expected result',
             );
         }
     }
