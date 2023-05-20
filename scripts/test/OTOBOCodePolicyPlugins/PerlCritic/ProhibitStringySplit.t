@@ -60,7 +60,7 @@ use strict;
 use warnings;
 my @Strings = split ':', 'some::code';
 EOF
-        Exception => 1,
+        Exception => 0,
     },
     {
         Name      => 'PerlCritic ProhibitStringySplit with regexes',
