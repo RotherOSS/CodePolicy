@@ -105,9 +105,6 @@ select = var/httpd/htdocs/js/test/*.js
 ; Legal
 ;
 
-[+TidyAll::Plugin::OTOBO::Legal::AddressUpdate]
-select = doc/**/*.xml
-
 [+TidyAll::Plugin::OTOBO::Legal::LicenseValidator]
 select = **/*.{pl,pm,psgi,t,tt,spec,js,css,scss,vue,dist,sh,skel,xml,sopm}
 ignore = COPYING RELEASE CREDITS
