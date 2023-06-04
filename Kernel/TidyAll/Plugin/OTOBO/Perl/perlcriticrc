@@ -64,6 +64,9 @@ severity = 4
 [BuiltinFunctions::ProhibitStringySplit]
 severity = 4
 
+[Variables::ProhibitPerl4PackageNames]
+severity = 4
+
 # Specific settings for some policies.
 
 # be a bit more relaxed about brief opens and allow more that the default 9 lines
