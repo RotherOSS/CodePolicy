@@ -54,6 +54,7 @@ sub validate_source {
         Archive::Zip
         Carp
         Const::Fast
+        Cpanel::JSON::XS
         Cwd
         DBI
         Data::Dumper
