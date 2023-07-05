@@ -153,8 +153,6 @@ sub validate_source {
         }
     }
 
-    # use Data::Dumper;
-    # print Dumper( \%ColumnTypes );
     if ($ErrorMessage) {
         return $Self->DieWithError(<<"EOF");
 Problem found in XML database schema: keys with more than 1000 bytes will fail on MyISAM storage engine in MySQL!
