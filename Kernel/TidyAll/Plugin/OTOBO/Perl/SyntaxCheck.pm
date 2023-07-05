@@ -41,6 +41,7 @@ sub validate_source {
 
     # Allow important modules that come with the Perl core or are external
     #   dependencies of OTOBO and can thus be assumed as being installed.
+    #   Some common modules that are used during development are also not stripped.
     my @AllowedExternalModules = qw(
         vars
         constant
@@ -58,6 +59,7 @@ sub validate_source {
         Cwd
         DBI
         Data::Dumper
+        Data::Dx
         DateTime
         Fcntl
         File::Basename
