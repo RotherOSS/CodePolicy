@@ -41,7 +41,7 @@ sub transform_source {
 
     my $Copy = 'Rother OSS GmbH, https://otobo.de/';
 
-    my ( $Sec, $Min, $Hour, $Day, $Month, $Year ) = localtime( time() );
+    my $Year = ( localtime(time) )[5];
     $Year += 1900;
 
     my $YearString = "2019-$Year";
@@ -54,7 +54,7 @@ sub transform_source {
     # header start
     LINE:
     for my $Line (@Lines) {
-        last LINE if $Line =~ /Copyright/;
+        last LINE if $Line =~ m/Copyright/;
 
         $Output .= $Line . "\n";
         $i++;
