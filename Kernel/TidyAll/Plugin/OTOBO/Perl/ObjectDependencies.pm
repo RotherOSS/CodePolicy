@@ -98,7 +98,7 @@ sub validate_source {
         my @DeclaredObjectDependencies;
         for my $Array (qw(ObjectDependencies SoftObjectDependencies)) {
             $Code =~ s{
-                ^our\s+\@\Q$Array\E\s+=\s+\(($ValidListExpression)\);
+                ^our\s+\@\Q$Array\E\s+=\s+(?:qw)?\(($ValidListExpression)\);
             }{
                 push @DeclaredObjectDependencies, $Self->_CleanupObjectList(
                     Code => $1,
