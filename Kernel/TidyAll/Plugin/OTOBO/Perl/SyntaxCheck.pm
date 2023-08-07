@@ -61,6 +61,8 @@ sub validate_source {
         Data::Dumper
         Data::Dx
         DateTime
+        Encode
+        Encode::Locale
         Fcntl
         File::Basename
         FindBin
