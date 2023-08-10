@@ -57,7 +57,7 @@ sub validate_source {
         ^ \s* our \s* \$ObjectManagerDisabled \s* = \s* 1
     }smx;
 
-    my $ErrorMessage;
+    my $ErrorMessage = '';
 
     if ( $Code =~ m{^ \s* our \s* \$ObjectManagerAware}smx ) {
         $ErrorMessage .= "Don't use the deprecated flag \$ObjectManagerAware. It can be removed.\n";
@@ -93,16 +93,19 @@ sub validate_source {
 
     # Now check the declared dependencies and compare.
     # Dependencies can be declared in the array ObjectDependencies and SoftObjectDependencies.
+    # The substitution is done for the side effects.
     my %ObjectIsDeclared;
+    my $ObjectDeclarationWithQuotedWords;
     {
         my @DeclaredObjectDependencies;
         for my $Array (qw(ObjectDependencies SoftObjectDependencies)) {
             $Code =~ s{
-                ^our\s+\@\Q$Array\E\s+=\s+(?:qw)?\(($ValidListExpression)\);
+                ^our\s+\@\Q$Array\E\s+=\s+(qw)?\(($ValidListExpression)\);
             }{
                 push @DeclaredObjectDependencies, $Self->_CleanupObjectList(
-                    Code => $1,
+                    Code => $2,
                 );
+                $ObjectDeclarationWithQuotedWords = $1 ? 1 : 0;
                 '';
             }esmx;
         }
@@ -110,13 +113,21 @@ sub validate_source {
         %ObjectIsDeclared = map { $_ => 1 } @DeclaredObjectDependencies;
     }
 
+    # report undeclared object dependencies
     my @UndeclaredObjectDependencies = sort grep { !$ObjectIsDeclared{$_} } uniq @UsedObjects;
-
     if (@UndeclaredObjectDependencies) {
+
+        # The formating of the messing depends on whether qw() was used
+        my $Separator = $ObjectDeclarationWithQuotedWords ? qq{\n} : qq{,\n};
+        my $Delimiter = $ObjectDeclarationWithQuotedWords ? q{}    : q{'};
+        my $List      = join $Separator,
+            map  {"    $Delimiter$_$Delimiter"}
+            sort { $a cmp $b }
+            @UndeclaredObjectDependencies;
         $ErrorMessage .=
             "The following objects are used in the code, but not declared as dependencies:\n"
-            . join( ",\n", map {"    '$_'"} sort { $a cmp $b } @UndeclaredObjectDependencies )
-            . ",\n"
+            . $List
+            . $Separator
             . 'Please add the missing dependencies to the array @ObjectDependencies.';
     }
 
