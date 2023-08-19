@@ -409,9 +409,6 @@ select = doc/**/*.xml
 [+TidyAll::Plugin::OTOBO::XML::WSDL::XSDValidator]
 select = **/*.wsdl
 
-[+TidyAll::Plugin::OTOBO::XML::WADL::XSDValidator]
-select = **/*.wadl
-
 [+TidyAll::Plugin::OTOBO::XML::Lint]
 select = **/*.{xml,xsd}
 

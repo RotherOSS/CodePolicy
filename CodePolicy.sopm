@@ -155,8 +155,6 @@
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/StaticFiles/XSD/Docbook/4_5/docbook.xsd" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/StaticFiles/XSD/Docbook/4_5/htmltblx.xsd" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/StaticFiles/XSD/Docbook/4_5/xml.xsd" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/StaticFiles/XSD/WADL/wadl.xsd" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/StaticFiles/XSD/WADL/xml.xsd" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/StaticFiles/XSD/WSDL/Literal.xsd" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/StaticFiles/XSD/WSDL/WSDL.xsd" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/StaticFiles/XSD/SOPM.xsd" />
@@ -177,7 +175,6 @@
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/XML/Docbook/ReplaceSupportEmail.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/XML/Docbook/RemoveContactChapter.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/XML/Docbook/XSDValidator.pm" />
-        <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/XML/WADL/XSDValidator.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/XML/WSDL/XSDValidator.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/XML/Lint.pm" />
         <File Permission="660" Location="Kernel/TidyAll/Plugin/OTOBO/XML/LintWithOurParsers.pm" />
