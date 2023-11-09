@@ -78,6 +78,7 @@ modules = Class::ISA Pod::Plainer Shell Switch vars {Use 'our' variables instead
 
 [Variables::ProhibitEvilVariables]
 variables = $DB::single {clean up your debug statements}
+variables = @*          {avoid the $ref-@* error}
 
 [Subroutines::RequireFinalReturn]
 terminal_methods = FatalError CustomerFatalError
