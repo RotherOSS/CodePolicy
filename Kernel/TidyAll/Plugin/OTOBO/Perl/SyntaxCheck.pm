@@ -20,6 +20,7 @@ use v5.24;
 use strict;
 use warnings;
 use namespace::autoclean;
+use utf8;
 
 use Moo;
 
@@ -77,6 +78,7 @@ sub validate_source {
         Test2::V0
         Test2::Tools::Spec
         Time::HiRes
+        Types::Serialiser
     );
 
     my $AllowedExternalModulesRegex = '\A \s* use \s+ (?: ' . join( '|', @AllowedExternalModules ) . ' ) ';
