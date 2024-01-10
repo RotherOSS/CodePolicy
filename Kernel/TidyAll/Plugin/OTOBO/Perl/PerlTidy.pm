@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2023 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -31,12 +31,12 @@ extends qw(TidyAll::Plugin::OTOBO::Perl);
 use Capture::Tiny qw(capture_merged);
 
 # Require a recent version of Perl::Tidy for consistent formatting on all systems.
-use Perl::Tidy v20210111;
+use Perl::Tidy 20230912;
 
 # OTOBO modules
 
 # Force a certain version for uniformity
-if ( Perl::Tidy->VERSION() ne '20210111' ) {
+if ( Perl::Tidy->VERSION() ne '20230912' ) {
     my $Error = 'Newer versions of Perl::Tidy than v20210111 are currently not supported.';
     $Error   .= ' Please use exactly that version (sudo cpanm Perl::Tidy@v20210111).';
     $Error   .= ' Your installed version is: ' . Perl::Tidy->VERSION() . ".\n";
