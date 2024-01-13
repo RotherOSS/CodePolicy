@@ -124,6 +124,7 @@ ignore = **/*.tt.sh
 [+TidyAll::Plugin::OTOBO::Legal::ReplaceCopyright]
 select = **/*.{pl,pm,psgi,t,tt,spec,js,css,scss,vue,dist,tmpl,sh,skel,conf,template}
 select = .*.dist .bash_completion
+select = .screenrc
 select = var/cron/*
 select = var/git/hooks/*-receive
 select = documentation.yml
