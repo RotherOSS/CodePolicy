@@ -1,20 +1,19 @@
-# TODO: comment this file, maybe use the verbose options
--l=160
--vmll
--i=4
--ci=4
--xci
--vt=0
--vtc=0
--cti=0
--pt=1
--bt=1
--sbt=1
--bbt=1
--nsfs
--nolq
--bbao
--nola
--ndnl
--cab=0
+-l=160          # line length
+-vmll           # variable maximum line length
+-i=4            # indentation width
+-ci=4           # continuous indentation width
+-xci            # extended continuous indentation
+-vt=0           # vertical tightness
+-vtc=0          # vertical tightness closing
+-cti=0          # closing token indentation
+-pt=1           # paren tightness
+-bt=1           # brace tightness
+-sbt=1          # square brackets tightness
+-bbt=1          # block brace tightness
+-nsfs           # no space for semicolon
+-nolq           # no outdent long quotes
+-bbao           # break before all operators
+-nola           # no outdent labels
+-ndnl           # no delete old newlines
+-cab=0          # comma arrow breakpoints
 --character-encoding=none
