@@ -49,8 +49,7 @@ sub validate_source {
                 MatchSettingName       => qr{.*},
                 MatchNavigationValue   => qr{.*},
                 RequireNavigationMatch => qr{^(CloudService|Core|Daemon|GenericInterface|Frontend)(::|$)},
-                ErrorMessage           =>
-                    'Invalid top level group found (only CloudService|Core|Daemon|GenericInterface|Frontend are allowed).',
+                ErrorMessage           => 'Invalid top level group found (only CloudService|Core|Daemon|GenericInterface|Frontend are allowed).',
             },
             {
                 Name                   => 'Event handlers',
