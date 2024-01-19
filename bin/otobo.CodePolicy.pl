@@ -85,6 +85,12 @@ Example usage:
     # run Perl::Critic on a source tree
     ../CodePolicy/bin/otobo.CodePolicy.pl --plugins +TidyAll::Plugin::OTOBO::Perl::PerlCritic -a --processes 1 1>critic.out
 
+    # run only the syntax check on changed files
+    ../CodePolicy/bin/otobo.CodePolicy.pl --plugins +TidyAll::Plugin::OTOBO::Perl::SyntaxCheck
+
+    # only update the copyright year for all files
+    ../CodePolicy/bin/otobo.CodePolicy.pl --plugins +TidyAll::Plugin::OTOBO::Legal::ReplaceCopyright -a
+
 END_MSG
 
     exit 0;
