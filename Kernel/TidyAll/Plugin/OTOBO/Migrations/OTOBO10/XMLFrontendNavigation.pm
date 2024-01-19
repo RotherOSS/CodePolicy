@@ -45,9 +45,9 @@ sub validate_source {
             $ValueContent       = '';
         }
 
-        $InValue = 1 if $Line =~ m{<Value>};
+        $InValue = 1                  if $Line =~ m{<Value>};
         $ValueContent .= "\n" . $Line if $InValue;
-        $InValue = 0 if $Line =~ m{</Value>};
+        $InValue = 0                  if $Line =~ m{</Value>};
 
         next LINE if !$ValueContent || $InValue;
 

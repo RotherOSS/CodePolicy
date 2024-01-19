@@ -32,7 +32,7 @@ sub validate_file {
     my $Code = $Self->_GetFileContents($Filename);
 
     my ($NameOfTag) = $Code =~ m/<Name>([^<>]+)<\/Name>/;
-    my $NameOfFile = substr( basename($Filename), 0, -5 );    # cut off .sopm
+    my $NameOfFile = substr( basename($Filename), 0, -5 );     # cut off .sopm
 
     if ( $NameOfTag ne $NameOfFile ) {
         return $Self->DieWithError(<<"EOF");

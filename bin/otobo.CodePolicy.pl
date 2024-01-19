@@ -130,7 +130,7 @@ elsif ( defined $Directory && length $Directory ) {
 elsif ( defined $File && length $File ) {
     @Files = ( File::Spec->catfile( $RootDir, $File ) );
 }
-elsif ( @FileList ) {
+elsif (@FileList) {
     @Files = map { File::Spec->catfile( $RootDir, $_ ) } @FileList;
 }
 elsif ( defined $Cached && length $Cached ) {

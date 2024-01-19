@@ -86,7 +86,7 @@ EOF
         Exception => 0,
     },
     {
-        Name      => 'ObjectDependencies, dependency declared in TestObjectDependencies
+        Name => 'ObjectDependencies, dependency declared in TestObjectDependencies
 ',
         Filename  => 'Test.pm',
         Plugins   => [qw(TidyAll::Plugin::OTOBO::Perl::ObjectDependencies)],
