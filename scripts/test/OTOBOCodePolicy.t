@@ -30,7 +30,7 @@ use Devel::StackTrace ();
 local *Devel::StackTrace::new = sub { };    # no-op
 use warnings 'redefine';
 
-use Cwd qw(abs_path);
+use Cwd        qw(abs_path);
 use File::Spec qw();
 use TidyAll::OTOBO;
 
