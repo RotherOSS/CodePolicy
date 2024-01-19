@@ -3,7 +3,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -85,6 +85,12 @@ Example usage:
     # run Perl::Critic on a source tree
     ../CodePolicy/bin/otobo.CodePolicy.pl --plugins +TidyAll::Plugin::OTOBO::Perl::PerlCritic -a --processes 1 1>critic.out
 
+    # run only the syntax check on changed files
+    ../CodePolicy/bin/otobo.CodePolicy.pl --plugins +TidyAll::Plugin::OTOBO::Perl::SyntaxCheck
+
+    # only update the copyright year for all files
+    ../CodePolicy/bin/otobo.CodePolicy.pl --plugins +TidyAll::Plugin::OTOBO::Legal::ReplaceCopyright -a
+
 END_MSG
 
     exit 0;
@@ -124,7 +130,7 @@ elsif ( defined $Directory && length $Directory ) {
 elsif ( defined $File && length $File ) {
     @Files = ( File::Spec->catfile( $RootDir, $File ) );
 }
-elsif ( @FileList ) {
+elsif (@FileList) {
     @Files = map { File::Spec->catfile( $RootDir, $_ ) } @FileList;
 }
 elsif ( defined $Cached && length $Cached ) {

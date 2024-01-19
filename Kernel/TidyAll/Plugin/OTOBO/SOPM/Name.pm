@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -32,7 +32,7 @@ sub validate_file {
     my $Code = $Self->_GetFileContents($Filename);
 
     my ($NameOfTag) = $Code =~ m/<Name>([^<>]+)<\/Name>/;
-    my $NameOfFile = substr( basename($Filename), 0, -5 );    # cut off .sopm
+    my $NameOfFile = substr( basename($Filename), 0, -5 );     # cut off .sopm
 
     if ( $NameOfTag ne $NameOfFile ) {
         return $Self->DieWithError(<<"EOF");

@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -28,7 +28,7 @@ use lib dirname($RealBin) . '/Kernel/';    # find TidyAll
 #
 #   See https://github.com/houseabsolute/Devel-StackTrace/issues/11 and
 #   http://rt.perl.org/rt3/Public/Bug/Display.html?id=78186
-no warnings 'redefine';    ## no critic qw(TestingAndDebugging::ProhibitNoWarnings)
+no warnings 'redefine';                     ## no critic qw(TestingAndDebugging::ProhibitNoWarnings)
 use Devel::StackTrace ();
 local *Devel::StackTrace::new = sub { };    # no-op
 use warnings 'redefine';

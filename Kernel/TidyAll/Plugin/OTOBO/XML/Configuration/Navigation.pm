@@ -2,7 +2,7 @@
 # OTOBO is a web-based ticketing system for service organisations.
 # --
 # Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
-# Copyright (C) 2019-2021 Rother OSS GmbH, https://otobo.de/
+# Copyright (C) 2019-2024 Rother OSS GmbH, https://otobo.de/
 # --
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -49,7 +49,7 @@ sub validate_source {
                 MatchSettingName       => qr{.*},
                 MatchNavigationValue   => qr{.*},
                 RequireNavigationMatch => qr{^(CloudService|Core|Daemon|GenericInterface|Frontend|WebApp)(::|$)},
-                ErrorMessage =>
+                ErrorMessage           =>
                     'Invalid top level group found (only CloudService|Core|Daemon|GenericInterface|Frontend|WebApp are allowed).',
             },
             {
@@ -64,7 +64,7 @@ sub validate_source {
                 MatchSettingName       => qr{.*},
                 MatchNavigationValue   => qr{^Frontend},                                                      # no entries allowed in "Frontend" directly
                 RequireNavigationMatch => qr{^Frontend::(Admin|Agent|Base|Customer|Public|External)(::|$)},
-                ErrorMessage =>
+                ErrorMessage           =>
                     'Invalid top Frontend subgroup found (only Admin|Agent|Base|Customer|Public|External are allowed).',
             },
             {
@@ -79,7 +79,7 @@ sub validate_source {
                 MatchSettingName       => qr{^Loader::Module::Admin},
                 MatchNavigationValue   => qr{.*},
                 RequireNavigationMatch => qr{^Frontend::Admin::ModuleRegistration::Loader},
-                ErrorMessage =>
+                ErrorMessage           =>
                     "Loader config for Admin interface should be grouped in 'Frontend::Admin::ModuleRegistration::Loader'.",
             },
             {
@@ -87,7 +87,7 @@ sub validate_source {
                 MatchSettingName       => qr{^Loader::Module::Agent},
                 MatchNavigationValue   => qr{.*},
                 RequireNavigationMatch => qr{^Frontend::Agent::ModuleRegistration::Loader},
-                ErrorMessage =>
+                ErrorMessage           =>
                     "Loader settings for Agent interface should be grouped in 'Frontend::Agent::ModuleRegistration::Loader'.",
             },
             {
@@ -95,7 +95,7 @@ sub validate_source {
                 MatchSettingName       => qr{^Loader::Module::Customer},
                 MatchNavigationValue   => qr{.*},
                 RequireNavigationMatch => qr{^Frontend::Customer::ModuleRegistration::Loader},
-                ErrorMessage =>
+                ErrorMessage           =>
                     "Loader settings for Customer interface should be grouped in 'Frontend::Customer::ModuleRegistration::Loader'.",
             },
             {
@@ -103,7 +103,7 @@ sub validate_source {
                 MatchSettingName       => qr{^Loader::Module::Public},
                 MatchNavigationValue   => qr{.*},
                 RequireNavigationMatch => qr{^Frontend::Public::ModuleRegistration},
-                ErrorMessage =>
+                ErrorMessage           =>
                     "Loader settings for Public interface should be grouped in 'Frontend::Public::ModuleRegistration'.",
             },
             {
@@ -111,7 +111,7 @@ sub validate_source {
                 MatchSettingName       => qr{^Frontend::Navigation###Admin},
                 MatchNavigationValue   => qr{.*},
                 RequireNavigationMatch => qr{^Frontend::Admin::ModuleRegistration::MainMenu},
-                ErrorMessage =>
+                ErrorMessage           =>
                     "Frontend navigation config for Admin interface should be grouped in 'Frontend::Admin::ModuleRegistration::MainMenu'.",
             },
             {
@@ -119,7 +119,7 @@ sub validate_source {
                 MatchSettingName       => qr{^Frontend::Navigation###Agent},
                 MatchNavigationValue   => qr{.*},
                 RequireNavigationMatch => qr{^Frontend::Agent::ModuleRegistration::MainMenu},
-                ErrorMessage =>
+                ErrorMessage           =>
                     "Frontend navigation config for Agent interface should be grouped in 'Frontend::Agent::ModuleRegistration::MainMenu'.",
             },
             {
@@ -127,7 +127,7 @@ sub validate_source {
                 MatchSettingName       => qr{^CustomerFrontend::Navigation###Customer},
                 MatchNavigationValue   => qr{.*},
                 RequireNavigationMatch => qr{^Frontend::Customer::ModuleRegistration::MainMenu},
-                ErrorMessage =>
+                ErrorMessage           =>
                     "Frontend navigation config for Customer interface should be grouped in 'Frontend::Customer::ModuleRegistration::MainMenu'.",
             },
             {
@@ -135,7 +135,7 @@ sub validate_source {
                 MatchSettingName       => qr{^PublicFrontend::(Module|Navigation)},
                 MatchNavigationValue   => qr{.*},
                 RequireNavigationMatch => qr{^Frontend::Public::ModuleRegistration},
-                ErrorMessage =>
+                ErrorMessage           =>
                     "Module registration config for Public interface should be grouped in 'Frontend::Public::ModuleRegistration'.",
             },
             {
@@ -143,7 +143,7 @@ sub validate_source {
                 MatchSettingName       => qr{^Frontend::NavigationModule},
                 MatchNavigationValue   => qr{.*},
                 RequireNavigationMatch => qr{^Frontend::Admin::ModuleRegistration::AdminOverview},
-                ErrorMessage =>
+                ErrorMessage           =>
                     "Navigation module config should be grouped in 'Frontend::Admin::ModuleRegistration::AdminOverview'.",
             },
             {
@@ -151,7 +151,7 @@ sub validate_source {
                 MatchSettingName       => qr{^Frontend::Search.*?###Admin},
                 MatchNavigationValue   => qr{.*},
                 RequireNavigationMatch => qr{^Frontend::Admin::ModuleRegistration::MainMenu::Search},
-                ErrorMessage =>
+                ErrorMessage           =>
                     "Search router config for Admin interface should be grouped in 'Frontend::Admin::ModuleRegistration::Search'.",
             },
             {
@@ -159,7 +159,7 @@ sub validate_source {
                 MatchSettingName       => qr{^Frontend::Search.*?###Agent},
                 MatchNavigationValue   => qr{.*},
                 RequireNavigationMatch => qr{^Frontend::Agent::ModuleRegistration::MainMenu::Search},
-                ErrorMessage =>
+                ErrorMessage           =>
                     "Search router config for Agent interface should be grouped in 'Frontend::Agent::ModuleRegistration::Search'.",
             },
             {
@@ -167,7 +167,7 @@ sub validate_source {
                 MatchSettingName       => qr{(Output::Filter|OutputFilter)},
                 MatchNavigationValue   => qr{.*},
                 RequireNavigationMatch => qr{^Frontend::Base::OutputFilter},
-                ErrorMessage =>
+                ErrorMessage           =>
                     "Output filter settings should be grouped in 'Frontend::Base::OutputFilter' or subgroups.",
             },
             {
@@ -175,7 +175,7 @@ sub validate_source {
                 MatchSettingName       => qr{.*},
                 MatchNavigationValue   => qr{^Frontend::(Admin|Agent|Customer|Public)::(.+::)*View.+$},
                 RequireNavigationMatch => qr{^Frontend::(Admin|Agent|Customer|Public)::View::.+$},
-                ErrorMessage =>
+                ErrorMessage           =>
                     "Screen specific settings should be added in Frontend::(Admin|Agent|Customer|Public)::View.",
             },
         );
