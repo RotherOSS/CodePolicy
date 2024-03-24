@@ -42,11 +42,18 @@ sub validate_file {
 
     my $Code = $Self->_GetFileContents($Filename);
 
+    # extract the last part of the extension,
+    # e.g. 'dist' from DockerConfig.xml.dist
     my ($Filetype) = $Filename =~ m{ .* \. ( .+ ) }xmsi;
     $Filetype ||= '';
 
+    # in some cases the next to last extension part is the relevant part,
+    # e.g. 'xml' from DockerConfig.xml.dist
     if ( $Filetype eq 'skel' ) {
         ($Filetype) = $Filename =~ m{ .* \. ( .+ ) \.skel }xmsi;
+    }
+    elsif ( $Filetype eq 'dist' ) {
+        ($Filetype) = $Filename =~ m{ .* \. ( .+ ) \.dist }xmsi;
     }
 
     # Check a javascript license header.
