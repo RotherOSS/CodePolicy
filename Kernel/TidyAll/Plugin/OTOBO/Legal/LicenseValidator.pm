@@ -53,7 +53,8 @@ sub validate_file {
         ($Filetype) = $Filename =~ m{ .* \. ( .+ ) \.skel }xmsi;
     }
     elsif ( $Filetype eq 'dist' ) {
-        ($Filetype) = $Filename =~ m{ .* \. ( .+ ) \.dist }xmsi;
+        my ($NextToLastFiletype) = $Filename =~ m{ .* \. ( .+ ) \.dist }xmsi;
+        $Filetype = $NextToLastFiletype // 'dist';
     }
 
     # Check a javascript license header.
