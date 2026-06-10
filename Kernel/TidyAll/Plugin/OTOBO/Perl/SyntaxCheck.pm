@@ -67,6 +67,7 @@ sub validate_source {
         Archive::Tar
         Archive::Zip
         Carp
+        Config
         Const::Fast
         Cpanel::JSON::XS
         Cwd
