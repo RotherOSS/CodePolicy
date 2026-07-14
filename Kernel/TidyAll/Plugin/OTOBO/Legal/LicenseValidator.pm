@@ -21,6 +21,7 @@ package TidyAll::Plugin::OTOBO::Legal::LicenseValidator;
 use strict;
 use warnings;
 
+use Cwd;
 use Moo;
 
 extends qw(TidyAll::Plugin::OTOBO::Base);
@@ -41,6 +42,25 @@ sub validate_file {
     return if $Self->IsPluginDisabled( Filename => $Filename );
 
     my $Code = $Self->_GetFileContents($Filename);
+
+    my $RootDir = getcwd();
+    my @SOPMFiles = glob $RootDir . "/*.sopm";
+    if (@SOPMFiles) {
+
+        # determine Vendor and skip if it is a thirdparty package
+        my $FileHandle = IO::File->new( $SOPMFiles[0], 'r' );
+        my @Content    = $FileHandle->getlines();
+        LINE:
+        for my $Line (@Content) {
+            if ( $Line =~ m{<Vendor>} ) {
+                if ( $Line !~ m{Rother OSS} ) {
+                    return;
+                }
+
+                last LINE;
+            }
+        }
+    }
 
     my ($Filetype) = $Filename =~ m{ .* \. ( .+ ) }xmsi;
     $Filetype ||= '';
